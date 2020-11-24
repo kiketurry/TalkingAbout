@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutBackgroundCat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/scene_splash_background_cat">
+
+        <ImageView
+            android:id="@+id/house"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/contenDescription"
+            android:scaleType="fitXY"
+            android:src="@drawable/house"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/cat"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="50dp"
+            android:contentDescription="@string/contenDescription"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutWool"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/scene_splash_wool">
+
+        <ImageView
+            android:id="@+id/wool"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginBottom="50dp"
+            android:contentDescription="@string/contenDescription"
+            android:src="@drawable/wool"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutPlant"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/scene_splash_plant">
+
+        <ImageView
+            android:id="@+id/plants"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/contenDescription"
+            android:scaleType="fitXY"
+            android:src="@drawable/plants"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</FrameLayout>

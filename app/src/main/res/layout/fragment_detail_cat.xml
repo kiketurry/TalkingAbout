@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvBreed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="tvBreed" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBreed"
+        tools:text="Es una raza de los mas bonita y agradable para tener con los peques todo genial." />
+
+    <ImageView
+        android:id="@+id/ivAdaptability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_adaptability"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+    <TextView
+        android:id="@+id/tvAdaptability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/ivAdaptability"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability"
+        tools:text="8" />
+
+    <ImageView
+        android:id="@+id/ivIntelligence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_intelligence"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/tvAdaptability"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability" />
+
+    <TextView
+        android:id="@+id/tvIntelligence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/ivIntelligence"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability"
+        tools:text="8" />
+
+
+    <ImageView
+        android:id="@+id/ivAffectionLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_affection_level"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/tvIntelligence"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability" />
+
+    <TextView
+        android:id="@+id/tvAffectionLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/ivAffectionLevel"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability"
+        tools:text="8" />
+
+
+    <ImageView
+        android:id="@+id/ivChildFriendly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_child_friendly"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/tvAffectionLevel"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability" />
+
+    <TextView
+        android:id="@+id/tvChildFriendly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/ivChildFriendly"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability"
+        tools:text="8" />
+
+
+    <ImageView
+        android:id="@+id/ivDogFriendly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_dog_friendly"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/tvChildFriendly"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability" />
+
+    <TextView
+        android:id="@+id/tvDogFriendly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintStart_toEndOf="@id/ivDogFriendly"
+        app:layout_constraintTop_toTopOf="@id/ivAdaptability"
+        tools:text="8" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rvPhotos"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/ivAdaptability"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

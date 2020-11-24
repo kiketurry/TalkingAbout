@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/transitioonBackgroundCat"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@id/stateEndBackgroundCat"
+        motion:constraintSetStart="@id/stateStartBackgroundCat"
+        motion:duration="@integer/duration_escene_splash"
+        motion:motionInterpolator="linear" />
+
+    <Transition
+        android:id="@+id/transitionWool"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@id/stateEndWool"
+        motion:constraintSetStart="@id/stateStartWool"
+        motion:duration="@integer/duration_escene_splash"
+        motion:motionInterpolator="cubic(.01,1.13,.37,.88)" />
+
+    <ConstraintSet android:id="@+id/stateStartBackgroundCat">
+        <Constraint
+            android:id="@id/house"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@id/cat"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@id/plants"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/stateStartWool">
+        <Constraint
+            android:id="@id/wool"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/stateEndBackgroundCat">
+        <Constraint
+            android:id="@id/house"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:translationX="-575dp" />
+        <Constraint
+            android:id="@id/cat"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+        <Constraint
+            android:id="@id/plants"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:translationX="-575dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/stateEndWool">
+        <Constraint
+            android:id="@id/wool"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+    </ConstraintSet>
+
+</MotionScene>

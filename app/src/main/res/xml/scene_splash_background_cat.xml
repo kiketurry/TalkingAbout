@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/transitionBackgroundCat"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@id/stateEndBackgroundCat"
+        motion:constraintSetStart="@id/stateStartBackgroundCat"
+        motion:duration="@integer/duration_escene_splash"
+        motion:motionInterpolator="linear" />
+
+    <ConstraintSet android:id="@+id/stateStartBackgroundCat">
+        <Constraint
+            android:id="@id/house"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@id/cat"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/stateEndBackgroundCat">
+        <Constraint
+            android:id="@id/house"
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:translationX="-575dp" />
+        <Constraint
+            android:id="@id/cat"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+    </ConstraintSet>
+
+</MotionScene>
