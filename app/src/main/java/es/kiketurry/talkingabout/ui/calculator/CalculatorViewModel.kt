@@ -25,43 +25,38 @@ class CalculatorViewModel(application: Application) : BaseViewModel(application)
         }
     }
 
-    fun add(operatorOne: String, operatorTwo: String): Float {
+    fun add(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
         result = operatorOneFloat + operatorTwoFloat
         resultMutableLiveData.postValue(result.toString())
-        return result
     }
 
-    fun subtract(operatorOne: String, operatorTwo: String): Float {
+    fun subtract(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
         result = operatorOneFloat - operatorTwoFloat
         resultMutableLiveData.postValue(result.toString())
-        return result
     }
 
-    fun multiply(operatorOne: String, operatorTwo: String): Float {
+    fun multiply(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
         result = operatorOneFloat * operatorTwoFloat
         resultMutableLiveData.postValue(result.toString())
-        return result
     }
 
-    fun divide(operatorOne: String, operatorTwo: String): Float {
+    fun divide(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
         result = operatorOneFloat / operatorTwoFloat
         resultMutableLiveData.postValue(result.toString())
-        return result
     }
 
     @Throws(ArithmeticException::class)
-    fun dividePerZero(operatorOne: String, operatorTwo: String): Float {
+    fun dividePerZero(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
         if (operatorTwoFloat == 0f) {
             throw ArithmeticException("No se puede dividir por cero.")
         }
         result = operatorOneFloat / operatorTwoFloat
         resultMutableLiveData.postValue(result.toString())
-        return result
     }
 
     fun largeOperation() {

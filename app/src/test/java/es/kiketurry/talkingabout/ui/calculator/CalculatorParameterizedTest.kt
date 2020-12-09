@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(value = Parameterized::class)
-class CalculatorParameterizedTest(var numberOne: String, var numberTwo: String, var result: Float) {
+class CalculatorParameterizedTest(var numberOne: String, var numberTwo: String, var result: String) {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
@@ -21,12 +21,12 @@ class CalculatorParameterizedTest(var numberOne: String, var numberTwo: String, 
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
             return listOf(
-                arrayOf("6", "2", 3f),
-                arrayOf("6", "-2", -3f),
-                arrayOf("-6", "2", -3f),
-                arrayOf("-6", "-2", 3f),
-                arrayOf("6", "0", 3f),
-                arrayOf("10", "2", 5f)
+                arrayOf("6", "2", "3.0"),
+                arrayOf("6", "-2", "-3.0"),
+                arrayOf("-6", "2", "-3.0"),
+                arrayOf("-6", "-2", "3.0"),
+                arrayOf("6", "0", "Infinity"),
+                arrayOf("10", "2", "5.0")
             )
         }
     }
@@ -39,7 +39,8 @@ class CalculatorParameterizedTest(var numberOne: String, var numberTwo: String, 
 
     @Test
     fun dividirTest() {
-        Assert.assertEquals(calculatorViewModel.divide(numberOne, numberTwo), result)
+        calculatorViewModel.divide(numberOne, numberTwo)
+        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, result)
     }
 
 }

@@ -46,30 +46,31 @@ class CalculatorViewModelTest {
 
     @Test
     fun add() {
-        Assert.assertEquals(calculatorViewModel.add("10", "20"), 30f)
+        calculatorViewModel.add("10", "20")
+        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "30.0")
         System.out.println("l> Se ha ejecutado el test add Test")
     }
 
     @Test
     fun subtract() {
-        Assert.assertEquals(calculatorViewModel.subtract("10", "20"), -10f)
-        Assert.assertEquals(
-            calculatorViewModel.subtract("10", "20"),
-            -9.5f,
-            0.5f
-        )// El delta es curioso deja un margen de desviación por encima o por debajo del esperado por si alguna operación matematica aceptara cierta desviación cómo válida.
+        calculatorViewModel.subtract("10", "20")
+        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "-10.0")
         System.out.println("l> Se ha ejecutado el test subtract Test")
     }
 
+    // El delta es curioso deja un margen de desviación por encima o por debajo del esperado por si alguna operación matematica aceptara cierta desviación cómo válida.
+
     @Test
     fun multiply() {
-        Assert.assertEquals(calculatorViewModel.multiply("2.5", "3.2"), 8f)
+        calculatorViewModel.multiply("2.5", "3.2")
+        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "8.0")
         System.out.println("l> Se ha ejecutado el test multiply Test")
     }
 
     @Test
     fun divide() {
-        Assert.assertEquals(calculatorViewModel.divide("10", "4"), 10f / 4f)
+        calculatorViewModel.divide("10", "4")
+        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "2.5")
         System.out.println("l> Se ha ejecutado el test divide() Test")
     }
 
@@ -84,7 +85,7 @@ class CalculatorViewModelTest {
         System.out.println("l> Se ha ejecutado el test dividePerZero() Test")
     }
 
-    @Test(timeout = 1010) //Tiempo máximo que se le da a un test para ejecutarse.
+    @Test(timeout = 1050) //Tiempo máximo que se le da a un test para ejecutarse.
     fun operationLarteTimeout() {
         calculatorViewModel.largeOperation()
     }
@@ -92,7 +93,8 @@ class CalculatorViewModelTest {
     @Ignore("Método no listo. Ignorar por ahora. Esperando solucionar la división por cero")
     @Test
     fun dividePerZeroWithoutControl() {
-        Assert.assertEquals(calculatorViewModel.divide("10", "0"), 10f / 0f)
+        calculatorViewModel.divide("10", "0")
+        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "NaN")
         System.out.println("l> Se ha ejecutado el test divide() Test")
     }
 }
