@@ -11,4 +11,11 @@
     <string name="toolbar_title_fragment_detail_cat">Detalle de raza</string>
     <string name="generic_error">Ups! Hemos sufrido un error, pero ya es tarde para arreglarlo, no???? Mejor vamos a dormir XD! Vuelve en un rato</string>
     <string name="accept">Aceptar</string>
+    <string name="divide">Entre</string>
+    <string name="multiply">Por</string>
+    <string name="subtract">Menos</string>
+    <string name="add">Más</string>
+    <string name="equals">=</string>
+    <string name="operator">Operador</string>
+    <string name="titleToolbarCalculator">Calculadora</string>
 </resources>

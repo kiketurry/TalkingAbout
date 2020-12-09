@@ -6,3 +6,4 @@ TAG Git:  001MotionLayout<br/>
 Enlaces de interés:<br/>
 Documentación, https://developer.android.com/training/constraint-layout/motionlayout?hl=es<br/>
 Ejemplos de google (motionlayout), https://github.com/android/views-widgets-samples/tree/master/ConstraintLayoutExamples<br/>
+Web para personalizar la curva de interpolación, https://cubic-bezier.com/#.17,.67,.83,.67<br/>

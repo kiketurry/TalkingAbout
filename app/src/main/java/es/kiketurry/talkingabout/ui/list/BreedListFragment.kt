@@ -12,18 +12,22 @@ import es.kiketurry.talkingabout.databinding.FragmentBreedsListBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.MainActivity
 import es.kiketurry.talkingabout.ui.base.BaseFragment
+import es.kiketurry.talkingabout.ui.dialogfragment.TextButtonDialogFragment
+import es.kiketurry.talkingabout.ui.dialogfragment.TextButtonDialogFragment.Companion.TEXT_BUTTON_DIALOG_FRAGMENT_TAG
 import es.kiketurry.talkingabout.ui.list.adapter.BreedsAdapter
-import java.util.ArrayList
+import java.util.*
 
-class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapter.ItemBreedClickListener {
+class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapter.ItemBreedClickListener,
+    TextButtonDialogFragment.TextButtonDialogFragmentClickButtonListener {
     override val TAG: String? get() = BreedListFragment::class.qualifiedName
 
-    lateinit var breedListViewmodel : BreedListViewModel
+    lateinit var breedListViewmodel: BreedListViewModel
 
     private lateinit var breedsAdapter: BreedsAdapter
 
     override fun setupViewModel() {
-        breedListViewmodel = ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(BreedListViewModel::class.java)
+        breedListViewmodel =
+            ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(BreedListViewModel::class.java)
     }
 
     override fun observeViewModel() {
@@ -42,20 +46,32 @@ class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapt
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         breedsAdapter = BreedsAdapter(context!!, ArrayList(), this)
-        binding?.rvBreeds?.apply{
+        binding?.rvBreeds?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = breedsAdapter
         }
+
+        launchDialogFragment()
+    }
+
+    private fun launchDialogFragment() {
+        var textButtonDialogFragment: TextButtonDialogFragment = TextButtonDialogFragment()
+        textButtonDialogFragment.setValue("Hola y Adios", "Caracola del infierno", this)
+        showDialogFragment(textButtonDialogFragment, TEXT_BUTTON_DIALOG_FRAGMENT_TAG)
     }
 
     override fun configureToolbar() {
-        baseActivity.hideBackToolbar()
+        baseActivity.showBackToolbar(false)
         baseActivity.showTitleToolbar(R.string.toolbar_title_fragment_breeds_list)
-        baseActivity.showCloseToolbar()
+        baseActivity.showCloseToolbar(true)
     }
 
     override fun onItemBreedClick(position: Int) {
         (baseActivity as MainActivity).setPositionBreedSelected(position)
+    }
+
+    override fun onTextButtonDialogFragmentClickButton() {
+        Log.i(TAG, "l> Hemos pulsado el button del dialog :-)")
     }
 }

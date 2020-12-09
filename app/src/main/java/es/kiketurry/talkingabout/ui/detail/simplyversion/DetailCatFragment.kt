@@ -12,9 +12,9 @@ import es.kiketurry.talkingabout.databinding.FragmentDetailCatBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.MainActivity
 import es.kiketurry.talkingabout.ui.base.BaseFragment
-import es.kiketurry.talkingabout.ui.detail.viewmodel.DetailCatViewModel
 import es.kiketurry.talkingabout.ui.detail.adapter.DetailCatPhotosAdapter
-import java.util.ArrayList
+import es.kiketurry.talkingabout.ui.detail.viewmodel.DetailCatViewModel
+import java.util.*
 
 class DetailCatFragment : BaseFragment<FragmentDetailCatBinding>(), DetailCatPhotosAdapter.ItemPhotoClickListener {
     override val TAG: String? get() = DetailCatFragment::class.qualifiedName
@@ -58,9 +58,9 @@ class DetailCatFragment : BaseFragment<FragmentDetailCatBinding>(), DetailCatPho
     }
 
     override fun configureToolbar() {
-        baseActivity.showBackToolbar()
+        baseActivity.showBackToolbar(true)
         baseActivity.showTitleToolbar(R.string.toolbar_title_fragment_detail_cat)
-        baseActivity.showCloseToolbar()
+        baseActivity.showCloseToolbar(true)
     }
 
     override fun onItemPhotoClick(position: Int) {

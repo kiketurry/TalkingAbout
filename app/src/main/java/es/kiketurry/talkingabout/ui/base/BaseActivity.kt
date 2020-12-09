@@ -2,22 +2,24 @@ package es.kiketurry.talkingabout.ui.base
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
 import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
+import es.kiketurry.talkingabout.extensions.gone
+import es.kiketurry.talkingabout.extensions.visible
 import es.kiketurry.talkingabout.ui.dialogfragment.error.ErrorDialogFragment
 import es.kiketurry.talkingabout.ui.dialogfragment.error.ErrorDialogFragment.Companion.ERROR_DIALOG_FRAGMENT_TAG
 import es.kiketurry.talkingabout.ui.dialogfragment.loading.LoadingDialogFragment
 import es.kiketurry.talkingabout.ui.dialogfragment.loading.LoadingDialogFragment.Companion.LOADING_DIALOG_FRAGMENT_TAG
 
-abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(), View.OnClickListener {
     abstract val TAG: String?
 
     protected lateinit var binding: B
@@ -39,13 +41,18 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         setupViewModel()
         observeViewModel()
         create(savedInstanceState)
+        setListenersClickToolbarButton()
+    }
 
-        ibToolbarClose?.setOnClickListener {
-            clickToolbarClose()
-        }
+    private fun setListenersClickToolbarButton() {
+        ibToolbarClose?.setOnClickListener(this)
+        ibToolbarBack?.setOnClickListener(this)
+    }
 
-        ibToolbarBack?.setOnClickListener {
-            clickToolbarBack()
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.ibToolbarClose -> clickToolbarClose()
+            R.id.ibToolbarBack -> clickToolbarBack()
         }
     }
 
@@ -132,42 +139,30 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         }
     }
 
-    fun hideToolbar() {
-        tbToolbar?.visibility = GONE
+    fun showToolbar(show: Boolean) {
+        tbToolbar?.visible(show)
     }
 
-    fun showToolbar() {
-        tbToolbar?.visibility = VISIBLE
+    fun showBackToolbar(show: Boolean) {
+        ibToolbarBack?.visible(show)
     }
 
-    fun hideBackToolbar() {
-        ibToolbarBack?.visibility = GONE
-    }
-
-    fun showBackToolbar() {
-        ibToolbarBack?.visibility = VISIBLE
-    }
-
-    fun hideCloseToolbar() {
-        ibToolbarClose?.visibility = GONE
-    }
-
-    fun showCloseToolbar() {
-        ibToolbarClose?.visibility = VISIBLE
-    }
-
-    fun hideTitleToolbar() {
-        tvToolbarTitle?.visibility = GONE
+    fun showCloseToolbar(show: Boolean) {
+        ibToolbarClose?.visible(show)
     }
 
     fun showTitleToolbar(title: String) {
+        tvToolbarTitle?.visible()
         tvToolbarTitle?.text = title
-        tvToolbarTitle?.visibility = VISIBLE
     }
 
     fun showTitleToolbar(title: Int) {
+        tvToolbarTitle?.visible()
         tvToolbarTitle?.text = getString(title)
-        tvToolbarTitle?.visibility = VISIBLE
+    }
+
+    fun hideTitleToolbar() {
+        tvToolbarTitle?.gone()
     }
 
     fun showLoading(show: Boolean) {
@@ -188,6 +183,12 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             errorDialogFragment.setError(errorModel)
         } else {
             errorDialogFragment.setErrorAndRefreshInfo(errorModel)
+        }
+    }
+
+    fun showDialogFragment(dialogFragment: DialogFragment, tag: String) {
+        if (supportFragmentManager.findFragmentByTag(tag) == null) {
+            dialogFragment.show(supportFragmentManager, tag)
         }
     }
 

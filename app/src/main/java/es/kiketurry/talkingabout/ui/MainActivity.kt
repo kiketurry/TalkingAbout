@@ -40,8 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun configureToolbar() {
         showTitleToolbar("Actividad principal")
-        hideBackToolbar()
-        showCloseToolbar()
+        showBackToolbar(false)
+        showCloseToolbar(true)
     }
 
     private fun goToBreedsListFragment() {

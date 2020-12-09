@@ -30,7 +30,7 @@
             android:id="@id/house"
             android:layout_width="1000dp"
             android:layout_height="match_parent"
-            android:translationX="-575dp" />
+            android:translationX="-525dp" />
         <Constraint
             android:id="@id/cat"
             android:layout_width="150dp"

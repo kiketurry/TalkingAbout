@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
@@ -43,20 +44,20 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         binding = null
     }
 
-    fun hideToolbar() {
-        baseActivity.hideToolbar()
-    }
-
-    fun showToolbar() {
-        baseActivity.showToolbar()
+    fun showToolbar(show: Boolean) {
+        baseActivity.showToolbar(show)
     }
 
     fun showLoading(show: Boolean) {
         baseActivity.showLoading(show)
     }
 
-    fun showError(errorModel: ErrorModel){
+    fun showError(errorModel: ErrorModel) {
         baseActivity.showError(errorModel)
+    }
+
+    fun showDialogFragment(dialogFragment: DialogFragment, tag: String) {
+        baseActivity.showDialogFragment(dialogFragment, tag)
     }
 
     abstract fun setupViewModel()

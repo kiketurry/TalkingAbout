@@ -60,9 +60,9 @@ class DetailCatFragmentMotionLayout : BaseFragment<FragmentDetailCatMotionLayout
     }
 
     override fun configureToolbar() {
-        baseActivity.showBackToolbar()
+        baseActivity.showBackToolbar(true)
         baseActivity.showTitleToolbar(R.string.toolbar_title_fragment_detail_cat)
-        baseActivity.showCloseToolbar()
+        baseActivity.showCloseToolbar(true)
     }
 
     override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {

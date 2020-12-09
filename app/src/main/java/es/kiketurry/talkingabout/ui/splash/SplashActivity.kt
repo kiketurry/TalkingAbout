@@ -2,12 +2,11 @@ package es.kiketurry.talkingabout.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import es.kiketurry.talkingabout.databinding.ActivitySplashBinding
-import es.kiketurry.talkingabout.ui.MainActivity
 import es.kiketurry.talkingabout.ui.base.BaseActivity
+import es.kiketurry.talkingabout.ui.calculator.CalculatorActivity
 
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
@@ -36,7 +35,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun goToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+//        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, CalculatorActivity::class.java))
         finish()
     }
 

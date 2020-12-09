@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/clToolbar"
+        layout="@layout/toolbar_screen" />
+
+    <EditText
+        android:id="@+id/etOperatorOne"
+        style="@style/operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="@string/operator"
+        android:hint="@string/operator"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/rbAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clToolbar"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <RadioButton
+        android:id="@+id/rbAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        app:layout_constraintBottom_toTopOf="@id/rbMultiply"
+        app:layout_constraintEnd_toStartOf="@id/rbSubtract"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etOperatorOne" />
+
+    <RadioButton
+        android:id="@+id/rbSubtract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subtract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rbAdd"
+        app:layout_constraintTop_toTopOf="@id/rbAdd" />
+
+    <RadioButton
+        android:id="@+id/rbMultiply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/multiply"
+        app:layout_constraintBottom_toTopOf="@id/etOperatorTwo"
+        app:layout_constraintEnd_toStartOf="@id/rbDivide"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rbAdd" />
+
+    <RadioButton
+        android:id="@+id/rbDivide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/divide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rbMultiply"
+        app:layout_constraintTop_toTopOf="@id/rbMultiply" />
+
+    <EditText
+        android:id="@+id/etOperatorTwo"
+        style="@style/operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="@string/operator"
+        android:hint="@string/operator"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/tvEqual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rbMultiply" />
+
+    <TextView
+        android:id="@+id/tvEqual"
+        style="@style/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/equals"
+        app:layout_constraintBottom_toTopOf="@id/tvResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etOperatorTwo" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        style="@style/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEqual"
+        tools:text="20" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

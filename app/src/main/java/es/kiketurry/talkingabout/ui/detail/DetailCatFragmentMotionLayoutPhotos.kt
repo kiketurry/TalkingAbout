@@ -51,9 +51,9 @@ class DetailCatFragmentMotionLayoutPhotos : BaseFragment<FragmentDetailCatMotion
     }
 
     override fun configureToolbar() {
-        baseActivity.showBackToolbar()
+        baseActivity.showBackToolbar(true)
         baseActivity.showTitleToolbar(R.string.toolbar_title_fragment_detail_cat)
-        baseActivity.showCloseToolbar()
+        baseActivity.showCloseToolbar(true)
     }
 
     override fun onItemPhotoClick(position: Int) {
