@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.kiketurry.talkingabout">
 
+    <queries>
+        <package android:name="com.whatsapp" />
+    </queries>
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

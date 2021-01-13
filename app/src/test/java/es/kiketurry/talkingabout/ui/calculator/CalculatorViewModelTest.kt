@@ -6,6 +6,7 @@ import org.junit.*
 
 
 class CalculatorViewModelTest {
+    //Para que puedan correr los test con viewmodels.
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
@@ -58,7 +59,16 @@ class CalculatorViewModelTest {
         System.out.println("l> Se ha ejecutado el test subtract Test")
     }
 
-    // El delta es curioso deja un margen de desviación por encima o por debajo del esperado por si alguna operación matematica aceptara cierta desviación cómo válida.
+    @Test
+    fun addWithDeviation() {
+        Assert.assertEquals(
+            calculatorViewModel.addWithDeviation(10f, 20f),
+            30f,
+            0.5f
+        )// El delta es curioso deja un margen de desviación por encima o por debajo del esperado por si alguna operación matematica aceptara cierta desviación cómo válida.
+        System.out.println("l> Se ha ejecutado el test add Test")
+    }
+
 
     @Test
     fun multiply() {

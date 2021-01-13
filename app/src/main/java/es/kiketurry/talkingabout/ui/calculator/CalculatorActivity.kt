@@ -1,7 +1,12 @@
 package es.kiketurry.talkingabout.ui.calculator
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.databinding.ActivityCalculatorBinding
@@ -37,6 +42,7 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
         binding.rbSubtract.setOnClickListener(this)
         binding.rbMultiply.setOnClickListener(this)
         binding.rbDivide.setOnClickListener(this)
+        binding.btSendWhatsapp.setOnClickListener(this)
     }
 
 
@@ -44,6 +50,9 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
         super.onClick(view)
         hideKeyboard()
         when (view?.id) {
+            binding.btSendWhatsapp.id -> {
+                sendWhatsapp()
+            }
             binding.rbAdd.id -> {
                 uncheckAllRadioButtons()
                 binding.rbAdd.isChecked = true
@@ -65,6 +74,32 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
                 calculatorViewModel.divide(binding.etOperatorOne.text.toString(), binding.etOperatorTwo.text.toString())
             }
         }
+    }
+
+    private fun sendWhatsapp() {
+        val whatsappInstalled: Boolean = appInstalled("com.whatsapp")
+        val mobileNumber = 34689103476
+        val messageWhatsapp = "Mensaje de prueba estoy currando"
+
+        if (whatsappInstalled) {
+            intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$mobileNumber&text=$messageWhatsapp")
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "Whatsapp not installed on your device", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private fun appInstalled(packageString: String): Boolean {
+        var appInstalled: Boolean
+        try {
+            packageManager.getPackageInfo(packageString, PackageManager.GET_ACTIVITIES)
+            appInstalled = true
+        } catch (exception: Exception) {
+            Log.w(TAG, "l> Problemas revisando si la app esta instalada: $exception.message")
+            appInstalled = false
+        }
+        return appInstalled
     }
 
     private fun uncheckAllRadioButtons() {

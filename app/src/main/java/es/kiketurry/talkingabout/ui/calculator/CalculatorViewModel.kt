@@ -59,6 +59,10 @@ class CalculatorViewModel(application: Application) : BaseViewModel(application)
         resultMutableLiveData.postValue(result.toString())
     }
 
+    fun addWithDeviation(operatorOne: Float, operatorTwo: Float): Float {
+        return operatorOne + operatorTwo + 0.25f
+    }
+
     fun largeOperation() {
         Thread.sleep(1000)
     }

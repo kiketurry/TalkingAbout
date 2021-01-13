@@ -18,4 +18,5 @@
     <string name="equals">=</string>
     <string name="operator">Operador</string>
     <string name="titleToolbarCalculator">Calculadora</string>
+    <string name="sendWhatsapp">Enviar Whatsapp</string>
 </resources>

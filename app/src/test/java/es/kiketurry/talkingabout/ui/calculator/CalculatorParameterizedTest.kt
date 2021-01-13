@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(value = Parameterized::class)
 class CalculatorParameterizedTest(var numberOne: String, var numberTwo: String, var result: String) {
+    //Para que puedan correr los test con viewmodels.
     @get:Rule
     val rule = InstantTaskExecutorRule()
 

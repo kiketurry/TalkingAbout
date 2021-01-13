@@ -12,9 +12,9 @@ import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
 abstract class BaseFragment<B : ViewBinding> : Fragment() {
     abstract val TAG: String?
 
-    protected var binding: B? = null
+    var binding: B? = null
 
-    protected lateinit var baseActivity: BaseActivity<*>
+    lateinit var baseActivity: BaseActivity<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

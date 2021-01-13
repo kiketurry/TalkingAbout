@@ -21,7 +21,6 @@ class MainViewModel(application: Application, private val dataProvider: DataProv
 
     fun getBreeds(limitBreeds: Int) {
         loadingMutableLiveData.postValue(true)
-        loadingMutableLiveData.postValue(true)
         dataProvider.getBreeds(object : GetBreedsCallback {
             override fun onGetBreedsCallbackSuccess(breedsModelList: ArrayList<BreedModel>) {
                 breedsModelArrayList = breedsModelList

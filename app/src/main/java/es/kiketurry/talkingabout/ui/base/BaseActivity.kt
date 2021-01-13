@@ -22,7 +22,7 @@ import es.kiketurry.talkingabout.ui.dialogfragment.loading.LoadingDialogFragment
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(), View.OnClickListener {
     abstract val TAG: String?
 
-    protected lateinit var binding: B
+    lateinit var binding: B
 
     private var isKeyboardVisible = false
     private var tbToolbar: Toolbar? = null
