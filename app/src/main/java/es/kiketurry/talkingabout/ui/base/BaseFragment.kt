@@ -29,7 +29,7 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         inflateBinding()
-        createView(inflater, container, savedInstanceState)
+        createViewAfterInflateBinding(inflater, container, savedInstanceState)
         return binding!!.root
     }
 
@@ -37,6 +37,7 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         observeViewModel()
+        viewCreatedAfterSetupObserverViewModel(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
@@ -60,10 +61,10 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         baseActivity.showDialogFragment(dialogFragment, tag)
     }
 
+    abstract fun inflateBinding()
+    abstract fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
     abstract fun setupViewModel()
     abstract fun observeViewModel()
-    abstract fun inflateBinding()
-    abstract fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
-
+    abstract fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?)
     abstract fun configureToolbar()
 }

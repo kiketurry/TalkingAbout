@@ -3,6 +3,7 @@ package es.kiketurry.talkingabout.ui.list
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,11 +41,13 @@ class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapt
         })
     }
 
+    override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
+
     override fun inflateBinding() {
         binding = FragmentBreedsListBinding.inflate(layoutInflater)
     }
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
+    override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         breedsAdapter = BreedsAdapter(context!!, ArrayList(), this)
         binding?.rvBreeds?.apply {
             setHasFixedSize(true)

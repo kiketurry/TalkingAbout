@@ -1,7 +1,5 @@
 package es.kiketurry.talkingabout.data.repository
 
-import es.kiketurry.talkingabout.injection.holder.SingletonHolderOneParameter
-
 class DataProvider private constructor(private val remoteDataSource: DataSource) : DataSource {
     companion object {
         var INSTANCE: DataProvider? = null

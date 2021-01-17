@@ -3,6 +3,7 @@ package es.kiketurry.talkingabout.ui.detail.simplyversion
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,13 +45,15 @@ class DetailCatFragment : BaseFragment<FragmentDetailCatBinding>(), DetailCatPho
         })
     }
 
+    override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
+
     override fun inflateBinding() {
         binding = FragmentDetailCatBinding.inflate(layoutInflater)
     }
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
+    override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         detailCatPhotosAdapter = DetailCatPhotosAdapter(context!!, ArrayList(), this)
-        binding?.rvPhotos?.apply{
+        binding?.rvPhotos?.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
             adapter = detailCatPhotosAdapter

@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import es.kiketurry.talkingabout.databinding.ActivitySplashBinding
+import es.kiketurry.talkingabout.ui.MainActivity
 import es.kiketurry.talkingabout.ui.base.BaseActivity
-import es.kiketurry.talkingabout.ui.calculator.CalculatorActivity
 
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
@@ -20,7 +20,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun observeViewModel() = Unit
 
-    override fun create(savedInstanceState: Bundle?) {
+
+    override fun createAfterInflateBindingSetupObserverViewModel(savedInstanceState: Bundle?) {
         binding.motionLayoutBackgroundCat.setTransitionListener(object : TransitionListener {
             override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) = Unit
 
@@ -35,8 +36,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun goToMainActivity() {
-//        startActivity(Intent(this, MainActivity::class.java))
-        startActivity(Intent(this, CalculatorActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
+//        startActivity(Intent(this, CalculatorActivity::class.java))
         finish()
     }
 

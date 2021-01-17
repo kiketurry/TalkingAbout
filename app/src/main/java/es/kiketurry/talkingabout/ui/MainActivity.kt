@@ -30,12 +30,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mainViewModel.errorMutableLiveData.observe(this, this::showError)
     }
 
-    override fun create(savedInstanceState: Bundle?) {
+    override fun createAfterInflateBindingSetupObserverViewModel(savedInstanceState: Bundle?) {
         goToBreedsListFragment()
 
         binding.clToolbar.ibToolbarClose.setOnClickListener { Log.i(TAG, "Pulsamos Cerrar") }
 
-        mainViewModel.getBreeds(resources.getInteger(R.integer.limit_breeds))
+//        mainViewModel.getBreeds(resources.getInteger(R.integer.limit_breeds))
+//        mainViewModel.getBoardGamesByUser("kiketurrydeveloper")
+        mainViewModel.getThingsBoardGamesGeek("40834")
+//        mainViewModel.getThingsBoardGamesGeek("318079") //mision marte
     }
 
     override fun configureToolbar() {

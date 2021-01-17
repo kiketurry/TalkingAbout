@@ -1,11 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "es.kiketurry.talkingabout"
@@ -30,6 +31,7 @@ android {
             applicationIdSuffix = '.pre'
             versionNameSuffix = '-pre'
             buildConfigField 'String', "BASE_URL", '"https://api.thecatapi.com"'
+            buildConfigField 'String', "BASE_URL_BGG", '"https://www.boardgamegeek.com/xmlapi2/"'
             buildConfigField 'String', "API_KEY_HEADER", '"x-api-key"'
             buildConfigField 'String', "API_KEY_HEADER_VALUE", '"8ac5b7b9-054d-4fde-9439-5dd59e440786"'
         }
@@ -59,7 +61,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.21"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -79,10 +81,21 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation 'com.squareup.retrofit:converter-simplexml:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //Room
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
+    //optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.2.6"
+    //optional - Test helpers
+    testImplementation "androidx.room:room-testing:2.2.6"
+
+    //Detect language
+    implementation 'com.google.mlkit:language-id:16.1.1'
 }

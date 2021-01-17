@@ -3,6 +3,7 @@ package es.kiketurry.talkingabout.ui.detail
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
@@ -44,11 +45,13 @@ class DetailCatFragmentMotionLayout : BaseFragment<FragmentDetailCatMotionLayout
         })
     }
 
+    override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
+
     override fun inflateBinding() {
         binding = FragmentDetailCatMotionLayoutBinding.inflate(layoutInflater)
     }
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
+    override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         binding?.mlContainer?.setTransitionListener(this)
         if (savedInstanceState == null) {
             fragment = DetailCatFragmentMotionLayoutMiniatureCamera().also {

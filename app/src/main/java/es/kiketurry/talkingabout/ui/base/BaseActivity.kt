@@ -29,39 +29,9 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(), View.OnClick
     private var ibToolbarBack: ImageButton? = null
     private var ibToolbarClose: ImageButton? = null
     private var tvToolbarTitle: TextView? = null
+
     private var loadingDialogFragment: LoadingDialogFragment = LoadingDialogFragment()
     private var errorDialogFragment: ErrorDialogFragment = ErrorDialogFragment()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        inflateBinding()
-        setContentView(binding.root)
-        findViewByIdToolbar()
-        setListenerKeyboardIsVisible()
-        setupViewModel()
-        observeViewModel()
-        create(savedInstanceState)
-        setListenersClickToolbarButton()
-    }
-
-    private fun setListenersClickToolbarButton() {
-        ibToolbarClose?.setOnClickListener(this)
-        ibToolbarBack?.setOnClickListener(this)
-    }
-
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.ibToolbarClose -> clickToolbarClose()
-            R.id.ibToolbarBack -> clickToolbarBack()
-        }
-    }
-
-    private fun findViewByIdToolbar() {
-        tbToolbar = findViewById(R.id.tbToolbar)
-        ibToolbarBack = findViewById(R.id.ibToolbarBack)
-        ibToolbarClose = findViewById(R.id.ibToolbarClose)
-        tvToolbarTitle = findViewById(R.id.tvToolbarTitle)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -76,22 +46,23 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(), View.OnClick
         }
     }
 
-    fun popAllPreviousFragments() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            for (i in 0 until supportFragmentManager.backStackEntryCount) {
-                supportFragmentManager.popBackStack()
-            }
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inflateBinding()
+        setContentView(binding.root)
+        findViewByIdToolbar()
+        setListenerKeyboardIsVisible()
+        setupViewModel()
+        observeViewModel()
+        createAfterInflateBindingSetupObserverViewModel(savedInstanceState)
+        setListenersClickToolbarButton()
     }
 
-    fun goBackNumberSteps(steps: Int) {
-        var counter = steps
-        if (supportFragmentManager.fragments.size > 0 && supportFragmentManager.fragments.size >= steps) {
-            while (counter > 0) {
-                counter--
-                onBackPressed()
-            }
-        }
+    private fun findViewByIdToolbar() {
+        tbToolbar = findViewById(R.id.tbToolbar)
+        ibToolbarBack = findViewById(R.id.ibToolbarBack)
+        ibToolbarClose = findViewById(R.id.ibToolbarClose)
+        tvToolbarTitle = findViewById(R.id.tvToolbarTitle)
     }
 
     private fun setListenerKeyboardIsVisible() {
@@ -118,10 +89,47 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(), View.OnClick
         }
     }
 
+    private fun setListenersClickToolbarButton() {
+        ibToolbarClose?.setOnClickListener(this)
+        ibToolbarBack?.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.ibToolbarClose -> clickToolbarClose()
+            R.id.ibToolbarBack -> clickToolbarBack()
+        }
+    }
+
+    protected open fun clickToolbarBack() {
+        onBackPressed()
+    }
+
+    protected open fun clickToolbarClose() {
+        finish()
+    }
+
+    fun popAllPreviousFragments() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            for (i in 0 until supportFragmentManager.backStackEntryCount) {
+                supportFragmentManager.popBackStack()
+            }
+        }
+    }
+
+    fun goBackNumberSteps(steps: Int) {
+        var counter = steps
+        if (supportFragmentManager.fragments.size > 0 && supportFragmentManager.fragments.size >= steps) {
+            while (counter > 0) {
+                counter--
+                onBackPressed()
+            }
+        }
+    }
+
     fun isKeyboardVisible(): Boolean {
         return isKeyboardVisible
     }
-
 
     fun hideKeyboard() {
         val view = this.currentFocus
@@ -192,22 +200,9 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(), View.OnClick
         }
     }
 
-    protected open fun clickToolbarBack() {
-        onBackPressed()
-    }
-
-    protected open fun clickToolbarClose() {
-        finish()
-    }
-
     abstract fun inflateBinding()
-
     abstract fun setupViewModel()
-
     abstract fun observeViewModel()
-
-    abstract fun create(savedInstanceState: Bundle?)
-
+    abstract fun createAfterInflateBindingSetupObserverViewModel(savedInstanceState: Bundle?)
     abstract fun configureToolbar()
-
 }

@@ -37,14 +37,13 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
         binding.tvResult.text = result
     }
 
-    override fun create(savedInstanceState: Bundle?) {
+    override fun createAfterInflateBindingSetupObserverViewModel(savedInstanceState: Bundle?) {
         binding.rbAdd.setOnClickListener(this)
         binding.rbSubtract.setOnClickListener(this)
         binding.rbMultiply.setOnClickListener(this)
         binding.rbDivide.setOnClickListener(this)
         binding.btSendWhatsapp.setOnClickListener(this)
     }
-
 
     override fun onClick(view: View?) {
         super.onClick(view)
