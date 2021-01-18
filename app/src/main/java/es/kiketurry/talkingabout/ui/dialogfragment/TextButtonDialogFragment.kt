@@ -46,6 +46,7 @@ class TextButtonDialogFragment : DialogFragment() {
         binding.btAcceptError.setOnClickListener {
             Log.i("TextButtonDialogFragmen", "l> vamos a llamar al listener")
             textButtonDialogFragmentClickButtonListener.onTextButtonDialogFragmentClickButton()
+            dismiss()
         }
     }
 

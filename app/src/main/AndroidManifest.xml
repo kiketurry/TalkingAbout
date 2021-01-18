@@ -27,11 +27,19 @@
         </activity>
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.DistributiveActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.cats.CatsActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.calculator.CalculatorActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.bgg.listusers.ListUserBGGActivity"
             android:screenOrientation="portrait" />
 
     </application>

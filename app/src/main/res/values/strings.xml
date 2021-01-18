@@ -19,4 +19,10 @@
     <string name="operator">Operador</string>
     <string name="titleToolbarCalculator">Calculadora</string>
     <string name="sendWhatsapp">Enviar Whatsapp</string>
+    <string name="goToCatsActivity">Ir a la actividad de los gatos</string>
+    <string name="goToCalculatorActivity">Ir a la actividad de la calculadora</string>
+    <string name="goToBGGActivity">Ir a la actividad de la bgg</string>
+    <string name="toolbarDistributive">¿A dónde vamos?</string>
+    <string name="toolbarListUsersBGG">Listado de usuarios BGG</string>
+    <string name="add_user">añadir usuario bgg</string>
 </resources>

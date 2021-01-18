@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import es.kiketurry.talkingabout.databinding.ActivitySplashBinding
-import es.kiketurry.talkingabout.ui.MainActivity
+import es.kiketurry.talkingabout.ui.DistributiveActivity
 import es.kiketurry.talkingabout.ui.base.BaseActivity
 
 
@@ -28,16 +28,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) = Unit
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                goToMainActivity()
+                goToDistributiveActivity()
             }
 
             override fun onTransitionTrigger(motionLayout: MotionLayout?, triggerId: Int, positive: Boolean, progress: Float) = Unit
         })
     }
 
-    private fun goToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
-//        startActivity(Intent(this, CalculatorActivity::class.java))
+    private fun goToDistributiveActivity() {
+        startActivity(Intent(this, DistributiveActivity::class.java))
         finish()
     }
 

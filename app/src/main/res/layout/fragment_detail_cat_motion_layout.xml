@@ -136,13 +136,13 @@
         app:layout_constraintTop_toTopOf="@id/ivAdaptability"
         tools:text="8" />
 
-    <es.kiketurry.talkingabout.ui.custom.TouchFrameLayout
+    <es.kiketurry.talkingabout.ui.cats.custom.TouchFrameLayout
         android:id="@+id/tflContainerPhotos"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
