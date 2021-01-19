@@ -39,8 +39,9 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.bgg.listusers.ListUserBGGActivity"
-            android:screenOrientation="portrait" />
+            android:name=".ui.bgg.BGGActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

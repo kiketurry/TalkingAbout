@@ -38,6 +38,7 @@ class InjectionSingleton {
         fun provideViewModelFactory(context: Context): ViewModelFactory {
             return ViewModelFactory.getInstance(
                 context.applicationContext as Application,
+                provideBBDDManager(context),
                 provideDataSource(context),
                 provideDataSourceXML(context)
             )

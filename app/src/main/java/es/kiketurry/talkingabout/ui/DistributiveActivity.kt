@@ -8,7 +8,7 @@ import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.databinding.ActivityDistributiveBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
-import es.kiketurry.talkingabout.ui.bgg.listusers.ListUserBGGActivity
+import es.kiketurry.talkingabout.ui.bgg.BGGActivity
 import es.kiketurry.talkingabout.ui.calculator.CalculatorActivity
 import es.kiketurry.talkingabout.ui.cats.CatsActivity
 
@@ -51,7 +51,7 @@ class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
                 startActivity(Intent(this, CalculatorActivity::class.java))
             }
             R.id.btBGG -> {
-                startActivity(Intent(this, ListUserBGGActivity::class.java))
+                startActivity(Intent(this, BGGActivity::class.java))
             }
         }
     }

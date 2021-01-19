@@ -25,4 +25,12 @@
     <string name="toolbarDistributive">¿A dónde vamos?</string>
     <string name="toolbarListUsersBGG">Listado de usuarios BGG</string>
     <string name="add_user">añadir usuario bgg</string>
+    <string name="toolbarBGG">Cotilleando en la BGG</string>
+    <string name="bggAddUserHintName">Nombre</string>
+    <string name="bggAddUserButton">Añadir</string>
+    <string name="bggAddUserHintEmail">Email</string>
+    <string name="bggAddUserHintPrefix">Prefijo nacional ejemplo, 34</string>
+    <string name="bggAddUserHintPhone">Teléfono</string>
+    <string name="bggAddUserHintUserBGG">Usuario BGG *</string>
+    <string name="bggAddUserLimitMinUsername">Para añadir un nuevo usuario al menos tiene que tener nombre de usuario de la bgg</string>
 </resources>

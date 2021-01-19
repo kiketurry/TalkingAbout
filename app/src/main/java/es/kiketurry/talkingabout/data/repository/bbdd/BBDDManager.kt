@@ -3,7 +3,7 @@ package es.kiketurry.talkingabout.data.repository.bbdd
 import android.content.Context
 import androidx.room.Room
 
-class BBDDManager private constructor(private val context: Context) {
+class BBDDManager private constructor(context: Context) {
     companion object {
         var INSTANCE: BBDDManager? = null
 
@@ -16,7 +16,6 @@ class BBDDManager private constructor(private val context: Context) {
         }
     }
 
-    init {
-        val db = Room.databaseBuilder(context, AppDatabase::class.java, "talking-about-bbdd").build()
-    }
+    val db: AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "talking-about-bbdd").build()
+
 }
