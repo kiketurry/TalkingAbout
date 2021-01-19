@@ -1,4 +1,4 @@
-package es.kiketurry.talkingabout.data.repository.bbdd
+package es.kiketurry.talkingabout.data.repository.bbdd.things
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

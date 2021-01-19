@@ -4,8 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.data.repository.DataProvider
-import es.kiketurry.talkingabout.data.repository.DataProviderXML
-import es.kiketurry.talkingabout.data.repository.bbdd.BBDDManager
+import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.ui.DistributiveViewModel
 import es.kiketurry.talkingabout.ui.bgg.BGGViewModel
 import es.kiketurry.talkingabout.ui.bgg.adduser.AddUsersBGGViewModel
@@ -17,9 +16,8 @@ import es.kiketurry.talkingabout.ui.cats.list.BreedListViewModel
 
 class ViewModelFactory(
     var application: Application,
-    var bbddManager: BBDDManager,
+    var appDatabase: AppDatabase,
     var dataProvider: DataProvider,
-    var dataProviderXML: DataProviderXML
 ) :
     ViewModelProvider.Factory {
     companion object {
@@ -28,12 +26,11 @@ class ViewModelFactory(
         @Synchronized
         fun getInstance(
             application: Application,
-            bbddManager: BBDDManager,
-            dataProvider: DataProvider,
-            dataProviderXML: DataProviderXML
+            appDatabase: AppDatabase,
+            dataProvider: DataProvider
         ): ViewModelFactory {
             if (INSTANCE == null) {
-                INSTANCE = ViewModelFactory(application, bbddManager, dataProvider, dataProviderXML)
+                INSTANCE = ViewModelFactory(application, appDatabase, dataProvider)
             }
             return INSTANCE!!
         }
@@ -45,7 +42,7 @@ class ViewModelFactory(
                 DistributiveViewModel(application)
             }
             CatsViewModel::class.qualifiedName -> {
-                CatsViewModel(application, dataProvider, dataProviderXML)
+                CatsViewModel(application, dataProvider)
             }
             BreedListViewModel::class.qualifiedName -> {
                 BreedListViewModel(application, dataProvider)
@@ -60,10 +57,10 @@ class ViewModelFactory(
                 BGGViewModel(application)
             }
             ListUsersBGGViewModel::class.qualifiedName -> {
-                ListUsersBGGViewModel(application, bbddManager)
+                ListUsersBGGViewModel(application, appDatabase)
             }
             AddUsersBGGViewModel::class.qualifiedName -> {
-                AddUsersBGGViewModel(application, bbddManager)
+                AddUsersBGGViewModel(application, appDatabase)
             }
             else -> {
                 SimplyViewModel(application)

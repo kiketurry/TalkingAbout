@@ -12,21 +12,21 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient() {
+class RetrofitClientCats() {
     companion object {
-        var INSTANCE: RetrofitClient? = null
+        var INSTANCE: RetrofitClientCats? = null
 
         @Synchronized
-        fun getInstance(): RetrofitClient {
+        fun getInstance(): RetrofitClientCats {
             if (INSTANCE == null) {
-                INSTANCE = RetrofitClient()
+                INSTANCE = RetrofitClientCats()
             }
             return INSTANCE!!
         }
     }
 
     private val retrofit: Retrofit
-    private val apiServices: ApiServices
+    private val apiServicesCats: ApiServicesCats
 
     init {
         val httpClient = OkHttpClient.Builder()
@@ -61,10 +61,10 @@ class RetrofitClient() {
             .client(httpClient.build())
             .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
-        apiServices = retrofit.create(ApiServices::class.java)
+        apiServicesCats = retrofit.create(ApiServicesCats::class.java)
     }
 
-    fun getApiServices(): ApiServices {
-        return apiServices
+    fun getApiServices(): ApiServicesCats {
+        return apiServicesCats
     }
 }

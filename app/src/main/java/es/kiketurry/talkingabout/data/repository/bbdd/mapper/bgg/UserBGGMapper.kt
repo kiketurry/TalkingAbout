@@ -1,8 +1,8 @@
 package es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg
 
 import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
-import es.kiketurry.talkingabout.data.repository.bbdd.UserBGGRoomEntity
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.BBDDMapperModel
+import es.kiketurry.talkingabout.data.repository.bbdd.users.UserBGGRoomEntity
 
 class UserBGGMapper : BBDDMapperModel<UserBGGModel, UserBGGRoomEntity> {
     override fun toBBDD(model: UserBGGModel): UserBGGRoomEntity {

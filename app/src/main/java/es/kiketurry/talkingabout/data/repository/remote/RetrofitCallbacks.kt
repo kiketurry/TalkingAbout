@@ -7,6 +7,8 @@ import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
 import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks
 import es.kiketurry.talkingabout.data.repository.remote.mapper.breeds.BreedMapper
 import es.kiketurry.talkingabout.data.repository.remote.mapper.breeds.BreedPhotoMapper
+import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.listuser.ListBoardGameUserResponse
+import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.things.ListThingsBoardGameGeekResponse
 import es.kiketurry.talkingabout.data.repository.remote.responses.breeds.BreedPhotoResponse
 import es.kiketurry.talkingabout.data.repository.remote.responses.breeds.BreedResponse
 import es.kiketurry.talkingabout.utils.ErrorsUtils
@@ -19,7 +21,7 @@ class RetrofitCallbacks {
         private val TAG: String? = ErrorsUtils::class.simpleName
 
         //****
-        //BREEDS
+        //CATS
         //****
         fun getBreedsCallback(getBreedsCallback: DataSourceCallbacks.GetBreedsCallback): Callback<ArrayList<BreedResponse>> {
             return object : Callback<ArrayList<BreedResponse>> {
@@ -59,13 +61,66 @@ class RetrofitCallbacks {
                         getBreedsPhotosCallback.onGetBreedsPhotosCallbacksSuccess(breedPhotoModelList)
                     } else {
                         Log.e(TAG, "l> Problemas en la respuesta de getPhotosCallback.")
-                        getBreedsPhotosCallback.onGetBreedsPhotosCallbackUnsuccess(ErrorsUtils.generateErrorModelFromResponseErrorBody(response.errorBody()))
+                        getBreedsPhotosCallback.onGetBreedsPhotosCallbackUnsuccess(
+                            ErrorsUtils.generateErrorModelFromResponseErrorBody(
+                                response.errorBody()
+                            )
+                        )
                     }
                 }
 
                 override fun onFailure(call: Call<ArrayList<BreedPhotoResponse>>, throwable: Throwable) {
                     Log.e(TAG, "l> Problemas en la respuesta de getPhotosCallback failure.")
                     getBreedsPhotosCallback.onGetBreedsPhotosCallbackFailure(ErrorModel(throwable.message ?: "unknow"))
+                }
+            }
+        }
+
+        //***
+        //BGG
+        //***
+        fun getBoardGamesByUserCallback(getBoardGamesByUserCallback: DataSourceCallbacks.GetBoardGamesByUserCallback): Callback<ListBoardGameUserResponse> {
+            return object : Callback<ListBoardGameUserResponse> {
+                override fun onResponse(call: Call<ListBoardGameUserResponse>, response: Response<ListBoardGameUserResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "l> Éxito en la respuesta de getBoardGmesByUserCallback.")
+                        getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackSuccess(response.body()!!)
+                    } else {
+                        Log.e(TAG, "l> Problemas en la respuesta de getBoardGmesByUserCallback.")
+                        getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackUnsuccess(
+                            ErrorsUtils.generateErrorModelFromResponseErrorBody(
+                                response.errorBody()
+                            )
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<ListBoardGameUserResponse>, throwable: Throwable) {
+                    Log.e(TAG, "l> Problemas en la respuesta de getBoardGmesByUserCallback failure.")
+                    getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackFailure(ErrorModel(throwable.message ?: "unknow"))
+                }
+            }
+        }
+
+        fun getThingsBoardGameGeekCallback(getThingsBoardGamesGeekCallback: DataSourceCallbacks.GetThingsBoardGamesGeekCallback): Callback<ListThingsBoardGameGeekResponse> {
+            return object : Callback<ListThingsBoardGameGeekResponse> {
+                override fun onResponse(call: Call<ListThingsBoardGameGeekResponse>, response: Response<ListThingsBoardGameGeekResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "l> Éxito en la respuesta de getThingsBoardGameGeekCallback.")
+                        getThingsBoardGamesGeekCallback.onGetThingsBoardGamesGeekCallbackSuccess(response.body()!!)
+                    } else {
+                        Log.e(TAG, "l> Problemas en la respuesta de getThingsBoardGameGeekCallback.")
+                        getThingsBoardGamesGeekCallback.onGetThingsBoardGamesGeekCallbackUnsuccess(
+                            ErrorsUtils.generateErrorModelFromResponseErrorBody(
+                                response.errorBody()
+                            )
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<ListThingsBoardGameGeekResponse>, throwable: Throwable) {
+                    Log.e(TAG, "l> Problemas en la respuesta de getThingsBoardGameGeekCallback failure.")
+                    getThingsBoardGamesGeekCallback.onGetThingsBoardGamesGeekCallbackFailure(ErrorModel(throwable.message ?: "unknow"))
                 }
             }
         }

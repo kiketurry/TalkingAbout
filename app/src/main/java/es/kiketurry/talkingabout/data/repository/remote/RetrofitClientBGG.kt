@@ -12,21 +12,21 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class RetrofitClientXML() {
+class RetrofitClientBGG() {
     companion object {
-        var INSTANCE: RetrofitClientXML? = null
+        var INSTANCE: RetrofitClientBGG? = null
 
         @Synchronized
-        fun getInstance(): RetrofitClientXML {
+        fun getInstance(): RetrofitClientBGG {
             if (INSTANCE == null) {
-                INSTANCE = RetrofitClientXML()
+                INSTANCE = RetrofitClientBGG()
             }
             return INSTANCE!!
         }
     }
 
     private val retrofit: Retrofit
-    private val apiServices: ApiServicesXML
+    private val apiServices: ApiServicesBGG
 
     init {
         val httpClient = OkHttpClient.Builder()
@@ -61,10 +61,10 @@ class RetrofitClientXML() {
             .client(httpClient.build())
             .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
-        apiServices = retrofit.create(ApiServicesXML::class.java)
+        apiServices = retrofit.create(ApiServicesBGG::class.java)
     }
 
-    fun getApiServicesXML(): ApiServicesXML {
+    fun getApiServicesXML(): ApiServicesBGG {
         return apiServices
     }
 }

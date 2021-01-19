@@ -8,15 +8,13 @@ import es.kiketurry.talkingabout.data.domain.model.breeds.BreedModel
 import es.kiketurry.talkingabout.data.domain.model.breeds.BreedPhotoModel
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
 import es.kiketurry.talkingabout.data.repository.DataProvider
-import es.kiketurry.talkingabout.data.repository.DataProviderXML
 import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks
 import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks.GetBreedsCallback
-import es.kiketurry.talkingabout.data.repository.DataSourceCallbacksXML
 import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.listuser.ListBoardGameUserResponse
 import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.things.ListThingsBoardGameGeekResponse
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 
-class CatsViewModel(application: Application, private val dataProvider: DataProvider, private val dataProviderXML: DataProviderXML) :
+class CatsViewModel(application: Application, private val dataProvider: DataProvider) :
     BaseViewModel(application) {
     override val TAG: String? get() = CatsViewModel::class.qualifiedName
 
@@ -49,7 +47,7 @@ class CatsViewModel(application: Application, private val dataProvider: DataProv
 
     fun getBoardGamesByUser(user: String) {
         loadingMutableLiveData.postValue(true)
-        dataProviderXML.getBoardGamesByUser(object : DataSourceCallbacksXML.GetBoardGamesByUserCallback {
+        dataProvider.getBoardGamesByUser(object : DataSourceCallbacks.GetBoardGamesByUserCallback {
 
             override fun onGetBoardGamesByUserCallbackSuccess(listBoardGameUserResponse: ListBoardGameUserResponse) {
                 loadingMutableLiveData.postValue(false)
@@ -69,7 +67,7 @@ class CatsViewModel(application: Application, private val dataProvider: DataProv
 
     fun getThingsBoardGamesGeek(things: String) {
         loadingMutableLiveData.postValue(true)
-        dataProviderXML.getThingsBoardGameGeek(object : DataSourceCallbacksXML.GetThingsBoardGamesGeekCallback {
+        dataProvider.getThingsBoardGameGeek(object : DataSourceCallbacks.GetThingsBoardGamesGeekCallback {
             override fun onGetThingsBoardGamesGeekCallbackSuccess(listThingsBoardGameGeekResponse: ListThingsBoardGameGeekResponse) {
                 loadingMutableLiveData.postValue(false)
                 listThingsBoardGameGeekResponse.boardGamesList?.get(0)?.namesList?.forEachIndexed { index, nameBoardGameGeekResponse ->
