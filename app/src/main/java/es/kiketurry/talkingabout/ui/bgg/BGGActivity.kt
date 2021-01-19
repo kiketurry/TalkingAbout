@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.R
+import es.kiketurry.talkingabout.data.constants.IntentKeys.Companion.INTENT_KEY_EDIT_USER_BGG
+import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.databinding.ActivityBggBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
-import es.kiketurry.talkingabout.ui.bgg.adduser.AddUserBGGFragment
+import es.kiketurry.talkingabout.ui.bgg.addmodifyuser.AddModifyUserBGGFragment
 import es.kiketurry.talkingabout.ui.bgg.listusers.ListUserBGGFragment
 
 class BGGActivity : BaseActivity<ActivityBggBinding>() {
@@ -41,10 +43,15 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
             .commit()
     }
 
-    fun goToAddUser() {
-        val fragment: Fragment = AddUserBGGFragment()
+    fun goToAddUser(edit: Boolean = false, userBGGModel: UserBGGModel = UserBGGModel()) {
+        val fragment: Fragment = AddModifyUserBGGFragment()
+        if (edit) {
+            val editBundle = Bundle()
+            editBundle.putSerializable(INTENT_KEY_EDIT_USER_BGG, userBGGModel)
+            fragment.arguments = editBundle
+        }
         supportFragmentManager.beginTransaction()
-            .replace(R.id.flMainFragmentHost, fragment, AddUserBGGFragment::class.qualifiedName)
+            .replace(R.id.flMainFragmentHost, fragment, AddModifyUserBGGFragment::class.qualifiedName)
             .addToBackStack(ListUserBGGFragment::class.qualifiedName)
             .commit()
     }

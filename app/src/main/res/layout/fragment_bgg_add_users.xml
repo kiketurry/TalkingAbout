@@ -9,8 +9,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:text="kiketurry"
         android:hint="@string/bggAddUserHintUserBGG"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/etName"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:hint="@string/bggAddUserHintName"
-        android:text="Enrique Márquez Turrillo"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/etEmail"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etUserBGG" />
@@ -32,7 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:hint="@string/bggAddUserHintEmail"
-        android:text="kiketurry@gmail.com"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/etPrefix"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etName" />
@@ -42,8 +48,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:text="34"
         android:hint="@string/bggAddUserHintPrefix"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/etPhone"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etEmail" />
@@ -54,8 +62,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:hint="@string/bggAddUserHintPhone"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="665370508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPrefix" />
 

@@ -7,16 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import es.kiketurry.talkingabout.R
+import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.databinding.FragmentBggListUsersBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.bgg.BGGActivity
+import es.kiketurry.talkingabout.ui.bgg.listusers.adapter.UsersBGGAdapter
+import java.util.*
 
-class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>() {
+class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>(), UsersBGGAdapter.ItemUserBGGClickListener {
     override val TAG: String? get() = ListUserBGGFragment::class.qualifiedName
 
     lateinit var listUsersBGGViewModel: ListUsersBGGViewModel
+
+    private lateinit var usersBGGAdapter: UsersBGGAdapter
 
     override fun inflateBinding() {
         binding = FragmentBggListUsersBinding.inflate(layoutInflater)
@@ -28,10 +34,11 @@ class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>() {
     }
 
     override fun observeViewModel() {
-        listUsersBGGViewModel.usersListMutableLiveData.observe(this, Observer { listUsersBGGViewModel ->
-            listUsersBGGViewModel.forEachIndexed { index, userBGGRoomEntity ->
-                Log.i(TAG, "l> tenemos al usuario ${userBGGRoomEntity.name} con nick ${userBGGRoomEntity.userBGG}")
-            }
+        listUsersBGGViewModel.errorMutableLiveData.observe(viewLifecycleOwner, this::showError)
+        listUsersBGGViewModel.loadingMutableLiveData.observe(viewLifecycleOwner, this::showLoading)
+
+        listUsersBGGViewModel.usersListMutableLiveData.observe(viewLifecycleOwner, Observer { listUserBGG ->
+            usersBGGAdapter.refreshUsers(listUserBGG)
         })
     }
 
@@ -42,12 +49,32 @@ class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>() {
     }
 
     override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
+        usersBGGAdapter = UsersBGGAdapter(context!!, ArrayList(), this)
+        binding?.rvListUsersBGG?.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = usersBGGAdapter
+        }
+
         binding?.fabAddUserBGG?.setOnClickListener {
             (baseActivity as BGGActivity).goToAddUser()
         }
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
+        Log.i(TAG, "l> vamos a observar la bbdd")
+        listUsersBGGViewModel.observeUsersBGGBBDD(this)
+    }
 
+    override fun onItemUserBGGClick(userBGGModel: UserBGGModel) {
+        Log.i(TAG, "l> hemos pulsado sobre el usuario: ${userBGGModel.userBGG}")
+    }
+
+    override fun onEditUserBGGClick(userBGGModel: UserBGGModel) {
+        (baseActivity as BGGActivity).goToAddUser(true, userBGGModel)
+    }
+
+    override fun onDeleteUserBGGClick(userBGGModel: UserBGGModel) {
+        listUsersBGGViewModel.deleteUserBGG(userBGGModel)
     }
 }

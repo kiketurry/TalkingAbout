@@ -10,6 +10,9 @@
     <color name="grey">#ededed</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="backgroundUserBGGListLight">#DAE5F4</color>
+    <color name="backgroundUserBGGListDark">#B8D1F3</color>
+
     <color name="backgroundColorFragmentDetailCatMotionLayoutMiniatureCamera">#cc3f70d7</color>
     <color name="backgroundColorFragmentDetailCatMotionLayoutPhotos">#ffac3f</color>
 </resources>

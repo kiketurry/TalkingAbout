@@ -10,7 +10,7 @@ import es.kiketurry.talkingabout.ui.base.ViewModelFactory
 
 class InjectionSingleton {
     companion object {
-        fun provideAppDatabase(context: Context): AppDatabase {
+        private fun provideAppDatabase(context: Context): AppDatabase {
             return AppDatabase.getInstance(context)
         }
 
