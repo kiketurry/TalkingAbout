@@ -30,10 +30,10 @@ class DetailCatFragmentMotionLayout : BaseFragment<FragmentDetailCatMotionLayout
     }
 
     override fun observeViewModel() {
-        detailCatViewModel.errorMutableLiveData.observe(this, this::showError)
-        detailCatViewModel.loadingMutableLiveData.observe(this, this::showLoading)
+        detailCatViewModel.errorMutableLiveData.observe(viewLifecycleOwner, this::showError)
+        detailCatViewModel.loadingMutableLiveData.observe(viewLifecycleOwner, this::showLoading)
 
-        (baseActivity as CatsActivity).catsViewModel.breedCatSelectedMutableLiveData.observe(this, Observer { breedModel ->
+        (baseActivity as CatsActivity).catsViewModel.breedCatSelectedMutableLiveData.observe(viewLifecycleOwner, Observer { breedModel ->
             Log.d(TAG, "l> breedCatSelectedMutableLiveData posted")
             binding?.tvBreed?.text = breedModel.name
             binding?.tvDescription?.text = breedModel.description

@@ -32,10 +32,10 @@ class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapt
     }
 
     override fun observeViewModel() {
-        breedListViewmodel.errorMutableLiveData.observe(this, this::showError)
-        breedListViewmodel.loadingMutableLiveData.observe(this, this::showLoading)
+        breedListViewmodel.errorMutableLiveData.observe(viewLifecycleOwner, this::showError)
+        breedListViewmodel.loadingMutableLiveData.observe(viewLifecycleOwner, this::showLoading)
 
-        (baseActivity as CatsActivity).catsViewModel.breedsModelListMutableLiveData.observe(this, Observer { breedModelList ->
+        (baseActivity as CatsActivity).catsViewModel.breedsModelListMutableLiveData.observe(viewLifecycleOwner, Observer { breedModelList ->
             Log.d(TAG, "l> breedsModelListMutableLiveData posted")
             breedsAdapter.refreshBreeds(breedListViewmodel.getNamesBreedList(breedModelList))
         })
