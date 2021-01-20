@@ -1,7 +1,6 @@
 package es.kiketurry.talkingabout.ui.bgg.listusers
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,12 +61,11 @@ class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>(), UsersBG
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-        Log.i(TAG, "l> vamos a observar la bbdd")
-        listUsersBGGViewModel.observeUsersBGGBBDD(this)
+        listUsersBGGViewModel.observeUsersBGGBBDD(viewLifecycleOwner)
     }
 
     override fun onItemUserBGGClick(userBGGModel: UserBGGModel) {
-        Log.i(TAG, "l> hemos pulsado sobre el usuario: ${userBGGModel.userBGG}")
+        (baseActivity as BGGActivity).setUserBGGSelected(userBGGModel.userBGG)
     }
 
     override fun onEditUserBGGClick(userBGGModel: UserBGGModel) {

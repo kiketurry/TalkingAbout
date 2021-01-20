@@ -4,7 +4,7 @@ import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.BBDDMapperModel
 import es.kiketurry.talkingabout.data.repository.bbdd.users.UserBGGRoomEntity
 
-class UserBGGMapper : BBDDMapperModel<UserBGGModel, UserBGGRoomEntity> {
+class UserBGGMapperBBDD : BBDDMapperModel<UserBGGModel, UserBGGRoomEntity> {
     override fun toBBDD(model: UserBGGModel): UserBGGRoomEntity {
         return UserBGGRoomEntity(model.userBGG, model.name, model.email, model.prefix, model.phone)
     }

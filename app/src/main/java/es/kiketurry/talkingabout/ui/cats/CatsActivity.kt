@@ -36,9 +36,6 @@ class CatsActivity : BaseActivity<ActivityCatsBinding>() {
         binding.clToolbar.ibToolbarClose.setOnClickListener { Log.i(TAG, "Pulsamos Cerrar") }
 
         catsViewModel.getBreeds(resources.getInteger(R.integer.limit_breeds))
-//        mainViewModel.getBoardGamesByUser("kiketurrydeveloper")
-//        catsViewModel.getThingsBoardGamesGeek("40834")
-//        mainViewModel.getThingsBoardGamesGeek("318079") //mision marte
     }
 
     override fun configureToolbar() {

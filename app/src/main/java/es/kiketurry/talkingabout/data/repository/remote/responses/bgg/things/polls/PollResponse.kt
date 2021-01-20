@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root
 @Root(strict = false)
 class PollResponse @JvmOverloads constructor(
     @field: Attribute(name = "name")
-    var NumPlayerName: String? = null,
+    var namePoll: String? = null,
     @field: Attribute
     var title: String? = null,
     @field: Attribute

@@ -14,7 +14,6 @@ interface ApiServicesBGG {
     fun getListBoardGameUser(
         @Query("username") username: String,
         @Query("own") own: Int,
-        @Query("excludesubtype") excludesubtype: String,
     ): Call<ListBoardGameUserResponse>
 
 

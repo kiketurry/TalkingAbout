@@ -8,5 +8,5 @@ class RankDataResponse @JvmOverloads constructor(
     @field: Attribute(required = false)
     var friendlyname: String? = null,
     @field: Attribute(required = false, name = "value")
-    var valueName: String? = null,
+    var valueData: String? = null,
 )

@@ -10,6 +10,7 @@ import es.kiketurry.talkingabout.databinding.ActivityBggBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
 import es.kiketurry.talkingabout.ui.bgg.addmodifyuser.AddModifyUserBGGFragment
+import es.kiketurry.talkingabout.ui.bgg.listboardgames.ListBoardGamesBGGFragment
 import es.kiketurry.talkingabout.ui.bgg.listusers.ListUserBGGFragment
 
 class BGGActivity : BaseActivity<ActivityBggBinding>() {
@@ -52,7 +53,15 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
         }
         supportFragmentManager.beginTransaction()
             .replace(R.id.flMainFragmentHost, fragment, AddModifyUserBGGFragment::class.qualifiedName)
-            .addToBackStack(ListUserBGGFragment::class.qualifiedName)
+            .addToBackStack(AddModifyUserBGGFragment::class.qualifiedName)
+            .commit()
+    }
+
+    private fun goToListBoardGamesBGGFragment() {
+        val fragment: Fragment = ListBoardGamesBGGFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.flMainFragmentHost, fragment, ListBoardGamesBGGFragment::class.qualifiedName)
+            .addToBackStack(ListBoardGamesBGGFragment::class.qualifiedName)
             .commit()
     }
 
@@ -60,5 +69,10 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
         showTitleToolbar(getString(R.string.toolbarBGG))
         showBackToolbar(false)
         showCloseToolbar(true)
+    }
+
+    fun setUserBGGSelected(userBGG: String) {
+        bggViewModel.setUserBGGSelected(userBGG)
+        goToListBoardGamesBGGFragment()
     }
 }

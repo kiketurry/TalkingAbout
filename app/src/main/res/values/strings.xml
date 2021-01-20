@@ -33,4 +33,5 @@
     <string name="bggAddUserHintPhone">Teléfono</string>
     <string name="bggAddUserHintUserBGG">Usuario BGG *</string>
     <string name="bggAddUserLimitMinUsername">Para añadir un nuevo usuario al menos tiene que tener nombre de usuario de la bgg</string>
+    <string name="toolbarListBoardGamesBGG">Listado de juegos</string>
 </resources>

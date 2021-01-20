@@ -11,6 +11,8 @@ import org.simpleframework.xml.Root
 class ThingBoardGameGeekResponse @JvmOverloads constructor(
     @field: Attribute(name = "type")
     var type: String = "",
+    @field: Attribute(name = "id")
+    var id: String = "",
     @field: Element(name = "thumbnail")
     var thumbnail: String = "",
     @field: Element(name = "image")

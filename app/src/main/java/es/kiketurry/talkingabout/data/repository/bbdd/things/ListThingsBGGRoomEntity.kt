@@ -13,7 +13,4 @@ data class ListThingsBGGRoomEntity(
     @ColumnInfo(name = "totalExpansions") val totalExpansions: String,
     @ColumnInfo(name = "listThings") val listThings: String,
     @ColumnInfo(name = "dateUpdate") val dateUpdate: Long,
-) {
-    enum class TypeThingBGG { UNKNOW, BOARDGAME, EXPANSION }
-    enum class LanguageDependenceThingBGG { UNKNOW, NO_NECESARY, SOME_NECESSARY, MODERATE, EXTENSIVE, UNPLAYABLE }
-}
+)

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
-import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.UserBGGMapper
+import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.UserBGGMapperBBDD
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 import kotlinx.coroutines.runBlocking
 
@@ -16,7 +16,7 @@ class ListUsersBGGViewModel(application: Application, var appDatabase: AppDataba
 
     var usersListMutableLiveData: MutableLiveData<ArrayList<UserBGGModel>> = MutableLiveData()
 
-    private val userBGGMapper = UserBGGMapper()
+    private val userBGGMapper = UserBGGMapperBBDD()
 
     fun observeUsersBGGBBDD(lifecycleOwner: LifecycleOwner) {
         appDatabase.UserBGGDao().getAllUsersBGG().observe(lifecycleOwner, Observer { listUser ->

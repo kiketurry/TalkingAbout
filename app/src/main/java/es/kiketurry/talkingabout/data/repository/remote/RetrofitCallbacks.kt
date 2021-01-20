@@ -1,10 +1,13 @@
 package es.kiketurry.talkingabout.data.repository.remote
 
 import android.util.Log
+import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.breeds.BreedModel
 import es.kiketurry.talkingabout.data.domain.model.breeds.BreedPhotoModel
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
 import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks
+import es.kiketurry.talkingabout.data.repository.remote.mapper.bgg.ListUserBGGMapper
+import es.kiketurry.talkingabout.data.repository.remote.mapper.bgg.ThingBGGMapper
 import es.kiketurry.talkingabout.data.repository.remote.mapper.breeds.BreedMapper
 import es.kiketurry.talkingabout.data.repository.remote.mapper.breeds.BreedPhotoMapper
 import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.listuser.ListBoardGameUserResponse
@@ -84,7 +87,7 @@ class RetrofitCallbacks {
                 override fun onResponse(call: Call<ListBoardGameUserResponse>, response: Response<ListBoardGameUserResponse>) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "l> Éxito en la respuesta de getBoardGmesByUserCallback.")
-                        getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackSuccess(response.body()!!)
+                        getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackSuccess(ListUserBGGMapper().fromResponse(response.body()!!))
                     } else {
                         Log.e(TAG, "l> Problemas en la respuesta de getBoardGmesByUserCallback.")
                         getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackUnsuccess(
@@ -107,7 +110,12 @@ class RetrofitCallbacks {
                 override fun onResponse(call: Call<ListThingsBoardGameGeekResponse>, response: Response<ListThingsBoardGameGeekResponse>) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "l> Éxito en la respuesta de getThingsBoardGameGeekCallback.")
-                        getThingsBoardGamesGeekCallback.onGetThingsBoardGamesGeekCallbackSuccess(response.body()!!)
+                        val listThingBGGModels: ArrayList<ThingBGGModel> = ArrayList()
+                        val thingBGGMapper = ThingBGGMapper()
+                        response.body()!!.boardGamesList?.forEachIndexed { _, thingBoardGameGeekResponse ->
+                            listThingBGGModels.add(thingBGGMapper.fromResponse(thingBoardGameGeekResponse))
+                        }
+                        getThingsBoardGamesGeekCallback.onGetThingsBoardGamesGeekCallbackSuccess(listThingBGGModels)
                     } else {
                         Log.e(TAG, "l> Problemas en la respuesta de getThingsBoardGameGeekCallback.")
                         getThingsBoardGamesGeekCallback.onGetThingsBoardGamesGeekCallbackUnsuccess(

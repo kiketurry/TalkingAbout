@@ -1,10 +1,10 @@
 package es.kiketurry.talkingabout.data.repository
 
+import es.kiketurry.talkingabout.data.domain.model.bgg.ListUserBGGModel
+import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.breeds.BreedModel
 import es.kiketurry.talkingabout.data.domain.model.breeds.BreedPhotoModel
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
-import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.listuser.ListBoardGameUserResponse
-import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.things.ListThingsBoardGameGeekResponse
 
 interface DataSourceCallbacks {
     //CATS
@@ -26,7 +26,7 @@ interface DataSourceCallbacks {
 
     //BGG
     interface GetBoardGamesByUserCallback {
-        fun onGetBoardGamesByUserCallbackSuccess(listBoardGameUserResponse: ListBoardGameUserResponse)
+        fun onGetBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel)
 
         fun onGetBoardGamesByUserCallbackUnsuccess(errorModel: ErrorModel)
 
@@ -34,7 +34,7 @@ interface DataSourceCallbacks {
     }
 
     interface GetThingsBoardGamesGeekCallback {
-        fun onGetThingsBoardGamesGeekCallbackSuccess(listThingsBoardGameGeekResponse: ListThingsBoardGameGeekResponse)
+        fun onGetThingsBoardGamesGeekCallbackSuccess(listThingBGGModels: ArrayList<ThingBGGModel>)
 
         fun onGetThingsBoardGamesGeekCallbackUnsuccess(errorModel: ErrorModel)
 
