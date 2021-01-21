@@ -15,7 +15,7 @@ class DetailCatPhotosAdapter(context: Context, private val dataSet: ArrayList<St
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailCatPhotoViewHolder {
-        val view = layoutInflater.inflate(R.layout.recyclerview_item_photo, parent, false)
+        val view = layoutInflater.inflate(R.layout.recyclerview_item_cat_photo, parent, false)
         return DetailCatPhotoViewHolder(view, itemPhotoClickListener)
     }
 

@@ -16,6 +16,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue 'string', 'app_name', 'Talking About'
     }
 
     buildTypes {
@@ -27,7 +29,24 @@ android {
 
     flavorDimensions 'default'
     productFlavors {
+        mock {
+            resValue 'string', 'app_name', 'Mock Talking About'
+            applicationIdSuffix = '.mock'
+            versionNameSuffix = '-mock'
+            //QuickMocker
+            buildConfigField 'String', "BASE_URL", '"https://we5z4kdge0.api.quickmocker.com/api/"'
+            buildConfigField 'String', "BASE_URL_BGG", '"https://we5z4kdge0.api.quickmocker.com/api/"'
+            //MockLab
+//            buildConfigField 'String', "BASE_URL", '"https://jr92r.mocklab.io/api/"'
+//            buildConfigField 'String', "BASE_URL_BGG", '"https://jr92r.mocklab.io/api/"'
+            //Beeceptor
+//            buildConfigField 'String', "BASE_URL", '"https://testvass.free.beeceptor.com/api/"'
+//            buildConfigField 'String', "BASE_URL_BGG", '"https://testvass.free.beeceptor.com/api/"'
+            buildConfigField 'String', "API_KEY_HEADER", '"x-api-key"'
+            buildConfigField 'String', "API_KEY_HEADER_VALUE", '"8ac5b7b9-054d-4fde-9439-5dd59e440786"'
+        }
         pre {
+            resValue 'string', 'app_name', 'Pre Talking About'
             applicationIdSuffix = '.pre'
             versionNameSuffix = '-pre'
             buildConfigField 'String', "BASE_URL", '"https://api.thecatapi.com"'
@@ -36,6 +55,8 @@ android {
             buildConfigField 'String', "API_KEY_HEADER_VALUE", '"8ac5b7b9-054d-4fde-9439-5dd59e440786"'
         }
         pro {
+            buildConfigField 'String', "BASE_URL", '"https://api.thecatapi.com"'
+            buildConfigField 'String', "BASE_URL_BGG", '"https://www.boardgamegeek.com/xmlapi2/"'
             buildConfigField 'String', "BASE_URL", '"https://api.thecatapi.com"'
             buildConfigField 'String', "API_KEY_HEADER", '"x-api-key"'
             buildConfigField 'String', "API_KEY_HEADER_VALUE", '"8ac5b7b9-054d-4fde-9439-5dd59e440786"'

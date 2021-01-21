@@ -22,7 +22,7 @@ class UsersBGGAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserBGGViewHolder {
-        val view = layoutInflater.inflate(R.layout.recyclerview_item_user_bgg, parent, false)
+        val view = layoutInflater.inflate(R.layout.recyclerview_item_bgg_user, parent, false)
         return UserBGGViewHolder(view, itemUserBGGClickListener)
     }
 

@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.R
-import es.kiketurry.talkingabout.databinding.FragmentDetailCatMotionLayoutBinding
+import es.kiketurry.talkingabout.databinding.FragmentCatDetailMotionLayoutBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.cats.CatsActivity
 import es.kiketurry.talkingabout.ui.cats.detail.viewmodel.DetailCatViewModel
 
-class DetailCatFragmentMotionLayout : BaseFragment<FragmentDetailCatMotionLayoutBinding>(), MotionLayout.TransitionListener {
+class DetailCatFragmentMotionLayout : BaseFragment<FragmentCatDetailMotionLayoutBinding>(), MotionLayout.TransitionListener {
     override val TAG: String? get() = DetailCatFragmentMotionLayout::class.qualifiedName
 
     lateinit var detailCatViewModel: DetailCatViewModel
@@ -26,7 +26,8 @@ class DetailCatFragmentMotionLayout : BaseFragment<FragmentDetailCatMotionLayout
     private var last: Float = 0f
 
     override fun setupViewModel() {
-        detailCatViewModel = ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(DetailCatViewModel::class.java)
+        detailCatViewModel =
+            ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(DetailCatViewModel::class.java)
     }
 
     override fun observeViewModel() {
@@ -48,7 +49,7 @@ class DetailCatFragmentMotionLayout : BaseFragment<FragmentDetailCatMotionLayout
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
 
     override fun inflateBinding() {
-        binding = FragmentDetailCatMotionLayoutBinding.inflate(layoutInflater)
+        binding = FragmentCatDetailMotionLayoutBinding.inflate(layoutInflater)
     }
 
     override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {

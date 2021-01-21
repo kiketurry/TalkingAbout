@@ -1,8 +1,7 @@
-package es.kiketurry.talkingabout.ui.bgg.listboardgames
+package es.kiketurry.talkingabout.ui.bgg.listthings
 
 import android.app.Application
 import android.util.Log
-import com.google.mlkit.nl.languageid.LanguageIdentification
 import es.kiketurry.talkingabout.data.domain.model.bgg.ListUserBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
@@ -13,10 +12,10 @@ import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ListUserBGGMapp
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingBGGMapperBBDD
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 
-class ListBoardGamesBGGViewModel(application: Application, var appDatabase: AppDatabase, val dataProvider: DataProvider) :
+class ListThingsBGGViewModel(application: Application, var appDatabase: AppDatabase, val dataProvider: DataProvider) :
     BaseViewModel(application) {
 
-    override val TAG: String? get() = ListBoardGamesBGGViewModel::class.qualifiedName
+    override val TAG: String? get() = ListThingsBGGViewModel::class.qualifiedName
 
     val listThingsBGGMapperBBDD = ListUserBGGMapperBBDD()
     val thingsBGGMapperBBDD = ThingBGGMapperBBDD()
@@ -87,36 +86,6 @@ class ListBoardGamesBGGViewModel(application: Application, var appDatabase: AppD
                 loadingMutableLiveData.postValue(false)
             }
         }, things)
-    }
-
-    fun detectLanguage(text: String) {
-        val languageIdentifier = LanguageIdentification.getClient()
-        languageIdentifier.identifyLanguage(text)
-            .addOnSuccessListener { languageCode ->
-                if (languageCode == "und") {
-                    Log.i(TAG, "l> Can't identify language, $text")
-                } else {
-                    Log.i(TAG, "l> Language, $text -> $languageCode")
-                }
-            }
-            .addOnFailureListener {
-                Log.i(TAG, "l> detectLanguage error con el texto, $text: ${it.message}")
-            }
-    }
-
-    fun posibleLanguage(text: String) {
-        val languageIdentifier = LanguageIdentification.getClient()
-        languageIdentifier.identifyPossibleLanguages(text)
-            .addOnSuccessListener { identifiedLanguages ->
-                for (identifiedLanguage in identifiedLanguages) {
-                    val language = identifiedLanguage.languageTag
-                    val confidence = identifiedLanguage.confidence
-                    Log.i(TAG, "l> posible lenguaje: $language confianza de: $confidence")
-                }
-            }
-            .addOnFailureListener {
-                Log.i(TAG, "l> posibleLanguage error con el texto, $text: ${it.message}")
-            }
     }
 
 }

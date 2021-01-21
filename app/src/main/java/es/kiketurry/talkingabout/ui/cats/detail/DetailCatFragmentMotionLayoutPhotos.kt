@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import es.kiketurry.talkingabout.R
-import es.kiketurry.talkingabout.databinding.FragmentDetailCatMotionLayoutPhotosBinding
+import es.kiketurry.talkingabout.databinding.FragmentCatCatMotionLayoutPhotosBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.cats.CatsActivity
@@ -17,7 +17,7 @@ import es.kiketurry.talkingabout.ui.cats.detail.adapter.DetailCatPhotosAdapter
 import es.kiketurry.talkingabout.ui.cats.detail.viewmodel.DetailCatViewModel
 import java.util.*
 
-class DetailCatFragmentMotionLayoutPhotos : BaseFragment<FragmentDetailCatMotionLayoutPhotosBinding>(),
+class DetailCatFragmentMotionLayoutPhotos : BaseFragment<FragmentCatCatMotionLayoutPhotosBinding>(),
     DetailCatPhotosAdapter.ItemPhotoClickListener {
     override val TAG: String? get() = DetailCatFragmentMotionLayoutPhotos::class.qualifiedName
 
@@ -26,7 +26,8 @@ class DetailCatFragmentMotionLayoutPhotos : BaseFragment<FragmentDetailCatMotion
     private lateinit var detailCatPhotosAdapter: DetailCatPhotosAdapter
 
     override fun setupViewModel() {
-        detailCatViewModel = ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(DetailCatViewModel::class.java)
+        detailCatViewModel =
+            ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(DetailCatViewModel::class.java)
     }
 
     override fun observeViewModel() {
@@ -41,7 +42,7 @@ class DetailCatFragmentMotionLayoutPhotos : BaseFragment<FragmentDetailCatMotion
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
 
     override fun inflateBinding() {
-        binding = FragmentDetailCatMotionLayoutPhotosBinding.inflate(layoutInflater)
+        binding = FragmentCatCatMotionLayoutPhotosBinding.inflate(layoutInflater)
     }
 
     override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {

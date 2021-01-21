@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Talking About</string>
     <string name="title_activity_splash">SplashActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in
@@ -29,8 +28,8 @@
     <string name="bggAddUserHintName">Nombre</string>
     <string name="bggAddUserButton">Añadir</string>
     <string name="bggAddUserHintEmail">Email</string>
-    <string name="bggAddUserHintPrefix">Prefijo nacional ejemplo, 34</string>
-    <string name="bggAddUserHintPhone">Teléfono</string>
+    <string name="bggAddUserHintPrefix">Prefijo país ejemplo, 34</string>
+    <string name="bggAddUserHintPhone">Teléfono móvil</string>
     <string name="bggAddUserHintUserBGG">Usuario BGG *</string>
     <string name="bggAddUserLimitMinUsername">Para añadir un nuevo usuario al menos tiene que tener nombre de usuario de la bgg</string>
     <string name="toolbarListBoardGamesBGG">Listado de juegos</string>

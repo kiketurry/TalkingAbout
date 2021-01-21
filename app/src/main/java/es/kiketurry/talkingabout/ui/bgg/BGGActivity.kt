@@ -10,7 +10,7 @@ import es.kiketurry.talkingabout.databinding.ActivityBggBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
 import es.kiketurry.talkingabout.ui.bgg.addmodifyuser.AddModifyUserBGGFragment
-import es.kiketurry.talkingabout.ui.bgg.listboardgames.ListBoardGamesBGGFragment
+import es.kiketurry.talkingabout.ui.bgg.listthings.ListThingsBGGFragment
 import es.kiketurry.talkingabout.ui.bgg.listusers.ListUserBGGFragment
 
 class BGGActivity : BaseActivity<ActivityBggBinding>() {
@@ -58,10 +58,10 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
     }
 
     private fun goToListBoardGamesBGGFragment() {
-        val fragment: Fragment = ListBoardGamesBGGFragment()
+        val fragment: Fragment = ListThingsBGGFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.flMainFragmentHost, fragment, ListBoardGamesBGGFragment::class.qualifiedName)
-            .addToBackStack(ListBoardGamesBGGFragment::class.qualifiedName)
+            .replace(R.id.flMainFragmentHost, fragment, ListThingsBGGFragment::class.qualifiedName)
+            .addToBackStack(ListThingsBGGFragment::class.qualifiedName)
             .commit()
     }
 

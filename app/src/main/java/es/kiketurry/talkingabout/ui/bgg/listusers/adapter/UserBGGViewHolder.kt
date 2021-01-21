@@ -4,12 +4,12 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
-import es.kiketurry.talkingabout.databinding.RecyclerviewItemUserBggBinding
+import es.kiketurry.talkingabout.databinding.RecyclerviewItemBggUserBinding
 
 class UserBGGViewHolder(var view: View, private val userBGGClickListener: UsersBGGAdapter.ItemUserBGGClickListener) :
     RecyclerView.ViewHolder(view) {
 
-    private val binding = RecyclerviewItemUserBggBinding.bind(view)
+    private val binding = RecyclerviewItemBggUserBinding.bind(view)
 
     fun bind(userBGGModel: UserBGGModel) {
         if (adapterPosition % 2 == 0) {

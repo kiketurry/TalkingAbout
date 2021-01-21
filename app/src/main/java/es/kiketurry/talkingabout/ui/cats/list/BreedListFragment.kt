@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.kiketurry.talkingabout.R
-import es.kiketurry.talkingabout.databinding.FragmentBreedsListBinding
+import es.kiketurry.talkingabout.databinding.FragmentCatBreedsListBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.cats.CatsActivity
@@ -18,7 +18,7 @@ import es.kiketurry.talkingabout.ui.dialogfragment.TextButtonDialogFragment
 import es.kiketurry.talkingabout.ui.dialogfragment.TextButtonDialogFragment.Companion.TEXT_BUTTON_DIALOG_FRAGMENT_TAG
 import java.util.*
 
-class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapter.ItemBreedClickListener,
+class BreedListFragment : BaseFragment<FragmentCatBreedsListBinding>(), BreedsAdapter.ItemBreedClickListener,
     TextButtonDialogFragment.TextButtonDialogFragmentClickButtonListener {
     override val TAG: String? get() = BreedListFragment::class.qualifiedName
 
@@ -44,7 +44,7 @@ class BreedListFragment : BaseFragment<FragmentBreedsListBinding>(), BreedsAdapt
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
 
     override fun inflateBinding() {
-        binding = FragmentBreedsListBinding.inflate(layoutInflater)
+        binding = FragmentCatBreedsListBinding.inflate(layoutInflater)
     }
 
     override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {

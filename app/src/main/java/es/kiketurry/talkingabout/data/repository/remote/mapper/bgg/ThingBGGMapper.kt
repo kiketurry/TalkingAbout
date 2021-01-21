@@ -123,6 +123,8 @@ class ThingBGGMapper : ResponseMapper<ThingBoardGameGeekResponse, ThingBGGModel>
             }
         }
 
+        //TODO kiketurry ver como coger el idioma español
+
         return ThingBGGModel(
             response.id.toInt(),
             type,

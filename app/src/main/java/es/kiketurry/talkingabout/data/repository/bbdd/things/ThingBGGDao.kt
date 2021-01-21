@@ -4,8 +4,11 @@ import androidx.room.*
 
 @Dao
 interface ThingBGGDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg thingBGGRoomEntity: ThingBGGRoomEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(thingBGGRoomEntity: ThingBGGRoomEntity)
 
     @Delete
     fun delete(thingBGGRoomEntity: ThingBGGRoomEntity)

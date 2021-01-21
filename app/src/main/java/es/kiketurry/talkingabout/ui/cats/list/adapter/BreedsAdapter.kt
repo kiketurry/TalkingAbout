@@ -15,7 +15,7 @@ class BreedsAdapter(context: Context, private val dataSet: ArrayList<String>, pr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedViewHolder {
-        val view = layoutInflater.inflate(R.layout.recyclerview_item_breed, parent, false)
+        val view = layoutInflater.inflate(R.layout.recyclerview_item_cat_breed, parent, false)
         return BreedViewHolder(view, itemBreedClickListener)
     }
 

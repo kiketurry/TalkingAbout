@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import es.kiketurry.talkingabout.R
-import es.kiketurry.talkingabout.databinding.FragmentDetailCatBinding
+import es.kiketurry.talkingabout.databinding.FragmentCatDetailBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.cats.CatsActivity
@@ -17,15 +17,16 @@ import es.kiketurry.talkingabout.ui.cats.detail.adapter.DetailCatPhotosAdapter
 import es.kiketurry.talkingabout.ui.cats.detail.viewmodel.DetailCatViewModel
 import java.util.*
 
-class DetailCatFragment : BaseFragment<FragmentDetailCatBinding>(), DetailCatPhotosAdapter.ItemPhotoClickListener {
+class DetailCatFragment : BaseFragment<FragmentCatDetailBinding>(), DetailCatPhotosAdapter.ItemPhotoClickListener {
     override val TAG: String? get() = DetailCatFragment::class.qualifiedName
 
-    lateinit var detailCatViewModel : DetailCatViewModel
+    lateinit var detailCatViewModel: DetailCatViewModel
 
     private lateinit var detailCatPhotosAdapter: DetailCatPhotosAdapter
 
     override fun setupViewModel() {
-        detailCatViewModel = ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(DetailCatViewModel::class.java)
+        detailCatViewModel =
+            ViewModelProvider(this, InjectionSingleton.provideViewModelFactory(context!!)).get(DetailCatViewModel::class.java)
     }
 
     override fun observeViewModel() {
@@ -48,7 +49,7 @@ class DetailCatFragment : BaseFragment<FragmentDetailCatBinding>(), DetailCatPho
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
 
     override fun inflateBinding() {
-        binding = FragmentDetailCatBinding.inflate(layoutInflater)
+        binding = FragmentCatDetailBinding.inflate(layoutInflater)
     }
 
     override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
