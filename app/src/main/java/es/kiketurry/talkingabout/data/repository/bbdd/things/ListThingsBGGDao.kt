@@ -5,16 +5,16 @@ import androidx.room.*
 @Dao
 interface ListThingsBGGDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
+    suspend fun insertAll(vararg listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
+    suspend fun insert(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
 
     @Delete
-    fun delete(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
+    suspend fun delete(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
 
     @Update
-    fun update(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
+    suspend fun update(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
 
     @Query("SELECT * FROM listThingsBGGRoomEntity")
     fun getAll(): List<ListThingsBGGRoomEntity>
@@ -23,5 +23,5 @@ interface ListThingsBGGDao {
     fun loadAllListByUsersBGG(usersBGG: IntArray): List<ListThingsBGGRoomEntity>
 
     @Query("SELECT * FROM listThingsBGGRoomEntity WHERE userBGG LIKE :userBGG LIMIT 1")
-    fun findByUserBGG(userBGG: String): ListThingsBGGRoomEntity
+    suspend fun findByUserBGG(userBGG: String): ListThingsBGGRoomEntity
 }

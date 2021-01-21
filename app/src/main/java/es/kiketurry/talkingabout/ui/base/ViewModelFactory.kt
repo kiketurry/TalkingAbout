@@ -55,7 +55,7 @@ class ViewModelFactory(
                 CalculatorViewModel(application)
             }
             BGGViewModel::class.qualifiedName -> {
-                BGGViewModel(application)
+                BGGViewModel(application, appDatabase, dataProvider)
             }
             ListUsersBGGViewModel::class.qualifiedName -> {
                 ListUsersBGGViewModel(application, appDatabase)

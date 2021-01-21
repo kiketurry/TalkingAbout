@@ -5,16 +5,16 @@ import androidx.room.*
 @Dao
 interface ThingBGGDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg thingBGGRoomEntity: ThingBGGRoomEntity)
+    suspend fun insertAll(vararg thingBGGRoomEntity: ThingBGGRoomEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(thingBGGRoomEntity: ThingBGGRoomEntity)
+    suspend fun insert(thingBGGRoomEntity: ThingBGGRoomEntity)
 
     @Delete
-    fun delete(thingBGGRoomEntity: ThingBGGRoomEntity)
+    suspend fun delete(thingBGGRoomEntity: ThingBGGRoomEntity)
 
     @Update
-    fun update(thingBGGRoomEntity: ThingBGGRoomEntity)
+    suspend fun update(thingBGGRoomEntity: ThingBGGRoomEntity)
 
     @Query("SELECT * FROM thingBGGRoomEntity")
     fun getAllThings(): List<ThingBGGRoomEntity>
@@ -23,5 +23,8 @@ interface ThingBGGDao {
     fun loadAllThingsByIds(ids: IntArray): List<ThingBGGRoomEntity>
 
     @Query("SELECT * FROM thingBGGRoomEntity WHERE id LIKE :id LIMIT 1")
-    fun findByThingId(id: String): ThingBGGRoomEntity
+    suspend fun findByThingId(id: Int): ThingBGGRoomEntity
+
+    @Query("SELECT EXISTS(SELECT * FROM thingBGGRoomEntity WHERE id = :id)")
+    suspend fun isRowExist(id: Int): Boolean
 }
