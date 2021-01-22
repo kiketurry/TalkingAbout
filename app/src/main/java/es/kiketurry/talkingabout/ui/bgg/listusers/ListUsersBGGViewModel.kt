@@ -19,7 +19,7 @@ class ListUsersBGGViewModel(application: Application, var appDatabase: AppDataba
     private val userBGGMapper = UserBGGMapperBBDD()
 
     fun observeUsersBGGBBDD(lifecycleOwner: LifecycleOwner) {
-        appDatabase.UserBGGDao().getAllUsersBGG().observe(lifecycleOwner, Observer { listUser ->
+        appDatabase.UserBGGDao().getAllUsersBGGLiveData().observe(lifecycleOwner, Observer { listUser ->
             usersListMutableLiveData.postValue(userBGGMapper.toModel(listUser))
         })
     }
@@ -27,6 +27,13 @@ class ListUsersBGGViewModel(application: Application, var appDatabase: AppDataba
     fun deleteUserBGG(userBGGModel: UserBGGModel) {
         runBlocking {
             appDatabase.UserBGGDao().delete(userBGGMapper.toBBDD(userBGGModel))
+            appDatabase.ListThingsBGGDao().deleteByUserBGG(userBGGModel.userBGG)
+        }
+    }
+
+    fun deleteAllThings() {
+        runBlocking {
+            appDatabase.ThingBGGDao().deleteAll()
         }
     }
 

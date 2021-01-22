@@ -17,14 +17,17 @@ interface ThingBGGDao {
     suspend fun update(thingBGGRoomEntity: ThingBGGRoomEntity)
 
     @Query("SELECT * FROM thingBGGRoomEntity")
-    fun getAllThings(): List<ThingBGGRoomEntity>
+    suspend fun getAllThings(): List<ThingBGGRoomEntity>
 
     @Query("SELECT * FROM thingBGGRoomEntity WHERE id IN (:ids)")
-    fun loadAllThingsByIds(ids: IntArray): List<ThingBGGRoomEntity>
+    suspend fun getAllThingsByIds(ids: IntArray): List<ThingBGGRoomEntity>
 
     @Query("SELECT * FROM thingBGGRoomEntity WHERE id LIKE :id LIMIT 1")
     suspend fun findByThingId(id: Int): ThingBGGRoomEntity
 
     @Query("SELECT EXISTS(SELECT * FROM thingBGGRoomEntity WHERE id = :id)")
     suspend fun isRowExist(id: Int): Boolean
+
+    @Query("DELETE FROM thingBGGRoomEntity")
+    suspend fun deleteAll()
 }

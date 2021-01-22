@@ -13,10 +13,10 @@ class ListUserBGGMapper : ResponseMapper<ListBoardGameUserResponse, ListUserBGGM
 
     override fun fromResponse(response: ListBoardGameUserResponse): ListUserBGGModel {
 
-        val listThings: ArrayList<String> = ArrayList()
+        val listThings: ArrayList<Int> = ArrayList()
         response.boardGamesList?.forEachIndexed { _, boardGameResponse ->
             if (!boardGameResponse.objectid.isNullOrBlank() && boardGameResponse.status.own.equals("1")) {
-                listThings.add(boardGameResponse.objectid!!)
+                listThings.add(boardGameResponse.objectid!!.toInt())
             }
         }
 

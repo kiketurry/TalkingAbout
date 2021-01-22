@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/btDeleteThings"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:text="BORRAR todas las cosas" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListUsersBGG"
         android:layout_width="0dp"

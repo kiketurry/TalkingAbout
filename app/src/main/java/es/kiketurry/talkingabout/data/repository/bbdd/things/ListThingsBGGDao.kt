@@ -13,14 +13,17 @@ interface ListThingsBGGDao {
     @Delete
     suspend fun delete(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
 
+    @Query("DELETE FROM listThingsBGGRoomEntity WHERE userBGG = :usersBGG")
+    suspend fun deleteByUserBGG(usersBGG: String)
+
     @Update
     suspend fun update(listThingsBGGRoomEntity: ListThingsBGGRoomEntity)
 
     @Query("SELECT * FROM listThingsBGGRoomEntity")
-    fun getAll(): List<ListThingsBGGRoomEntity>
+    suspend fun getAll(): List<ListThingsBGGRoomEntity>
 
     @Query("SELECT * FROM listThingsBGGRoomEntity WHERE userBGG IN (:usersBGG)")
-    fun loadAllListByUsersBGG(usersBGG: IntArray): List<ListThingsBGGRoomEntity>
+    suspend fun loadAllListByUsersBGG(usersBGG: IntArray): List<ListThingsBGGRoomEntity>
 
     @Query("SELECT * FROM listThingsBGGRoomEntity WHERE userBGG LIKE :userBGG LIMIT 1")
     suspend fun findByUserBGG(userBGG: String): ListThingsBGGRoomEntity

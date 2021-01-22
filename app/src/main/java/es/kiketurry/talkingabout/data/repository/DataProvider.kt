@@ -23,8 +23,8 @@ class DataProvider private constructor(private val remoteDataSource: DataSource)
     }
 
     //BGG
-    override fun getBoardGamesByUser(getBoardGamesByUserCallback: DataSourceCallbacks.GetBoardGamesByUserCallback, user: String) {
-        remoteDataSource.getBoardGamesByUser(getBoardGamesByUserCallback, user)
+    override fun getBoardGamesByUser(getListBoardGamesByUserCallback: DataSourceCallbacks.GetListBoardGamesByUserCallback, user: String) {
+        remoteDataSource.getBoardGamesByUser(getListBoardGamesByUserCallback, user)
     }
 
     override fun getThingsBoardGameGeek(

@@ -7,6 +7,6 @@ data class ListUserBGGModel(
     var totalThings: Int = 0,
     var totalBoardGames: Int = 0,
     var totalExpansions: Int = 0,
-    var listThings: ArrayList<String> = ArrayList(),
+    var listThings: ArrayList<Int> = ArrayList(),
     var dateUpdate: Long = 0L,
 ) : Serializable

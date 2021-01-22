@@ -28,9 +28,9 @@ class RemoteDataSource(private val apiServiceCats: ApiServicesCats, private val 
     }
 
     //BGG
-    override fun getBoardGamesByUser(getBoardGamesByUserCallback: DataSourceCallbacks.GetBoardGamesByUserCallback, user: String) {
+    override fun getBoardGamesByUser(getListBoardGamesByUserCallback: DataSourceCallbacks.GetListBoardGamesByUserCallback, user: String) {
         val getBoardGameByUserCall = apiServiceBGG.getListBoardGameUser(user, 1)
-        getBoardGameByUserCall.enqueue(RetrofitCallbacks.getBoardGamesByUserCallback(getBoardGamesByUserCallback))
+        getBoardGameByUserCall.enqueue(RetrofitCallbacks.getListBoardGamesByUserCallback(getListBoardGamesByUserCallback))
     }
 
     override fun getThingsBoardGameGeek(

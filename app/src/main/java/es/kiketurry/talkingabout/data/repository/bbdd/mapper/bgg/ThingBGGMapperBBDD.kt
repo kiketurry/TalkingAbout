@@ -93,4 +93,12 @@ class ThingBGGMapperBBDD : BBDDMapperModel<ThingBGGModel, ThingBGGRoomEntity> {
             bbdd.dateUpdate
         )
     }
+
+    fun toModelListThingsEntity(listThingBGGRoomEntity: List<ThingBGGRoomEntity>): ArrayList<ThingBGGModel> {
+        val listThingBGGModel: ArrayList<ThingBGGModel> = ArrayList()
+        listThingBGGRoomEntity.forEach { thingBGGRoomEntity ->
+            listThingBGGModel.add(toModel(thingBGGRoomEntity))
+        }
+        return listThingBGGModel
+    }
 }

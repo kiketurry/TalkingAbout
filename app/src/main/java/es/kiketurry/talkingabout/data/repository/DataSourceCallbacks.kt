@@ -25,12 +25,12 @@ interface DataSourceCallbacks {
     }
 
     //BGG
-    interface GetBoardGamesByUserCallback {
-        fun onGetBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel)
+    interface GetListBoardGamesByUserCallback {
+        fun onGetListBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel)
 
-        fun onGetBoardGamesByUserCallbackUnsuccess(errorModel: ErrorModel)
+        fun onGetListBoardGamesByUserCallbackUnsuccess(errorModel: ErrorModel)
 
-        fun onGetBoardGamesByUserCallbackFailure(errorModel: ErrorModel)
+        fun onGetListBoardGamesByUserCallbackFailure(errorModel: ErrorModel)
     }
 
     interface GetThingsBoardGamesGeekCallback {

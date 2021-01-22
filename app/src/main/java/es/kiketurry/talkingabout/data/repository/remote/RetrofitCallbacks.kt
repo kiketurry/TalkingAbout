@@ -82,15 +82,15 @@ class RetrofitCallbacks {
         //***
         //BGG
         //***
-        fun getBoardGamesByUserCallback(getBoardGamesByUserCallback: DataSourceCallbacks.GetBoardGamesByUserCallback): Callback<ListBoardGameUserResponse> {
+        fun getListBoardGamesByUserCallback(getListBoardGamesByUserCallback: DataSourceCallbacks.GetListBoardGamesByUserCallback): Callback<ListBoardGameUserResponse> {
             return object : Callback<ListBoardGameUserResponse> {
                 override fun onResponse(call: Call<ListBoardGameUserResponse>, response: Response<ListBoardGameUserResponse>) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "l> Éxito en la respuesta de getBoardGmesByUserCallback.")
-                        getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackSuccess(ListUserBGGMapper().fromResponse(response.body()!!))
+                        getListBoardGamesByUserCallback.onGetListBoardGamesByUserCallbackSuccess(ListUserBGGMapper().fromResponse(response.body()!!))
                     } else {
                         Log.e(TAG, "l> Problemas en la respuesta de getBoardGmesByUserCallback.")
-                        getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackUnsuccess(
+                        getListBoardGamesByUserCallback.onGetListBoardGamesByUserCallbackUnsuccess(
                             ErrorsUtils.generateErrorModelFromResponseErrorBody(
                                 response.errorBody()
                             )
@@ -100,7 +100,7 @@ class RetrofitCallbacks {
 
                 override fun onFailure(call: Call<ListBoardGameUserResponse>, throwable: Throwable) {
                     Log.e(TAG, "l> Problemas en la respuesta de getBoardGmesByUserCallback failure.")
-                    getBoardGamesByUserCallback.onGetBoardGamesByUserCallbackFailure(ErrorModel(throwable.message ?: "unknow"))
+                    getListBoardGamesByUserCallback.onGetListBoardGamesByUserCallbackFailure(ErrorModel(throwable.message ?: "unknow"))
                 }
             }
         }

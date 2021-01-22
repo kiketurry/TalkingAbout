@@ -58,6 +58,10 @@ class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>(), UsersBG
         binding?.fabAddUserBGG?.setOnClickListener {
             (baseActivity as BGGActivity).goToAddUser()
         }
+
+        binding?.btDeleteThings?.setOnClickListener {
+            listUsersBGGViewModel.deleteAllThings()
+        }
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {

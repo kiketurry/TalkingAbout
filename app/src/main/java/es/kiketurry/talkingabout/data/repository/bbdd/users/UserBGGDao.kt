@@ -19,11 +19,16 @@ interface UserBGGDao {
     suspend fun update(userBGGRoomEntity: UserBGGRoomEntity)
 
     @Query("SELECT * FROM userbggroomentity")
-    fun getAllUsersBGG(): LiveData<List<UserBGGRoomEntity>>
+    suspend fun getAllUsersBGG(): List<UserBGGRoomEntity>
 
     @Query("SELECT * FROM userbggroomentity WHERE userBGG IN (:userBGG)")
-    fun loadAllUsersByUserBGG(userBGG: IntArray): List<UserBGGRoomEntity>
+    suspend fun loadAllUsersByUserBGG(userBGG: IntArray): List<UserBGGRoomEntity>
 
     @Query("SELECT * FROM userBGGRoomEntity WHERE userBGG LIKE :userBGG LIMIT 1")
     suspend fun findByUserBGG(userBGG: String): UserBGGRoomEntity
+
+
+    //LiveDatas
+    @Query("SELECT * FROM userbggroomentity")
+    fun getAllUsersBGGLiveData(): LiveData<List<UserBGGRoomEntity>>
 }

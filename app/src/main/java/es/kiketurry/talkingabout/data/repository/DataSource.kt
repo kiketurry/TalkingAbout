@@ -6,6 +6,6 @@ interface DataSource {
     fun getPhotos(getBreedsPhotosCallback: DataSourceCallbacks.GetBreedsPhotosCallback, breedId: String)
 
     //BGG
-    fun getBoardGamesByUser(getBoardGamesByUserCallback: DataSourceCallbacks.GetBoardGamesByUserCallback, user: String)
+    fun getBoardGamesByUser(getListBoardGamesByUserCallback: DataSourceCallbacks.GetListBoardGamesByUserCallback, user: String)
     fun getThingsBoardGameGeek(getThingsBoardGamesGeekCallback: DataSourceCallbacks.GetThingsBoardGamesGeekCallback, things: String)
 }

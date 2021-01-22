@@ -22,6 +22,7 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
 
     companion object {
         const val ONE_MONTH_IN_MILLISECOND = 2629746000L
+        const val TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG = 1
     }
 
     var userBGGSelectedMutableLiveData: MutableLiveData<String> = MutableLiveData()
@@ -31,6 +32,9 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
 
     var timeStampNow = Date().time
 
+    var countFailureGetListUserBGG = 0
+    var userSelectedBGG = ""
+
     fun setUserBGGSelected(userBGG: String) {
         userBGGSelectedMutableLiveData.postValue(userBGG)
         getListAndBoardGamesUser(userBGG)
@@ -38,13 +42,14 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
 
     private fun getListAndBoardGamesUser(userSelectedBGG: String) {
         loadingMutableLiveData.postValue(true)
-        getBoardGamesByUser(userSelectedBGG)
+        this.userSelectedBGG = userSelectedBGG
+        getListBoardGamesByUser(userSelectedBGG)
     }
 
-    private fun getBoardGamesByUser(userBGG: String) {
+    private fun getListBoardGamesByUser(userBGG: String) {
         loadingMutableLiveData.postValue(true)
-        dataProvider.getBoardGamesByUser(object : DataSourceCallbacks.GetBoardGamesByUserCallback {
-            override fun onGetBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel) {
+        dataProvider.getBoardGamesByUser(object : DataSourceCallbacks.GetListBoardGamesByUserCallback {
+            override fun onGetListBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel) {
                 runBlocking {
                     loadingMutableLiveData.postValue(false)
                     getListUserBGGModel = listUserBGGModel
@@ -57,14 +62,18 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                 }
             }
 
-            override fun onGetBoardGamesByUserCallbackUnsuccess(errorModel: ErrorModel) {
+            override fun onGetListBoardGamesByUserCallbackUnsuccess(errorModel: ErrorModel) {
                 errorMutableLiveData.postValue(errorModel)
                 loadingMutableLiveData.postValue(false)
             }
 
-            override fun onGetBoardGamesByUserCallbackFailure(errorModel: ErrorModel) {
-                errorMutableLiveData.postValue(errorModel)
-                loadingMutableLiveData.postValue(false)
+            override fun onGetListBoardGamesByUserCallbackFailure(errorModel: ErrorModel) {
+                if (countFailureGetListUserBGG < TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG) {
+                    getListBoardGamesByUser(userSelectedBGG)
+                } else {
+                    errorMutableLiveData.postValue(errorModel)
+                    loadingMutableLiveData.postValue(false)
+                }
             }
         }, userBGG)
     }
@@ -81,12 +90,12 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                 }
             }
             stringBuilderIds.dropLast(1)
-            Log.i(TAG, "l> Vamos a pedir: ${stringBuilderIds.toString()}")
+            Log.d(TAG, "l> Vamos a pedir: $stringBuilderIds")
             val idsToDownload = stringBuilderIds.toString()
             if (!idsToDownload.isNullOrBlank()) {
                 getThingsBoardGamesGeek(idsToDownload)
             } else {
-                Log.i(TAG, "l> No hay que descargar nada, ya lo tenemos todo :-)")
+                Log.d(TAG, "l> No hay que descargar nada, ya lo tenemos todo :-)")
                 loadingMutableLiveData.postValue(false)
             }
         }
@@ -100,11 +109,12 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                 runBlocking {
                     loadingMutableLiveData.postValue(false)
                     val listThingsBGGRoomEntity: ArrayList<ThingBGGRoomEntity> = ArrayList()
-                    val thingBGGMapperBBDD: ThingBGGMapperBBDD = ThingBGGMapperBBDD()
+                    val thingBGGMapperBBDD = ThingBGGMapperBBDD()
                     listThingBGGModels.forEach { thingBGGModel ->
                         listThingsBGGRoomEntity.add(thingBGGMapperBBDD.toBBDD(thingBGGModel))
                     }
                     appDatabase.ThingBGGDao().insertAll(*listThingsBGGRoomEntity.toTypedArray())
+                    completeInformationTableListThingsBGGUser(getListUserBGGModel.userBGG)
                 }
             }
 
@@ -118,5 +128,38 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                 loadingMutableLiveData.postValue(false)
             }
         }, things)
+    }
+
+    private fun completeInformationTableListThingsBGGUser(userBGG: String) {
+        runBlocking {
+            var totalBoardGame = 0
+            var totalExpansion = 0
+            val listUserBGGModel = ListUserBGGMapperBBDD().toModel(appDatabase.ListThingsBGGDao().findByUserBGG(userBGG))
+            val listThingBGGModel = ThingBGGMapperBBDD().toModelListThingsEntity(
+                appDatabase.ThingBGGDao().getAllThingsByIds(listUserBGGModel.listThings.toIntArray())
+            )
+            val totalCount = listThingBGGModel.size
+            listThingBGGModel.forEach { thingBGGModel ->
+                when (thingBGGModel.type) {
+                    ThingBGGModel.TypeThingBGG.TYPE_THING_UNKNOW -> {
+                        Log.d(
+                            TAG,
+                            "l> tenemos un juego desconocido id: ${thingBGGModel.id} con nonmbre principal: ${thingBGGModel.nameFirst}"
+                        )
+                    }
+                    ThingBGGModel.TypeThingBGG.TYPE_THING_BOARDGAME -> {
+                        totalBoardGame++
+                    }
+                    ThingBGGModel.TypeThingBGG.TYPE_THING_EXPANSION -> {
+                        totalExpansion++
+                    }
+                }
+            }
+            val listThingsBGGRoomEntity = appDatabase.ListThingsBGGDao().findByUserBGG(userBGG)
+            listThingsBGGRoomEntity.totalThings = totalCount.toString()
+            listThingsBGGRoomEntity.totalBoardGames = totalBoardGame.toString()
+            listThingsBGGRoomEntity.totalExpansions = totalExpansion.toString()
+            appDatabase.ListThingsBGGDao().update(listThingsBGGRoomEntity)
+        }
     }
 }

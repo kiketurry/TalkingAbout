@@ -23,9 +23,8 @@ class ListUserBGGMapperBBDD : BBDDMapperModel<ListUserBGGModel, ListThingsBGGRoo
     }
 
     override fun toModel(bbdd: ListThingsBGGRoomEntity): ListUserBGGModel {
-
-        val listThingsType: Type = object : TypeToken<ArrayList<String>>() {}.type
-        val listThingsFromJson: ArrayList<String> = Gson().fromJson(bbdd.listThings, listThingsType)
+        val listThingsType: Type = object : TypeToken<ArrayList<Int>>() {}.type
+        val listThingsFromJson: ArrayList<Int> = Gson().fromJson(bbdd.listThings, listThingsType)
 
         return ListUserBGGModel(
             bbdd.userBGG,

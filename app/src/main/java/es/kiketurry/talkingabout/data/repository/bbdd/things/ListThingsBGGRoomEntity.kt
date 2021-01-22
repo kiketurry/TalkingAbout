@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "listThingsBGGRoomEntity")
 data class ListThingsBGGRoomEntity(
     @PrimaryKey @ColumnInfo(name = "userBGG") val userBGG: String,
-    @ColumnInfo(name = "totalThings") val totalThings: String,
-    @ColumnInfo(name = "totalBoardGames") val totalBoardGames: String,
-    @ColumnInfo(name = "totalExpansions") val totalExpansions: String,
+    @ColumnInfo(name = "totalThings") var totalThings: String,
+    @ColumnInfo(name = "totalBoardGames") var totalBoardGames: String,
+    @ColumnInfo(name = "totalExpansions") var totalExpansions: String,
     @ColumnInfo(name = "listThings") val listThings: String,
     @ColumnInfo(name = "dateUpdate") val dateUpdate: Long,
 )
