@@ -1,8 +1,11 @@
 package es.kiketurry.talkingabout.ui.bgg
 
 import android.app.Application
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.mlkit.nl.languageid.LanguageIdentification
 import es.kiketurry.talkingabout.data.domain.model.bgg.ListUserBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
@@ -23,15 +26,14 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
     companion object {
         const val ONE_MONTH_IN_MILLISECOND = 2629746000L
         const val TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG = 1
+        const val TIME_IN_MILLISECOND_WAIT_UPDATE_DATA_BGG = 2000L
     }
 
     var userBGGSelectedMutableLiveData: MutableLiveData<String> = MutableLiveData()
+    var loadingDataBGGMutableLiveData: MutableLiveData<Int> = MutableLiveData()
 
     var getListUserBGGModel: ListUserBGGModel = ListUserBGGModel()
-    var getListThings: ArrayList<ThingBGGModel> = ArrayList()
-
     var timeStampNow = Date().time
-
     var countFailureGetListUserBGG = 0
     var userSelectedBGG = ""
 
@@ -51,7 +53,6 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
         dataProvider.getBoardGamesByUser(object : DataSourceCallbacks.GetListBoardGamesByUserCallback {
             override fun onGetListBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel) {
                 runBlocking {
-                    loadingMutableLiveData.postValue(false)
                     getListUserBGGModel = listUserBGGModel
                     getListUserBGGModel.userBGG = userBGG
                     getAllThingFromList()
@@ -97,6 +98,7 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
             } else {
                 Log.d(TAG, "l> No hay que descargar nada, ya lo tenemos todo :-)")
                 loadingMutableLiveData.postValue(false)
+                loadingDataBGGMutableLiveData.postValue(0)
             }
         }
     }
@@ -107,7 +109,6 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
 
             override fun onGetThingsBoardGamesGeekCallbackSuccess(listThingBGGModels: ArrayList<ThingBGGModel>) {
                 runBlocking {
-                    loadingMutableLiveData.postValue(false)
                     val listThingsBGGRoomEntity: ArrayList<ThingBGGRoomEntity> = ArrayList()
                     val thingBGGMapperBBDD = ThingBGGMapperBBDD()
                     listThingBGGModels.forEach { thingBGGModel ->
@@ -115,6 +116,11 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                     }
                     appDatabase.ThingBGGDao().insertAll(*listThingsBGGRoomEntity.toTypedArray())
                     completeInformationTableListThingsBGGUser(getListUserBGGModel.userBGG)
+                    searchSpanishNames()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        loadingMutableLiveData.postValue(false)
+                        loadingDataBGGMutableLiveData.postValue(0)
+                    }, TIME_IN_MILLISECOND_WAIT_UPDATE_DATA_BGG)
                 }
             }
 
@@ -160,6 +166,47 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
             listThingsBGGRoomEntity.totalBoardGames = totalBoardGame.toString()
             listThingsBGGRoomEntity.totalExpansions = totalExpansion.toString()
             appDatabase.ListThingsBGGDao().update(listThingsBGGRoomEntity)
+        }
+    }
+
+    private fun searchSpanishNames() {
+        runBlocking {
+            val languageIdentifier = LanguageIdentification.getClient()
+            val thingBGGMapperBBDD = ThingBGGMapperBBDD()
+            val listThingBGGModel: ArrayList<ThingBGGModel> =
+                thingBGGMapperBBDD.toModelListThingsEntity(appDatabase.ThingBGGDao().getAllThings())
+            var confidenceMax: Float
+            var confidenceUpdate: Float
+            var probablySpanish: String
+
+            listThingBGGModel.forEach { thingBGGModel ->
+                confidenceMax = 0.0F
+                confidenceUpdate = 0.0F
+                probablySpanish = ""
+                thingBGGModel.nameList.forEach { name ->
+                    languageIdentifier.identifyPossibleLanguages(name)
+                        .addOnSuccessListener { identifiedLanguages ->
+                            for (identifiedLanguage in identifiedLanguages) {
+                                if (identifiedLanguage.languageTag == "es" && identifiedLanguage.confidence > confidenceMax) {
+                                    confidenceMax = identifiedLanguage.confidence
+                                    probablySpanish = name
+                                    Log.d(TAG, "l> nombre probable en español: $probablySpanish con confianza del $confidenceMax")
+                                }
+                            }
+
+                            if (probablySpanish.isNotBlank() && confidenceMax >= 0.5F && confidenceMax > confidenceUpdate) {
+                                thingBGGModel.nameEs = probablySpanish
+                                runBlocking {
+                                    appDatabase.ThingBGGDao().update(thingBGGMapperBBDD.toBBDD(thingBGGModel))
+                                    Log.d(TAG, "l> actualizamos la base de datos con el nombre $name")
+                                    confidenceUpdate = confidenceMax
+                                    confidenceMax = 0.0F
+                                    probablySpanish = ""
+                                }
+                            }
+                        }
+                }
+            }
         }
     }
 }

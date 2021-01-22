@@ -21,7 +21,7 @@ class ListThingsBGGAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThingBGGViewHolder {
-        val view = layoutInflater.inflate(R.layout.recyclerview_item_cat_photo, parent, false)
+        val view = layoutInflater.inflate(R.layout.recyclerview_item_bgg_thing, parent, false)
         return ThingBGGViewHolder(view, itemThingsBGGClickListener)
     }
 

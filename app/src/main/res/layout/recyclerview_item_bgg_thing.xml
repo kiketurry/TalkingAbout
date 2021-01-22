@@ -9,13 +9,13 @@
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:scaleType="centerCrop"
-        tools:src="@drawable/loading_image_bgg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/loading_image_bgg" />
 
     <ImageView
         android:id="@+id/ivWhatsapp"
@@ -30,17 +30,15 @@
     <TextView
         android:id="@+id/tvName"
         style="@style/itemThingBGGName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="8dp"
-        android:background="@color/whiteTransparent"
         android:layout_marginBottom="8dp"
+        android:background="@color/whiteTransparent"
         android:gravity="center_horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Tigris y Eufrates" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,10 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
         (baseActivity as BGGActivity).bggViewModel.userBGGSelectedMutableLiveData.observe(
             viewLifecycleOwner,
             Observer { userSelectedBGG -> userSelectedBGG(userSelectedBGG) })
+
+        listThingsBGGViewModel.listShowThingBGGModelMutableLiveData.observe(viewLifecycleOwner, { listThingsBGGViewModel ->
+            listThingsBGGAdapter.refreshThings(listThingsBGGViewModel)
+        })
     }
 
     private fun userSelectedBGG(userSelectedBGG: String) {
@@ -65,11 +69,11 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
     }
 
-    override fun onItemThingClick(position: ThingBGGModel) {
-        Log.i(TAG, "l> Hemos pulsado en una linda cosa")
+    override fun onItemThingClick(thingBGGModel: ThingBGGModel) {
+        Log.i(TAG, "l> Hemos pulsado ${thingBGGModel.nameFirst} es una linda cosa")
     }
 
-    override fun onWhatsappThingClick(position: ThingBGGModel) {
-        Log.i(TAG, "l> Hemos pulsado para enviar whatsapp")
+    override fun onWhatsappThingClick(thingBGGModel: ThingBGGModel) {
+        Log.i(TAG, "l> Hemos pulsado ${thingBGGModel.nameFirst} para enviar whatsapp")
     }
 }

@@ -1,6 +1,7 @@
 package es.kiketurry.talkingabout.ui.bgg
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.R
@@ -30,6 +31,17 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
     override fun observeViewModel() {
         bggViewModel.loadingMutableLiveData.observe(this, this::showLoading)
         bggViewModel.errorMutableLiveData.observe(this, this::showError)
+
+        bggViewModel.loadingDataBGGMutableLiveData.observe(this, { loading ->
+            Log.i(TAG, "l> value of loading: $loading")
+            if (loading == 0) {
+                bggViewModel.loadingDataBGGMutableLiveData.value = -1
+                goToListBoardGamesBGGFragment()
+                Log.i(TAG, "l> vamos a lista de juegos: $loading")
+            } else {
+                Log.i(TAG, "l> no vamos a ningún sitio: $loading")
+            }
+        })
     }
 
     override fun createAfterInflateBindingSetupObserverViewModel(savedInstanceState: Bundle?) {
@@ -73,6 +85,5 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
 
     fun setUserBGGSelected(userBGG: String) {
         bggViewModel.setUserBGGSelected(userBGG)
-        goToListBoardGamesBGGFragment()
     }
 }
