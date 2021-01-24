@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.data.constants.IntentKeys.Companion.INTENT_KEY_EDIT_USER_BGG
+import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.databinding.ActivityBggBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
 import es.kiketurry.talkingabout.ui.bgg.addmodifyuser.AddModifyUserBGGFragment
+import es.kiketurry.talkingabout.ui.bgg.detailboardgame.DetailThingBGGFragment
 import es.kiketurry.talkingabout.ui.bgg.listthings.ListThingsBGGFragment
 import es.kiketurry.talkingabout.ui.bgg.listusers.ListUserBGGFragment
 
@@ -77,6 +79,14 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
             .commit()
     }
 
+    private fun goToDetailThingBGGFragment() {
+        val fragment: Fragment = DetailThingBGGFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.flMainFragmentHost, fragment, DetailThingBGGFragment::class.qualifiedName)
+            .addToBackStack(DetailThingBGGFragment::class.qualifiedName)
+            .commit()
+    }
+
     override fun configureToolbar() {
         showTitleToolbar(getString(R.string.toolbarBGG))
         showBackToolbar(false)
@@ -85,5 +95,10 @@ class BGGActivity : BaseActivity<ActivityBggBinding>() {
 
     fun setUserBGGSelected(userBGG: String) {
         bggViewModel.setUserBGGSelected(userBGG)
+    }
+
+    fun setThingBGGSelected(thingBGGModel: ThingBGGModel) {
+        bggViewModel.setThingBGGSelected(thingBGGModel)
+        goToDetailThingBGGFragment()
     }
 }

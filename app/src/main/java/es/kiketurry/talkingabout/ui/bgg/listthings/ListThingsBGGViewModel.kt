@@ -30,6 +30,9 @@ class ListThingsBGGViewModel(application: Application, var appDatabase: AppDatab
             val listThingBGGModel = ThingBGGMapperBBDD().toModelListThingsEntity(
                 appDatabase.ThingBGGDao().getAllThingsByIds(listUserBGGModel.listThings.toIntArray())
             )
+            listAllThingBGGModel.clear()
+            listBoardGamesThingBGGModel.clear()
+            listExpansionsThingBGGModel.clear()
             listThingBGGModel.forEach { thingBGGModel ->
                 when (thingBGGModel.type) {
                     ThingBGGModel.TypeThingBGG.TYPE_THING_UNKNOW -> {

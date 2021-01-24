@@ -29,7 +29,7 @@ class ThingBGGMapperBBDD : BBDDMapperModel<ThingBGGModel, ThingBGGRoomEntity> {
             model.ageMin,
             model.ageMinRecommendedCommunity,
             model.time,
-            model.weight.toString(),
+            model.weight,
             model.languageDependence.name,
             model.rank,
             model.dateUpdate
@@ -87,7 +87,7 @@ class ThingBGGMapperBBDD : BBDDMapperModel<ThingBGGModel, ThingBGGRoomEntity> {
             bbdd.ageMin,
             bbdd.ageMinRecommendedCommunity,
             bbdd.time,
-            bbdd.weight.toDouble(),
+            bbdd.weight,
             languageDependence,
             bbdd.rank,
             bbdd.dateUpdate

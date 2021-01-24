@@ -20,11 +20,7 @@ class ThingBGGViewHolder(var view: View, private val thingBGGClickListener: Item
             .apply(RequestOptions().error(R.drawable.loading_image_bgg))
             .into(binding.ivImage)
 
-        if (thingBGGModel.nameEs.isNullOrBlank()) {
-            binding.tvName.text = thingBGGModel.nameFirst
-        } else {
-            binding.tvName.text = thingBGGModel.nameEs
-        }
+        binding.tvName.text = thingBGGModel.bestName()
 
         binding.ivWhatsapp.setOnClickListener { thingBGGClickListener.onWhatsappThingClick(thingBGGModel) }
         view.setOnClickListener { thingBGGClickListener.onItemThingClick(thingBGGModel) }

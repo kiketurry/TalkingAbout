@@ -8,6 +8,7 @@ import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.ui.DistributiveViewModel
 import es.kiketurry.talkingabout.ui.bgg.BGGViewModel
 import es.kiketurry.talkingabout.ui.bgg.addmodifyuser.AddModifyUsersBGGViewModel
+import es.kiketurry.talkingabout.ui.bgg.detailboardgame.DetailThingBGGViewModel
 import es.kiketurry.talkingabout.ui.bgg.listthings.ListThingsBGGViewModel
 import es.kiketurry.talkingabout.ui.bgg.listusers.ListUsersBGGViewModel
 import es.kiketurry.talkingabout.ui.calculator.CalculatorViewModel
@@ -65,6 +66,9 @@ class ViewModelFactory(
             }
             ListThingsBGGViewModel::class.qualifiedName -> {
                 ListThingsBGGViewModel(application, appDatabase, dataProvider)
+            }
+            DetailThingBGGViewModel::class.qualifiedName -> {
+                DetailThingBGGViewModel(application)
             }
             else -> {
                 SimplyViewModel(application)

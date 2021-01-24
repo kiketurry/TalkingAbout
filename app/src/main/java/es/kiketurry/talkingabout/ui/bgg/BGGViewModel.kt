@@ -26,11 +26,13 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
     companion object {
         const val ONE_MONTH_IN_MILLISECOND = 2629746000L
         const val TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG = 1
-        const val TIME_IN_MILLISECOND_WAIT_UPDATE_DATA_BGG = 2000L
+        const val TIME_IN_MILLISECOND_WAIT_UPDATE_DATA_BGG = 5000L
     }
 
     var userBGGSelectedMutableLiveData: MutableLiveData<String> = MutableLiveData()
     var loadingDataBGGMutableLiveData: MutableLiveData<Int> = MutableLiveData()
+
+    var thingBGGSelectedMutableLiveData: MutableLiveData<ThingBGGModel> = MutableLiveData()
 
     var getListUserBGGModel: ListUserBGGModel = ListUserBGGModel()
     var timeStampNow = Date().time
@@ -207,6 +209,16 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                         }
                 }
             }
+        }
+    }
+
+    fun setThingBGGSelected(thingBGGModel: ThingBGGModel) {
+        runBlocking {
+            thingBGGSelectedMutableLiveData.postValue(
+                ThingBGGMapperBBDD().toModel(
+                    appDatabase.ThingBGGDao().findByThingId(thingBGGModel.id)
+                )
+            )
         }
     }
 }

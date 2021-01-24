@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivThingBGG"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivWhatsapp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/ic_whatsapp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/detailThingBGGName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivThingBGG"
+            tools:text="Nombre del juego" />
+
+        <TextView
+            android:id="@+id/tvType"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_type"
+            app:layout_constraintEnd_toStartOf="@id/tvRank"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="Expansión" />
+
+        <TextView
+            android:id="@+id/tvRank"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_rank"
+            app:layout_constraintEnd_toStartOf="@id/tvWeight"
+            app:layout_constraintStart_toEndOf="@id/tvType"
+            app:layout_constraintTop_toTopOf="@id/tvType"
+            tools:text="115" />
+
+        <TextView
+            android:id="@+id/tvWeight"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_weight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvRank"
+            app:layout_constraintTop_toTopOf="@id/tvType"
+            tools:text="2.45 / 5" />
+
+        <TextView
+            android:id="@+id/tvYear"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_calendar"
+            app:layout_constraintEnd_toStartOf="@id/tvTime"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvType"
+            tools:text="2007" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvYear"
+            app:layout_constraintTop_toTopOf="@id/tvYear"
+            tools:text="30'" />
+
+        <TextView
+            android:id="@+id/tvPlayers"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_players"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvYear"
+            tools:text="2 - 5 jugadores, la comunidad recomienda: 5" />
+
+        <TextView
+            android:id="@+id/tvAge"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_age"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPlayers"
+            tools:text="Edad mínima 12, la comunidad recomienda 12" />
+
+        <TextView
+            android:id="@+id/tvLanguageDependence"
+            style="@style/detailThingBGGData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:layout_marginEnd="8dp"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_language"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAge"
+            tools:text="Texto moderado, con una hoja de ayuda se puede salvar" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierBottomTypeRankWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvLanguageDependence" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/detailThingBGGData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrierBottomTypeRankWeight"
+            tools:text="The great moment of terraforming Mars has arrived, and the spaceship must be equipped with all the necessary resources to complete the mission: CREW, WATER, FOOD, ENERGY and OXYGEN. The space of the spaceship is limited, and each mission is calculated to the millimeter. Will you be the fastest engineer organizing all the necessary resources? Mars, here we go! The round begins by rolling the 5 colored dice and placing them on the corresponding resource card. The numbers on the dice indicate the number of items required for each resource. You must equip the ship with the right amount of elements, no more and no less. Players must turn, flip and cover their 6 cards until they get the exact combination of elements that mark the dice. The first to do so, wins a Mars token (10 points). The rest of the players earn a star (5 points) if they fulfilled at least the requirement of 3 dice. The player with the most points after 4 missions to Mars wins." />
+
+        <TextView
+            android:id="@+id/tvOtherNames"
+            style="@style/detailThingBGGData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            tools:text="Otros nombres: palksjdflñkas d, anmsñdlfkjasldkfjaslñdkf, jasodkfj asñlkdjf aslkd, jalksdjfañlskdfj ." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

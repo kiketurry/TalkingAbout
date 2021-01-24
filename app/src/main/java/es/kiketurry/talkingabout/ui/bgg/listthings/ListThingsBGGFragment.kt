@@ -1,7 +1,6 @@
 package es.kiketurry.talkingabout.ui.bgg.listthings
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.bgg.BGGActivity
 import es.kiketurry.talkingabout.ui.bgg.listthings.adapter.ListThingsBGGAdapter
 import es.kiketurry.talkingabout.ui.bgg.listthings.adapter.ListThingsBGGAdapter.ItemThingBGGClickListener
+import es.kiketurry.talkingabout.utils.WhatsappUtils
 import java.util.*
 
 class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), ItemThingBGGClickListener {
@@ -70,10 +70,10 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
     }
 
     override fun onItemThingClick(thingBGGModel: ThingBGGModel) {
-        Log.i(TAG, "l> Hemos pulsado ${thingBGGModel.nameFirst} es una linda cosa")
+        (baseActivity as BGGActivity).setThingBGGSelected(thingBGGModel)
     }
 
     override fun onWhatsappThingClick(thingBGGModel: ThingBGGModel) {
-        Log.i(TAG, "l> Hemos pulsado ${thingBGGModel.nameFirst} para enviar whatsapp")
+        WhatsappUtils.sendWhatsapp(baseActivity, thingBGGModel.bestName())
     }
 }

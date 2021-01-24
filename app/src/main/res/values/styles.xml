@@ -31,4 +31,15 @@
         <item name="color">@color/black</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="detailThingBGGName">
+        <item name="android:textSize">24sp</item>
+        <item name="color">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="detailThingBGGData">
+        <item name="android:textSize">15sp</item>
+        <item name="color">@color/black</item>
+    </style>
 </resources>

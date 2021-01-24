@@ -4,6 +4,8 @@ import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel.LanguageDependenceThingBGG.*
 import es.kiketurry.talkingabout.data.repository.remote.mapper.ResponseMapper
 import es.kiketurry.talkingabout.data.repository.remote.responses.bgg.things.ThingBoardGameGeekResponse
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -110,7 +112,7 @@ class ThingBGGMapper : ResponseMapper<ThingBoardGameGeekResponse, ThingBGGModel>
             if (response.maxplaytime.value != null && response.minplaytime.value != null && response.maxplaytime.value.equals(response.minplaytime.value)) {
                 response.maxplaytime.value!!
             } else {
-                "${response.maxplaytime.value!!}-${response.minplaytime.value!!}'"
+                "${response.minplaytime.value!!}-${response.maxplaytime.value!!}'"
             }
 
         var rank = "-"
@@ -123,7 +125,13 @@ class ThingBGGMapper : ResponseMapper<ThingBoardGameGeekResponse, ThingBGGModel>
             }
         }
 
-        //TODO kiketurry ver como coger el idioma español
+        var weight = "-"
+        var weightDouble = response.statistics.ratings.averageweight.value?.toDoubleOrNull()
+        if (weightDouble != null) {
+            val decimalFormat = DecimalFormat("#.##")
+            decimalFormat.roundingMode = RoundingMode.HALF_EVEN
+            weight = decimalFormat.format(weightDouble).toString()
+        }
 
         return ThingBGGModel(
             response.id.toInt(),
@@ -139,7 +147,7 @@ class ThingBGGMapper : ResponseMapper<ThingBoardGameGeekResponse, ThingBGGModel>
             response.minage.value ?: "-",
             ageRecommendedCommunity,
             playTime,
-            response.statistics.ratings.averageweight.value?.toDouble() ?: 0.0,
+            weight,
             languageDependenceType,
             rank,
             Date().time,
