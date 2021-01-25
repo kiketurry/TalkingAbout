@@ -53,7 +53,7 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
 
     override fun configureToolbar() {
         baseActivity.showTitleToolbar(getString(R.string.toolbarListBoardGamesBGG))
-        baseActivity.showBackToolbar(false)
+        baseActivity.showBackToolbar(true)
         baseActivity.showCloseToolbar(false)
     }
 

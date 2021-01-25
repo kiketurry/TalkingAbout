@@ -8,6 +8,6 @@ import org.simpleframework.xml.Root
 class PollResultResponse @JvmOverloads constructor(
     @field: Attribute(required = false)
     var numplayers: String? = null,
-    @field: ElementList(entry = "result", inline = true)
+    @field: ElementList(entry = "result", inline = true, required = false)
     var pollResultDetailResponseList: List<PollResultDetailResponse>? = null,
 )

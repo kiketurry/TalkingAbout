@@ -12,6 +12,6 @@ class PollResponse @JvmOverloads constructor(
     var title: String? = null,
     @field: Attribute
     var totalvotes: String? = null,
-    @field: ElementList(entry = "results", inline = true)
+    @field: ElementList(entry = "results", inline = true, required = false)
     var results: List<PollResultResponse>? = null,
 )

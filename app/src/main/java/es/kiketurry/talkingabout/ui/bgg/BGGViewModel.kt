@@ -117,7 +117,7 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                         listThingsBGGRoomEntity.add(thingBGGMapperBBDD.toBBDD(thingBGGModel))
                     }
                     appDatabase.ThingBGGDao().insertAll(*listThingsBGGRoomEntity.toTypedArray())
-                    completeInformationTableListThingsBGGUser(getListUserBGGModel.userBGG)
+                    completeInformationTypeThingListThingsBGGUser(getListUserBGGModel.userBGG)
                     searchSpanishNames()
                     Handler(Looper.getMainLooper()).postDelayed({
                         loadingMutableLiveData.postValue(false)
@@ -138,7 +138,7 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
         }, things)
     }
 
-    private fun completeInformationTableListThingsBGGUser(userBGG: String) {
+    private fun completeInformationTypeThingListThingsBGGUser(userBGG: String) {
         runBlocking {
             var totalBoardGame = 0
             var totalExpansion = 0
@@ -196,7 +196,7 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                                 }
                             }
 
-                            if (probablySpanish.isNotBlank() && confidenceMax >= 0.5F && confidenceMax > confidenceUpdate) {
+                            if (probablySpanish.isNotBlank() && confidenceMax >= 0.33F && confidenceMax > confidenceUpdate) {
                                 thingBGGModel.nameEs = probablySpanish
                                 runBlocking {
                                     appDatabase.ThingBGGDao().update(thingBGGMapperBBDD.toBBDD(thingBGGModel))
