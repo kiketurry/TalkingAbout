@@ -1,8 +1,6 @@
 package es.kiketurry.talkingabout.ui.bgg
 
 import android.app.Application
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.mlkit.nl.languageid.LanguageIdentification
@@ -118,11 +116,8 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                     }
                     appDatabase.ThingBGGDao().insertAll(*listThingsBGGRoomEntity.toTypedArray())
                     completeInformationTypeThingListThingsBGGUser(getListUserBGGModel.userBGG)
-                    searchSpanishNames()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        loadingMutableLiveData.postValue(false)
-                        loadingDataBGGMutableLiveData.postValue(0)
-                    }, TIME_IN_MILLISECOND_WAIT_UPDATE_DATA_BGG)
+                    loadingMutableLiveData.postValue(false)
+                    loadingDataBGGMutableLiveData.postValue(0)
                 }
             }
 
@@ -181,14 +176,28 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
             var confidenceUpdate: Float
             var probablySpanish: String
 
+            Log.d(TAG, "l> Vamos a analizar el idioma de ${listThingBGGModel.size} juegos")
+
             listThingBGGModel.forEach { thingBGGModel ->
+
+                Log.d(TAG, "l> Juego ${thingBGGModel.nameFirst}")
+
                 confidenceMax = 0.0F
                 confidenceUpdate = 0.0F
                 probablySpanish = ""
                 thingBGGModel.nameList.forEach { name ->
+
+                    Log.d(TAG, "l> Posible nombre $name")
+
                     languageIdentifier.identifyPossibleLanguages(name)
                         .addOnSuccessListener { identifiedLanguages ->
                             for (identifiedLanguage in identifiedLanguages) {
+
+                                Log.d(
+                                    TAG,
+                                    "l> idioma identificado: ${identifiedLanguage.languageTag}, confianza de nombre ${identifiedLanguage.confidence}, nombre juego: $name - confidenceMax: $confidenceMax"
+                                )
+
                                 if (identifiedLanguage.languageTag == "es" && identifiedLanguage.confidence > confidenceMax) {
                                     confidenceMax = identifiedLanguage.confidence
                                     probablySpanish = name
