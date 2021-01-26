@@ -16,7 +16,7 @@ class ThingBGGMapperBBDD : BBDDMapperModel<ThingBGGModel, ThingBGGRoomEntity> {
         val nameListToJson = Gson().toJson(model.nameList)
 
         return ThingBGGRoomEntity(
-            model.id,
+            model.thingId,
             model.type.name,
             model.image,
             model.nameFirst,
@@ -74,7 +74,7 @@ class ThingBGGMapperBBDD : BBDDMapperModel<ThingBGGModel, ThingBGGRoomEntity> {
         val nameListFromJson: ArrayList<String> = Gson().fromJson(bbdd.nameList, nameListType)
 
         return ThingBGGModel(
-            bbdd.id,
+            bbdd.thingId,
             type,
             bbdd.image,
             bbdd.nameFirst,

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "thingBGGRoomEntity")
 data class ThingBGGRoomEntity(
-    @PrimaryKey @ColumnInfo(name = "id") val id: Int,
+    @PrimaryKey @ColumnInfo(name = "thingId") val thingId: Int,
     @ColumnInfo(name = "type") val type: String = "",
     @ColumnInfo(name = "image") val image: String = "",
     @ColumnInfo(name = "nameFirst") val nameFirst: String = "",

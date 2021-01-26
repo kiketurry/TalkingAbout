@@ -1,10 +1,7 @@
 package es.kiketurry.talkingabout.data.repository.bbdd.thinguser
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Update
 
 @Dao
 interface ThingUserBGGDao {
@@ -19,4 +16,7 @@ interface ThingUserBGGDao {
 
     @Update
     suspend fun update(thingUserBGGRoomEntity: ThingUserBGGRoomEntity)
+
+    @Query("SELECT * FROM thingUserBGGRoomEntity WHERE userBGG IN (:userBGG)")
+    suspend fun getAllThingsUserByUserBGG(userBGG: String): List<ThingUserBGGRoomEntity>
 }

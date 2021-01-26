@@ -19,14 +19,14 @@ interface ThingBGGDao {
     @Query("SELECT * FROM thingBGGRoomEntity")
     suspend fun getAllThings(): List<ThingBGGRoomEntity>
 
-    @Query("SELECT * FROM thingBGGRoomEntity WHERE id IN (:ids)")
-    suspend fun getAllThingsByIds(ids: IntArray): List<ThingBGGRoomEntity>
+    @Query("SELECT * FROM thingBGGRoomEntity WHERE thingId IN (:thingIds)")
+    suspend fun getAllThingsByIds(thingIds: IntArray): List<ThingBGGRoomEntity>
 
-    @Query("SELECT * FROM thingBGGRoomEntity WHERE id LIKE :id LIMIT 1")
-    suspend fun findByThingId(id: Int): ThingBGGRoomEntity
+    @Query("SELECT * FROM thingBGGRoomEntity WHERE thingId LIKE :thingId LIMIT 1")
+    suspend fun findByThingId(thingId: Int): ThingBGGRoomEntity
 
-    @Query("SELECT EXISTS(SELECT * FROM thingBGGRoomEntity WHERE id = :id)")
-    suspend fun isRowExist(id: Int): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM thingBGGRoomEntity WHERE thingId = :thingId)")
+    suspend fun isRowExist(thingId: Int): Boolean
 
     @Query("DELETE FROM thingBGGRoomEntity")
     suspend fun deleteAll()

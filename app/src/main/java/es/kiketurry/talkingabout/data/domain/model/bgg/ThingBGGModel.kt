@@ -5,7 +5,7 @@ import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel.TypeThingBG
 import java.io.Serializable
 
 data class ThingBGGModel(
-    var id: Int = -1,
+    var thingId: Int = -1,
     var type: TypeThingBGG = TYPE_THING_UNKNOW,
     var image: String = "",
     var nameFirst: String = "",
