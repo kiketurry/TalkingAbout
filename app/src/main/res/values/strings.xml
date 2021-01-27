@@ -10,6 +10,7 @@
     <string name="toolbar_title_fragment_detail_cat">Detalle de raza</string>
     <string name="generic_error">Ups! Hemos sufrido un error, pero ya es tarde para arreglarlo, no???? Mejor vamos a dormir XD! Vuelve en un rato</string>
     <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
     <string name="divide">Entre</string>
     <string name="multiply">Por</string>
     <string name="subtract">Menos</string>
@@ -36,4 +37,5 @@
     <string name="toolbarDetailThingBGG">Detalle</string>
     <string name="bggDetailThingBGGTitleOtherNames">Otros Nombres:</string>
     <string name="bggDetailThingBGGTitleDescription">Descripción:</string>
+    <string name="loading">Cargando</string>
 </resources>

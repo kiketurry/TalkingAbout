@@ -6,21 +6,23 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View.GONE
-import android.view.WindowManager
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.DialogFragment
-import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.data.domain.model.error.ErrorModel
 import es.kiketurry.talkingabout.databinding.FragmentDialogErrorBinding
-import es.kiketurry.talkingabout.databinding.FragmentDialogLoadingBinding
 
 class ErrorDialogFragment : DialogFragment() {
+
+    interface ErrorDialogFragmentClickButtonListener {
+        fun onErrorDialogFragmentClickAcceptButton()
+    }
+
     companion object {
         const val ERROR_DIALOG_FRAGMENT_TAG: String = "ERROR_DIALOG_FRAGMENT_TAG"
     }
 
     private lateinit var errorModel: ErrorModel
     private lateinit var binding: FragmentDialogErrorBinding
+    private var errorDialogFragmentClickButtonListener: ErrorDialogFragmentClickButtonListener? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -32,7 +34,10 @@ class ErrorDialogFragment : DialogFragment() {
 
         showErrorInfo()
 
-        binding.btAcceptError.setOnClickListener { dismiss() }
+        binding.btAcceptError.setOnClickListener {
+            errorDialogFragmentClickButtonListener?.onErrorDialogFragmentClickAcceptButton()
+            dismiss()
+        }
 
         return dialog
     }
@@ -40,7 +45,7 @@ class ErrorDialogFragment : DialogFragment() {
     private fun showErrorInfo() {
         binding.tvTitleError.text = errorModel.message
         binding.tvMesaggeError.text = errorModel.message
-        if(errorModel.title.isNullOrEmpty()){
+        if (errorModel.title.isNullOrEmpty()) {
             binding.tvTitleError.visibility = GONE
         }
     }
@@ -52,5 +57,9 @@ class ErrorDialogFragment : DialogFragment() {
     fun setErrorAndRefreshInfo(errorModel: ErrorModel) {
         this.errorModel = errorModel
         showErrorInfo()
+    }
+
+    fun setListener(errorDialogFragmentClickButtonListener: ErrorDialogFragmentClickButtonListener) {
+        this.errorDialogFragmentClickButtonListener = errorDialogFragmentClickButtonListener
     }
 }

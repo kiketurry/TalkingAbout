@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,12 +15,12 @@ import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.cats.CatsActivity
 import es.kiketurry.talkingabout.ui.cats.list.adapter.BreedsAdapter
-import es.kiketurry.talkingabout.ui.dialogfragment.TextButtonDialogFragment
-import es.kiketurry.talkingabout.ui.dialogfragment.TextButtonDialogFragment.Companion.TEXT_BUTTON_DIALOG_FRAGMENT_TAG
+import es.kiketurry.talkingabout.ui.dialogfragment.info.InfoDialogFragment
+import es.kiketurry.talkingabout.ui.dialogfragment.info.InfoDialogFragment.Companion.INFO_DIALOG_FRAGMENT_TAG
 import java.util.*
 
 class BreedListFragment : BaseFragment<FragmentCatBreedsListBinding>(), BreedsAdapter.ItemBreedClickListener,
-    TextButtonDialogFragment.TextButtonDialogFragmentClickButtonListener {
+    InfoDialogFragment.InfoDialogFragmentClickButtonListener {
     override val TAG: String? get() = BreedListFragment::class.qualifiedName
 
     lateinit var breedListViewmodel: BreedListViewModel
@@ -54,14 +55,19 @@ class BreedListFragment : BaseFragment<FragmentCatBreedsListBinding>(), BreedsAd
             layoutManager = LinearLayoutManager(context)
             adapter = breedsAdapter
         }
-
-        launchDialogFragment()
     }
 
     private fun launchDialogFragment() {
-        var textButtonDialogFragment: TextButtonDialogFragment = TextButtonDialogFragment()
-        textButtonDialogFragment.setValue("Hola y Adios", "Caracola del infierno", this)
-        showDialogFragment(textButtonDialogFragment, TEXT_BUTTON_DIALOG_FRAGMENT_TAG)
+        var infoDialogFragment: InfoDialogFragment = InfoDialogFragment()
+        infoDialogFragment.setValue(
+            this,
+            "Hola y Adios",
+            "Caracola del infierno",
+            ResourcesCompat.getDrawable(resources, R.drawable.ic_engine, null),
+            getString(R.string.add),
+            getString(R.string.app_name)
+        )
+        showDialogFragment(infoDialogFragment, INFO_DIALOG_FRAGMENT_TAG)
     }
 
     override fun configureToolbar() {
@@ -74,7 +80,11 @@ class BreedListFragment : BaseFragment<FragmentCatBreedsListBinding>(), BreedsAd
         (baseActivity as CatsActivity).setPositionBreedSelected(position)
     }
 
-    override fun onTextButtonDialogFragmentClickButton() {
+    override fun onInfoDialogFragmentClickPositive() {
         Log.i(TAG, "l> Hemos pulsado el button del dialog :-)")
+    }
+
+    override fun onInfoDialogFragmentClickNegative() {
+        Log.i(TAG, "l> Hemos pulsado el button del dialog :-(")
     }
 }

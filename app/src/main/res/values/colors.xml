@@ -6,10 +6,13 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="blackTransparent">#AA000000</color>
     <color name="basic_grey">#dedede</color>
     <color name="grey">#ededed</color>
     <color name="white">#FFFFFFFF</color>
     <color name="whiteTransparent">#AAFFFFFF</color>
+
+    <color name="backgroundLoading">#CC000000</color>
 
     <color name="backgroundUserBGGListLight">#DAE5F4</color>
     <color name="backgroundUserBGGListDark">#B8D1F3</color>

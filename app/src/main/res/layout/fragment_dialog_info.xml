@@ -7,7 +7,7 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/tvTitleError"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -16,20 +16,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Titulo del error" />
+        tools:text="Titulo" />
 
     <ImageView
-        android:id="@+id/ivError"
+        android:id="@+id/ivIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_warning"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleError" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
     <TextView
-        android:id="@+id/tvMesaggeError"
+        android:id="@+id/tvMesagge"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -37,17 +37,27 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivError"
+        app:layout_constraintTop_toBottomOf="@id/ivIcon"
         tools:text="Ups! Hemos sufrido un error, pero ya es tarde para arreglarlo, no???? Mejor vamos a dormir XD! Vuelve en un rato" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btAcceptError"
+        android:id="@+id/btPositive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/accept"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMesaggeError" />
+        app:layout_constraintTop_toBottomOf="@id/tvMesagge" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btNegative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btPositive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

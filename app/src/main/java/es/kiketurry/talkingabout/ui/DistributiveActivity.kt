@@ -10,7 +10,7 @@ import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
 import es.kiketurry.talkingabout.ui.bgg.BGGActivity
 import es.kiketurry.talkingabout.ui.calculator.CalculatorActivity
-import es.kiketurry.talkingabout.ui.cats.CatsActivity
+import es.kiketurry.talkingabout.ui.cats.splash.CatSplashActivity
 
 class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
     override val TAG: String? get() = DistributiveActivity::class.qualifiedName
@@ -45,7 +45,7 @@ class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
         super.onClick(view)
         when (view?.id) {
             R.id.btCats -> {
-                startActivity(Intent(this, CatsActivity::class.java))
+                startActivity(Intent(this, CatSplashActivity::class.java))
             }
             R.id.btCalculator -> {
                 startActivity(Intent(this, CalculatorActivity::class.java))

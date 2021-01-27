@@ -1,16 +1,16 @@
-package es.kiketurry.talkingabout.ui.splash
+package es.kiketurry.talkingabout.ui.cats.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import es.kiketurry.talkingabout.databinding.ActivitySplashBinding
-import es.kiketurry.talkingabout.ui.DistributiveActivity
 import es.kiketurry.talkingabout.ui.base.BaseActivity
+import es.kiketurry.talkingabout.ui.cats.CatsActivity
 
 
-class SplashActivity : BaseActivity<ActivitySplashBinding>() {
-    override val TAG: String? get() = SplashActivity::class.qualifiedName
+class CatSplashActivity : BaseActivity<ActivitySplashBinding>() {
+    override val TAG: String? get() = CatSplashActivity::class.qualifiedName
 
     override fun inflateBinding() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -36,7 +36,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun goToDistributiveActivity() {
-        startActivity(Intent(this, DistributiveActivity::class.java))
+        startActivity(Intent(this, CatsActivity::class.java))
         finish()
     }
 

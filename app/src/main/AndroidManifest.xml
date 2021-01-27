@@ -17,7 +17,7 @@
         android:theme="@style/Theme.TalkingAbout">
 
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="es.kiketurry.talkingabout.ui.DistributiveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityFullScreen">
             <intent-filter>
@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".ui.DistributiveActivity"
+            android:name=".ui.cats.splash.CatSplashActivity"
             android:screenOrientation="portrait" />
 
         <activity
