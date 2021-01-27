@@ -48,7 +48,7 @@ data class ThingBGGModel(
             LanguageDependenceThingBGG.LANGUAGE_DEPENDENCE_THING_NO_NECESARY -> "Independiente del idioma"
             LanguageDependenceThingBGG.LANGUAGE_DEPENDENCE_THING_SOME_NECESSARY -> "Algún texto necesario, pero poca cosa"
             LanguageDependenceThingBGG.LANGUAGE_DEPENDENCE_THING_MODERATE -> "Texto moderado, con una hoja de ayuda se puede salvar"
-            LanguageDependenceThingBGG.LANGUAGE_DEPENDENCE_THING_EXTENSIVE -> "Mucho texto, se recomienda tradu-maquetación"
+            LanguageDependenceThingBGG.LANGUAGE_DEPENDENCE_THING_EXTENSIVE -> "Mucho texto, se recomienda tradu-maquetar"
             LanguageDependenceThingBGG.LANGUAGE_DEPENDENCE_THING_UNPLAYABLE -> "No se puede jugar sin conocer el idioma"
         }
     }

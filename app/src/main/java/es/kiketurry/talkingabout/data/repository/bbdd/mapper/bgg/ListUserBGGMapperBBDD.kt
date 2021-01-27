@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 import es.kiketurry.talkingabout.data.domain.model.bgg.ListUserBGGModel
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.BBDDMapperModel
 import es.kiketurry.talkingabout.data.repository.bbdd.things.ListThingsBGGRoomEntity
+import es.kiketurry.talkingabout.data.repository.bbdd.thinguser.ThingUserBGGRoomEntity
 import java.lang.reflect.Type
 
 class ListUserBGGMapperBBDD : BBDDMapperModel<ListUserBGGModel, ListThingsBGGRoomEntity> {
@@ -34,6 +35,16 @@ class ListUserBGGMapperBBDD : BBDDMapperModel<ListUserBGGModel, ListThingsBGGRoo
             listThingsFromJson,
             bbdd.dateUpdate
         )
+    }
+
+    fun getListThingUserBGGRoomEntity(listThings: ArrayList<Int>, userBGG: String): List<ThingUserBGGRoomEntity> {
+        val listThingUserBGGRoomEntity: ArrayList<ThingUserBGGRoomEntity> = ArrayList()
+
+        listThings.forEach { thingId ->
+            listThingUserBGGRoomEntity.add(ThingUserBGGRoomEntity(userBGG, thingId))
+        }
+
+        return listThingUserBGGRoomEntity
     }
 
 }

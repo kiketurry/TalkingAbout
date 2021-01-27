@@ -101,4 +101,12 @@ class ThingBGGMapperBBDD : BBDDMapperModel<ThingBGGModel, ThingBGGRoomEntity> {
         }
         return listThingBGGModel
     }
+
+    fun getTimeStampMap(listThingBGGRoomEntity: List<ThingBGGRoomEntity>): MutableMap<Int, Long> {
+        val timeStampMap: MutableMap<Int, Long> = mutableMapOf()
+        listThingBGGRoomEntity.forEach { thingBGGRoomEntity ->
+            timeStampMap.put(thingBGGRoomEntity.thingId, thingBGGRoomEntity.dateUpdate)
+        }
+        return timeStampMap
+    }
 }

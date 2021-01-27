@@ -5,7 +5,6 @@ import es.kiketurry.talkingabout.data.constants.GeneralConstants.Companion.RETRO
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.io.IOException
@@ -48,12 +47,12 @@ class RetrofitClientBGG() {
             }
         })
 
-        if (BuildConfig.DEBUG) {
-            // Creamos un interceptor y le indicamos el log level a usar
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-            httpClient.addInterceptor(logging)
-        }
+//        if (BuildConfig.DEBUG) {
+//            // Creamos un interceptor y le indicamos el log level a usar
+//            val logging = HttpLoggingInterceptor()
+//            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+//            httpClient.addInterceptor(logging)
+//        }
 
         retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL_BGG)

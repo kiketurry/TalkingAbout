@@ -1,6 +1,7 @@
 package es.kiketurry.talkingabout.ui.bgg.listusers
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +70,7 @@ class ListUserBGGFragment : BaseFragment<FragmentBggListUsersBinding>(), UsersBG
     }
 
     override fun onItemUserBGGClick(userBGGModel: UserBGGModel) {
+        Log.d(TAG, "l> onItemUserBGGClick")
         (baseActivity as BGGActivity).setUserBGGSelected(userBGGModel.userBGG)
     }
 

@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_type"
             app:layout_constraintEnd_toStartOf="@id/tvRank"
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_calendar"
             app:layout_constraintEnd_toStartOf="@id/tvTime"
@@ -112,10 +112,10 @@
             style="@style/detailThingBGGData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:drawablePadding="8dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_players"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,12 +127,12 @@
             style="@style/detailThingBGGData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_age"
-            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPlayers"
@@ -143,11 +143,12 @@
             style="@style/detailThingBGGData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:gravity="center"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:drawablePadding="8dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             app:drawableStartCompat="@drawable/ic_language"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,18 +163,16 @@
             app:constraint_referenced_ids="tvLanguageDependence" />
 
         <TextView
-            android:id="@+id/tvDescription"
-            style="@style/detailThingBGGData"
-            android:layout_width="0dp"
+            android:id="@+id/tvTitleOtherNames"
+            style="@style/detailThingBGGTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:text="@string/bggDetailThingBGGTitleOtherNames"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrierBottomTypeRankWeight"
-            tools:text="The great moment of terraforming Mars has arrived, and the spaceship must be equipped with all the necessary resources to complete the mission: CREW, WATER, FOOD, ENERGY and OXYGEN. The space of the spaceship is limited, and each mission is calculated to the millimeter. Will you be the fastest engineer organizing all the necessary resources? Mars, here we go! The round begins by rolling the 5 colored dice and placing them on the corresponding resource card. The numbers on the dice indicate the number of items required for each resource. You must equip the ship with the right amount of elements, no more and no less. Players must turn, flip and cover their 6 cards until they get the exact combination of elements that mark the dice. The first to do so, wins a Mars token (10 points). The rest of the players earn a star (5 points) if they fulfilled at least the requirement of 3 dice. The player with the most points after 4 missions to Mars wins." />
+            app:layout_constraintTop_toBottomOf="@id/barrierBottomTypeRankWeight" />
 
         <TextView
             android:id="@+id/tvOtherNames"
@@ -181,12 +180,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleOtherNames"
             tools:text="Otros nombres: palksjdflñkas d, anmsñdlfkjasldkfjaslñdkf, jasodkfj asñlkdjf aslkd, jalksdjfañlskdfj ." />
+
+
+        <TextView
+            android:id="@+id/tvTitleDescription"
+            style="@style/detailThingBGGTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/bggDetailThingBGGTitleDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOtherNames" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/detailThingBGGData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDescription"
+            tools:text="The great moment of terraforming Mars has arrived, and the spaceship must be equipped with all the necessary resources to complete the mission: CREW, WATER, FOOD, ENERGY and OXYGEN. The space of the spaceship is limited, and each mission is calculated to the millimeter. Will you be the fastest engineer organizing all the necessary resources? Mars, here we go! The round begins by rolling the 5 colored dice and placing them on the corresponding resource card. The numbers on the dice indicate the number of items required for each resource. You must equip the ship with the right amount of elements, no more and no less. Players must turn, flip and cover their 6 cards until they get the exact combination of elements that mark the dice. The first to do so, wins a Mars token (10 points). The rest of the players earn a star (5 points) if they fulfilled at least the requirement of 3 dice. The player with the most points after 4 missions to Mars wins." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

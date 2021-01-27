@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.repository.DataProvider
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
-import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ListUserBGGMapperBBDD
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingBGGMapperBBDD
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 import kotlinx.coroutines.runBlocking
@@ -26,23 +25,24 @@ class ListThingsBGGViewModel(application: Application, var appDatabase: AppDatab
 
     private fun getThingsUser(userSelectedBGG: String) {
         runBlocking {
-            val listUserBGGModel = ListUserBGGMapperBBDD().toModel(appDatabase.ListThingsBGGDao().findByUserBGG(userSelectedBGG))
-            val listThingBGGModel = ThingBGGMapperBBDD().toModelListThingsEntity(
-                appDatabase.ThingBGGDao().getAllThingsByIds(listUserBGGModel.listThings.toIntArray())
-            )
             listAllThingBGGModel.clear()
             listBoardGamesThingBGGModel.clear()
             listExpansionsThingBGGModel.clear()
-            listThingBGGModel.forEach { thingBGGModel ->
+
+            listAllThingBGGModel.addAll(
+                ThingBGGMapperBBDD().toModelListThingsEntity(
+                    appDatabase.JoinsBGGDao().getAllThingsUser(userSelectedBGG)
+                )
+            )
+
+            listAllThingBGGModel.forEach { thingBGGModel ->
                 when (thingBGGModel.type) {
                     ThingBGGModel.TypeThingBGG.TYPE_THING_UNKNOW -> {
                     }
                     ThingBGGModel.TypeThingBGG.TYPE_THING_BOARDGAME -> {
-                        listAllThingBGGModel.add(thingBGGModel)
                         listBoardGamesThingBGGModel.add(thingBGGModel)
                     }
                     ThingBGGModel.TypeThingBGG.TYPE_THING_EXPANSION -> {
-                        listAllThingBGGModel.add(thingBGGModel)
                         listExpansionsThingBGGModel.add(thingBGGModel)
                     }
                 }

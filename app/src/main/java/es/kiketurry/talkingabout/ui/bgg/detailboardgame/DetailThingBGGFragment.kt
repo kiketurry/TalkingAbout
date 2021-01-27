@@ -57,9 +57,9 @@ class DetailThingBGGFragment : BaseFragment<FragmentBggDetailBoardGameBinding>()
         binding?.tvYear?.text = thingBGGModel.yearPublished
         binding?.tvTime?.text = thingBGGModel.time
         binding?.tvPlayers?.text =
-            "${thingBGGModel.playersNumber} jugadores, la comunidad recomienda: ${thingBGGModel.playersRecommendedCommunity}"
-        binding?.tvAge?.text = "Edad mínima ${thingBGGModel.ageMin}, la comunidad recomienda: ${thingBGGModel.ageMinRecommendedCommunity}"
-        binding?.tvLanguageDependence?.text = "Dependencia del idioma: ${thingBGGModel.getStringLanguageDependence()}"
+            "${thingBGGModel.playersNumber} jugadores, la gente recomienda: ${thingBGGModel.playersRecommendedCommunity}"
+        binding?.tvAge?.text = "Edad mínima ${thingBGGModel.ageMin}, la gente recomienda: ${thingBGGModel.ageMinRecommendedCommunity}"
+        binding?.tvLanguageDependence?.text = "Dependencia idioma: ${thingBGGModel.getStringLanguageDependence()}"
         binding?.tvDescription?.text = thingBGGModel.description
         binding?.tvOtherNames?.text = thingBGGModel.getStringListNames()
         binding?.ivWhatsapp?.visible()

@@ -12,8 +12,8 @@ import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ListUserBGGMapperBBDD
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingBGGMapperBBDD
+import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingNameEsBGGMapperBBDD
 import es.kiketurry.talkingabout.data.repository.bbdd.things.ThingBGGRoomEntity
-import es.kiketurry.talkingabout.data.repository.bbdd.thinguser.ThingUserBGGRoomEntity
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 import kotlinx.coroutines.runBlocking
 import java.util.*
@@ -60,9 +60,10 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
                     if (listThingsBGGRoomEntity == null || listThingsBGGRoomEntity.dateUpdate != listUserBGGModel.dateUpdate) {
                         appDatabase.ListThingsBGGDao().insert(ListUserBGGMapperBBDD().toBBDD(listUserBGGModel))
                     }
-                    listUserBGGModel.listThings.forEach { thing ->
-                        appDatabase.ThingUserBGGDao().insert(ThingUserBGGRoomEntity(userBGG, thing))
-                    }
+
+                    appDatabase.ThingUserBGGDao().insertAll(
+                        *ListUserBGGMapperBBDD().getListThingUserBGGRoomEntity(listUserBGGModel.listThings, userBGG).toTypedArray()
+                    )
                     getAllThingUser()
                 }
             }
@@ -87,12 +88,9 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
         runBlocking {
             val stringBuilderIds = StringBuilder("")
             val allThingsUserByUserBGG = appDatabase.ThingUserBGGDao().getAllThingsUserByUserBGG(getListUserBGGModel.userBGG)
-
-
-            var findByThingId: ThingBGGRoomEntity
+            val timeStampMap = ThingBGGMapperBBDD().getTimeStampMap(appDatabase.ThingBGGDao().getAllThings())
             allThingsUserByUserBGG.forEach { thingUserEntity ->
-                findByThingId = appDatabase.ThingBGGDao().findByThingId(thingUserEntity.thingId)
-                if (findByThingId == null || timeStampNow - findByThingId.dateUpdate > ONE_MONTH_IN_MILLISECOND) {
+                if (!timeStampMap.containsKey(thingUserEntity.thingId) || timeStampNow - timeStampMap[thingUserEntity.thingId]!! > ONE_MONTH_IN_MILLISECOND) {
                     stringBuilderIds.append(thingUserEntity.thingId)
                     stringBuilderIds.append(",")
                 }
@@ -116,9 +114,13 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
 
             override fun onGetThingsBoardGamesGeekCallbackSuccess(listThingBGGModels: ArrayList<ThingBGGModel>) {
                 runBlocking {
+                    val mapTranslate = ThingNameEsBGGMapperBBDD().getMapTranslate(appDatabase.ThingNameEsBGGDao().getAllThingsNameEs())
                     val listThingsBGGRoomEntity: ArrayList<ThingBGGRoomEntity> = ArrayList()
                     val thingBGGMapperBBDD = ThingBGGMapperBBDD()
                     listThingBGGModels.forEach { thingBGGModel ->
+                        if (mapTranslate.containsKey(thingBGGModel.thingId)) {
+                            thingBGGModel.nameEs = mapTranslate[thingBGGModel.thingId].toString()
+                        }
                         listThingsBGGRoomEntity.add(thingBGGMapperBBDD.toBBDD(thingBGGModel))
                     }
                     appDatabase.ThingBGGDao().insertAll(*listThingsBGGRoomEntity.toTypedArray())
@@ -144,18 +146,12 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
         runBlocking {
             var totalBoardGame = 0
             var totalExpansion = 0
-            val listUserBGGModel = ListUserBGGMapperBBDD().toModel(appDatabase.ListThingsBGGDao().findByUserBGG(userBGG))
-            val listThingBGGModel = ThingBGGMapperBBDD().toModelListThingsEntity(
-                appDatabase.ThingBGGDao().getAllThingsByIds(listUserBGGModel.listThings.toIntArray())
-            )
+            val listThingBGGModel = ThingBGGMapperBBDD().toModelListThingsEntity(appDatabase.JoinsBGGDao().getAllThingsUser(userBGG))
             val totalCount = listThingBGGModel.size
             listThingBGGModel.forEach { thingBGGModel ->
                 when (thingBGGModel.type) {
                     ThingBGGModel.TypeThingBGG.TYPE_THING_UNKNOW -> {
-                        Log.d(
-                            TAG,
-                            "l> tenemos un juego desconocido id: ${thingBGGModel.thingId} con nonmbre principal: ${thingBGGModel.nameFirst}"
-                        )
+                        Log.d(TAG, "l> Juego desconocido id: ${thingBGGModel.thingId} con nombre: ${thingBGGModel.nameFirst}")
                     }
                     ThingBGGModel.TypeThingBGG.TYPE_THING_BOARDGAME -> {
                         totalBoardGame++

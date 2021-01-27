@@ -1,5 +1,7 @@
 package es.kiketurry.talkingabout.data.repository.remote.mapper.bgg
 
+import android.os.Build
+import android.text.Html
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel.LanguageDependenceThingBGG.*
 import es.kiketurry.talkingabout.data.repository.remote.mapper.ResponseMapper
@@ -133,6 +135,13 @@ class ThingBGGMapper : ResponseMapper<ThingBoardGameGeekResponse, ThingBGGModel>
             weight = decimalFormat.format(weightDouble).toString()
         }
 
+        var description: String = response.description
+        description = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString()
+        } else {
+            Html.fromHtml(description).toString()
+        }
+
         return ThingBGGModel(
             response.id.toInt(),
             type,
@@ -140,7 +149,7 @@ class ThingBGGMapper : ResponseMapper<ThingBoardGameGeekResponse, ThingBGGModel>
             namePrimary,
             nameEs,
             listNames,
-            response.description,
+            description,
             response.yearpublished.value ?: "-",
             "${response.minplayers.value} - ${response.maxplayers.value}",
             playersRecommendedCommunity,

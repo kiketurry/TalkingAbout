@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ae2d5e7788f12f567360384142290317",
+    "identityHash": "0e5c3b5481ae520da173d55fd5374700",
     "entities": [
       {
         "tableName": "userBGGRoomEntity",
@@ -252,12 +252,38 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "thingNameEsBGGRoomEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`thingId` INTEGER NOT NULL, `nameEs` TEXT NOT NULL, PRIMARY KEY(`thingId`))",
+        "fields": [
+          {
+            "fieldPath": "thingId",
+            "columnName": "thingId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameEs",
+            "columnName": "nameEs",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "thingId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ae2d5e7788f12f567360384142290317')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e5c3b5481ae520da173d55fd5374700')"
     ]
   }
 }
