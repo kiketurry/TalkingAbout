@@ -23,42 +23,48 @@ class ListThingsBGGViewModel(application: Application, var appDatabase: AppDatab
     private val listExpansionsThingBGGModel: ArrayList<ThingBGGModel> = ArrayList()
 
     val listShowThingBGGModelMutableLiveData: MutableLiveData<ArrayList<ThingBGGModel>> = MutableLiveData()
-    val listTotalBoardGamesMutableLiveData: MutableLiveData<Int> = MutableLiveData()
-    val listTotalBoardGamesBasicMutableLiveData: MutableLiveData<Int> = MutableLiveData()
-    val listTotalBoardGamesExpansionMutableLiveData: MutableLiveData<Int> = MutableLiveData()
+    val totalBoardGamesMutableLiveData: MutableLiveData<Int> = MutableLiveData()
+    val totalBoardGamesBasicMutableLiveData: MutableLiveData<Int> = MutableLiveData()
+    val totalBoardGamesExpansionMutableLiveData: MutableLiveData<Int> = MutableLiveData()
+    val typeShowConfigSelectedListMutableLiveData: MutableLiveData<TypeThingBGG> = MutableLiveData()
 
-    var typeShowList: TypeThingBGG = TYPE_THING_BOARDGAME
+    var userSelectedBGG: String = ""
 
     fun observeThingsUser(lifecycleOwner: LifecycleOwner, userSelectedBGG: String) {
-        appDatabase.JoinsBGGDao().getAllThingsUserLiveData(userSelectedBGG).observe(lifecycleOwner, { listThings ->
-            listAllThingBGGModel.clear()
-            listAllThingBGGModel.addAll(thingBGGMapperBBDD.toModelListThingsEntity(listThings))
-            listTotalBoardGamesMutableLiveData.postValue(listThings.size)
-            if (typeShowList == TYPE_THING_UNKNOW) {
-                checkTypeShowList()
-            }
-        })
+        if (this.userSelectedBGG != userSelectedBGG) {
+            this.userSelectedBGG = userSelectedBGG
 
-        appDatabase.JoinsBGGDao().getAllThingsBoardGameUserLiveData(userSelectedBGG).observe(lifecycleOwner, { listThingsBoardgame ->
-            listBoardGamesThingBGGModel.clear()
-            listBoardGamesThingBGGModel.addAll(thingBGGMapperBBDD.toModelListThingsEntity(listThingsBoardgame))
-            listTotalBoardGamesBasicMutableLiveData.postValue(listThingsBoardgame.size)
-            if (typeShowList == TYPE_THING_BOARDGAME) {
-                checkTypeShowList()
-            }
-        })
+            appDatabase.JoinsBGGDao().getAllThingsUserLiveData(userSelectedBGG).observe(lifecycleOwner, { listThings ->
+                listAllThingBGGModel.clear()
+                listAllThingBGGModel.addAll(thingBGGMapperBBDD.toModelListThingsEntity(listThings))
+                totalBoardGamesMutableLiveData.postValue(listThings.size)
+                if (typeShowConfigSelectedListMutableLiveData.value == TYPE_THING_UNKNOW) {
+                    showList(TYPE_THING_UNKNOW)
+                }
+            })
 
-        appDatabase.JoinsBGGDao().getAllThingsExpansionUserLiveData(userSelectedBGG).observe(lifecycleOwner, { listThingsExpansion ->
-            listExpansionsThingBGGModel.clear()
-            listExpansionsThingBGGModel.addAll(thingBGGMapperBBDD.toModelListThingsEntity(listThingsExpansion))
-            listTotalBoardGamesExpansionMutableLiveData.postValue(listThingsExpansion.size)
-            if (typeShowList == TYPE_THING_EXPANSION) {
-                checkTypeShowList()
-            }
-        })
+            appDatabase.JoinsBGGDao().getAllBoardGameUserLiveData(userSelectedBGG).observe(lifecycleOwner, { listThingsBoardgame ->
+                listBoardGamesThingBGGModel.clear()
+                listBoardGamesThingBGGModel.addAll(thingBGGMapperBBDD.toModelListThingsEntity(listThingsBoardgame))
+                totalBoardGamesBasicMutableLiveData.postValue(listThingsBoardgame.size)
+                if (typeShowConfigSelectedListMutableLiveData.value == TYPE_THING_BOARDGAME || typeShowConfigSelectedListMutableLiveData.value == null) {
+                    showList(TYPE_THING_BOARDGAME)
+                }
+            })
+
+            appDatabase.JoinsBGGDao().getAllExpansionUserLiveData(userSelectedBGG).observe(lifecycleOwner, { listThingsExpansion ->
+                listExpansionsThingBGGModel.clear()
+                listExpansionsThingBGGModel.addAll(thingBGGMapperBBDD.toModelListThingsEntity(listThingsExpansion))
+                totalBoardGamesExpansionMutableLiveData.postValue(listThingsExpansion.size)
+                if (typeShowConfigSelectedListMutableLiveData.value == TYPE_THING_EXPANSION) {
+                    showList(TYPE_THING_EXPANSION)
+                }
+            })
+        }
     }
 
-    private fun checkTypeShowList() {
+    fun showList(typeShowList: TypeThingBGG) {
+        typeShowConfigSelectedListMutableLiveData.value = typeShowList
         when (typeShowList) {
             TYPE_THING_UNKNOW -> {
                 listShowThingBGGModelMutableLiveData.postValue(listAllThingBGGModel)
@@ -70,10 +76,5 @@ class ListThingsBGGViewModel(application: Application, var appDatabase: AppDatab
                 listShowThingBGGModelMutableLiveData.postValue(listExpansionsThingBGGModel)
             }
         }
-    }
-
-    fun showList(typeShowList: TypeThingBGG) {
-        this.typeShowList = typeShowList
-        checkTypeShowList()
     }
 }

@@ -14,8 +14,8 @@ interface JoinsBGGDao {
     fun getAllThingsUserLiveData(userBGG: String): LiveData<List<ThingBGGRoomEntity>>
 
     @Query("SELECT thingBGGRoomEntity.* FROM thingBGGRoomEntity INNER JOIN thingUserBGGRoomEntity ON (thingBGGRoomEntity.thingId = thingUserBGGRoomEntity.thingId AND thingUserBGGRoomEntity.userBGG = :userBGG) WHERE thingBGGRoomEntity.type = 'TYPE_THING_BOARDGAME'")
-    fun getAllThingsBoardGameUserLiveData(userBGG: String): LiveData<List<ThingBGGRoomEntity>>
+    fun getAllBoardGameUserLiveData(userBGG: String): LiveData<List<ThingBGGRoomEntity>>
 
     @Query("SELECT thingBGGRoomEntity.* FROM thingBGGRoomEntity INNER JOIN thingUserBGGRoomEntity ON (thingBGGRoomEntity.thingId = thingUserBGGRoomEntity.thingId AND thingUserBGGRoomEntity.userBGG = :userBGG) WHERE thingBGGRoomEntity.type = 'TYPE_THING_EXPANSION'")
-    fun getAllThingsExpansionUserLiveData(userBGG: String): LiveData<List<ThingBGGRoomEntity>>
+    fun getAllExpansionUserLiveData(userBGG: String): LiveData<List<ThingBGGRoomEntity>>
 }

@@ -42,4 +42,7 @@
     <string name="bgg_config_list_show_all">Todos</string>
     <string name="bgg_config_list_show_board_game_basic">Juegos Base</string>
     <string name="bgg_config_list_show_expansion">Expansiones</string>
+    <string name="toolbar_title_fragment_list_things_all">Juegos y Expansiones</string>
+    <string name="toolbar_title_fragment_list_things_boardgames">Juegos</string>
+    <string name="toolbar_title_fragment_list_things_expansions">Expansiones</string>
 </resources>

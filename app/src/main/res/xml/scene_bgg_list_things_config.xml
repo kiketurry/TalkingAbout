@@ -7,7 +7,7 @@
         motion:constraintSetEnd="@id/stateOpenConfig"
         motion:constraintSetStart="@id/stateCloseConfig"
         motion:duration="@integer/duration_escene_splash"
-        motion:motionInterpolator="linear" />
+        motion:motionInterpolator="easeInOut" />
 
     <ConstraintSet android:id="@+id/stateCloseConfig">
         <Constraint
