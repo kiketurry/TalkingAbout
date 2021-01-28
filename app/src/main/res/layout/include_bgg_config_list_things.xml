@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clConfigListThings"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/backgroundConfigListThing"
+        app:layout_constraintBottom_toTopOf="@id/ivOpenClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:background="@color/backgroundConfigListThing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivOpenClose" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <TextView
+        android:id="@+id/tvWhatShow"
+        style="@style/configListThingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/bgg_config_list_show_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTotalBoardGames"
+        style="@style/configListThingType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/bgg_config_list_show_all"
+        app:layout_constraintEnd_toEndOf="@id/gl25"
+        app:layout_constraintStart_toStartOf="@id/gl25"
+        app:layout_constraintTop_toBottomOf="@id/tvWhatShow" />
+
+    <TextView
+        android:id="@+id/tvTotalBoardGamesBasic"
+        style="@style/configListThingType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bgg_config_list_show_board_game_basic"
+        app:layout_constraintEnd_toEndOf="@id/gl50"
+        app:layout_constraintStart_toStartOf="@id/gl50"
+        app:layout_constraintTop_toTopOf="@id/tvTotalBoardGames" />
+
+    <TextView
+        android:id="@+id/tvTotalExpansion"
+        style="@style/configListThingType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bgg_config_list_show_expansion"
+        app:layout_constraintEnd_toEndOf="@id/gl75"
+        app:layout_constraintStart_toStartOf="@id/gl75"
+        app:layout_constraintTop_toTopOf="@id/tvTotalBoardGames" />
+
+    <TextView
+        android:id="@+id/tvTotalBoardGamesData"
+        style="@style/configListThingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@id/tvTotalBoardGames"
+        app:layout_constraintStart_toStartOf="@id/tvTotalBoardGames"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalBoardGames"
+        tools:text="321" />
+
+    <TextView
+        android:id="@+id/tvTotalBoardGamesBasicData"
+        style="@style/configListThingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@id/tvTotalBoardGamesBasic"
+        app:layout_constraintStart_toStartOf="@id/tvTotalBoardGamesBasic"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalBoardGamesBasic"
+        tools:text="245" />
+
+    <TextView
+        android:id="@+id/tvTotalExpansionData"
+        style="@style/configListThingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@id/tvTotalExpansion"
+        app:layout_constraintStart_toStartOf="@id/tvTotalExpansion"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalExpansion"
+        tools:text="76" />
+
+    <ImageView
+        android:id="@+id/ivCheckTotalBoardGames"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_uncheck"
+        app:layout_constraintEnd_toEndOf="@id/tvTotalBoardGames"
+        app:layout_constraintStart_toStartOf="@id/tvTotalBoardGames"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalBoardGamesData" />
+
+    <ImageView
+        android:id="@+id/ivCheckTotalBoardGamesBasic"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="@id/tvTotalBoardGamesBasic"
+        app:layout_constraintStart_toStartOf="@id/tvTotalBoardGamesBasic"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalBoardGamesBasicData" />
+
+    <ImageView
+        android:id="@+id/ivCheckTotalExpansion"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_uncheck"
+        app:layout_constraintEnd_toEndOf="@id/tvTotalExpansion"
+        app:layout_constraintStart_toStartOf="@id/tvTotalExpansion"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalExpansionData" />
+
+    <ImageView
+        android:id="@+id/ivOpenClose"
+        android:layout_width="55dp"
+        android:padding="5dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_config_list_thing_circle"
+        android:src="@drawable/ic_engine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivCheckTotalBoardGames" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

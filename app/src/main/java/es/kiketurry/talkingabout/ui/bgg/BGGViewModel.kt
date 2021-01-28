@@ -75,6 +75,7 @@ class BGGViewModel(application: Application, var appDatabase: AppDatabase, val d
 
             override fun onGetListBoardGamesByUserCallbackFailure(errorModel: ErrorModel) {
                 if (countFailureGetListUserBGG < TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG) {
+                    countFailureGetListUserBGG++
                     getListBoardGamesByUser(userSelectedBGG)
                 } else {
                     errorMutableLiveData.postValue(errorModel)

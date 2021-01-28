@@ -38,4 +38,8 @@
     <string name="bggDetailThingBGGTitleOtherNames">Otros Nombres:</string>
     <string name="bggDetailThingBGGTitleDescription">Descripción:</string>
     <string name="loading">Cargando</string>
+    <string name="bgg_config_list_show_title">Mostrar</string>
+    <string name="bgg_config_list_show_all">Todos</string>
+    <string name="bgg_config_list_show_board_game_basic">Juegos Base</string>
+    <string name="bgg_config_list_show_expansion">Expansiones</string>
 </resources>

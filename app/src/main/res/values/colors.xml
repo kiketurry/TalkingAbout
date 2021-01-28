@@ -13,6 +13,7 @@
     <color name="whiteTransparent">#AAFFFFFF</color>
 
     <color name="backgroundLoading">#CC000000</color>
+    <color name="backgroundConfigListThing">#EEffffff</color>
 
     <color name="backgroundUserBGGListLight">#DAE5F4</color>
     <color name="backgroundUserBGGListDark">#B8D1F3</color>

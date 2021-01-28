@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/clToolbar"
-        layout="@layout/toolbar_screen" />
+        layout="@layout/include_toolbar_screen" />
 
     <Button
         android:id="@+id/btCats"

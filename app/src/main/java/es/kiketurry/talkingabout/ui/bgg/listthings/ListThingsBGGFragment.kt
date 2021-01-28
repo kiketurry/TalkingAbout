@@ -45,10 +45,22 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
         listThingsBGGViewModel.listShowThingBGGModelMutableLiveData.observe(viewLifecycleOwner, { listThingsBGGViewModel ->
             listThingsBGGAdapter.refreshThings(listThingsBGGViewModel)
         })
+
+        listThingsBGGViewModel.listTotalBoardGamesMutableLiveData.observe(viewLifecycleOwner, { count ->
+            binding?.clConfigListThings?.tvTotalBoardGamesData?.text = count.toString()
+        })
+
+        listThingsBGGViewModel.listTotalBoardGamesBasicMutableLiveData.observe(viewLifecycleOwner, { count ->
+            binding?.clConfigListThings?.tvTotalBoardGamesBasicData?.text = count.toString()
+        })
+
+        listThingsBGGViewModel.listTotalBoardGamesExpansionMutableLiveData.observe(viewLifecycleOwner, { count ->
+            binding?.clConfigListThings?.tvTotalExpansionData?.text = count.toString()
+        })
     }
 
     private fun userSelectedBGG(userSelectedBGG: String) {
-        listThingsBGGViewModel.userSelectedBGG(userSelectedBGG)
+        listThingsBGGViewModel.observeThingsUser(viewLifecycleOwner, userSelectedBGG)
     }
 
     override fun configureToolbar() {
@@ -59,10 +71,21 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
 
     override fun createViewAfterInflateBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         listThingsBGGAdapter = ListThingsBGGAdapter(context!!, ArrayList(), this)
+
         binding?.rvListThingsBGG?.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
             adapter = listThingsBGGAdapter
+        }
+
+        binding?.clConfigListThings?.ivOpenClose?.setOnClickListener {
+            binding?.mlListThings?.currentState.let {
+                if (it == R.id.stateCloseConfig) {
+                    binding?.mlListThings?.transitionToEnd()
+                } else {
+                    binding?.mlListThings?.transitionToStart()
+                }
+            }
         }
     }
 
