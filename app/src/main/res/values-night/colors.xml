@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#42a5f5</color>
-    <color name="colorPrimaryVariant">#0077c2</color>
-    <color name="colorOnPrimary">#80d6ff</color>
-    <color name="colorSecondary">#fbc02d</color>
-    <color name="colorSecondaryVariant">#c49000</color>
-    <color name="colorOnSecondary">#fff263</color>
+    <color name="colorPrimary">#424242</color>
+    <color name="colorPrimaryVariant">#1b1b1b</color>
+    <color name="colorOnPrimary">#6d6d6d</color>
+    <color name="colorSecondary">#616161</color>
+    <color name="colorSecondaryVariant">#373737</color>
+    <color name="colorOnSecondary">#8e8e8e</color>
     <color name="statusBarColor">@color/colorPrimaryVariant</color>
-    <color name="textColorDefault">#000000</color>
+    <color name="textColorDefault">#ffffff</color>
     <color name="defaultTint">@color/colorOnPrimary</color>
 
     <color name="black">#FF000000</color>

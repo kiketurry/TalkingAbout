@@ -11,34 +11,32 @@
         android:id="@+id/tbToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/grey"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/black" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ImageButton
         android:id="@+id/ibToolbarBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:background="@null"
         android:padding="5dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ico_toolbar_arrow_back"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@id/tbToolbar"
         app:layout_constraintStart_toStartOf="@id/tbToolbar"
         app:layout_constraintTop_toTopOf="@id/tbToolbar" />
 
     <ImageButton
         android:id="@+id/ibToolbarClose"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:background="@null"
         android:padding="5dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ico_toolbar_close"
+        android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="@id/tbToolbar"
         app:layout_constraintEnd_toEndOf="@id/tbToolbar"
         app:layout_constraintTop_toTopOf="@id/tbToolbar" />

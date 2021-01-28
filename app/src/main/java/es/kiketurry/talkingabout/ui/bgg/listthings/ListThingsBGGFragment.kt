@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import es.kiketurry.talkingabout.R
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
+import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel.TypeThingBGG.*
 import es.kiketurry.talkingabout.databinding.FragmentBggListThingsBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseFragment
@@ -18,7 +20,7 @@ import es.kiketurry.talkingabout.ui.bgg.listthings.adapter.ListThingsBGGAdapter.
 import es.kiketurry.talkingabout.utils.WhatsappUtils
 import java.util.*
 
-class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), ItemThingBGGClickListener {
+class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), ItemThingBGGClickListener, View.OnClickListener {
     override val TAG: String? get() = ListThingsBGGFragment::class.qualifiedName
 
     lateinit var listThingsBGGViewModel: ListThingsBGGViewModel
@@ -87,6 +89,10 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
                 }
             }
         }
+
+        binding?.clConfigListThings?.ivCheckTotalBoardGames?.setOnClickListener(this)
+        binding?.clConfigListThings?.ivCheckTotalBoardGamesBasic?.setOnClickListener(this)
+        binding?.clConfigListThings?.ivCheckTotalExpansion?.setOnClickListener(this)
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
@@ -98,5 +104,40 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
 
     override fun onWhatsappThingClick(thingBGGModel: ThingBGGModel) {
         WhatsappUtils.sendWhatsapp(baseActivity, thingBGGModel.bestName())
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.ivCheckTotalBoardGames -> {
+                if (listThingsBGGViewModel.typeShowList != TYPE_THING_UNKNOW) {
+                    binding?.clConfigListThings?.ivCheckTotalBoardGames?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_check))
+                    binding?.clConfigListThings?.ivCheckTotalBoardGamesBasic?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_uncheck))
+                    binding?.clConfigListThings?.ivCheckTotalExpansion?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_uncheck))
+                    listThingsBGGViewModel.showList(TYPE_THING_UNKNOW)
+                    binding?.mlListThings?.transitionToStart()
+                    binding?.rvListThingsBGG?.smoothScrollToPosition(0)
+                }
+            }
+            R.id.ivCheckTotalBoardGamesBasic -> {
+                if (listThingsBGGViewModel.typeShowList != TYPE_THING_BOARDGAME) {
+                    binding?.clConfigListThings?.ivCheckTotalBoardGames?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_uncheck))
+                    binding?.clConfigListThings?.ivCheckTotalBoardGamesBasic?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_check))
+                    binding?.clConfigListThings?.ivCheckTotalExpansion?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_uncheck))
+                    listThingsBGGViewModel.showList(TYPE_THING_BOARDGAME)
+                    binding?.mlListThings?.transitionToStart()
+                    binding?.rvListThingsBGG?.smoothScrollToPosition(0)
+                }
+            }
+            R.id.ivCheckTotalExpansion -> {
+                if (listThingsBGGViewModel.typeShowList != TYPE_THING_EXPANSION) {
+                    binding?.clConfigListThings?.ivCheckTotalBoardGames?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_uncheck))
+                    binding?.clConfigListThings?.ivCheckTotalBoardGamesBasic?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_uncheck))
+                    binding?.clConfigListThings?.ivCheckTotalExpansion?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_check))
+                    listThingsBGGViewModel.showList(TYPE_THING_EXPANSION)
+                    binding?.mlListThings?.transitionToStart()
+                    binding?.rvListThingsBGG?.smoothScrollToPosition(0)
+                }
+            }
+        }
     }
 }

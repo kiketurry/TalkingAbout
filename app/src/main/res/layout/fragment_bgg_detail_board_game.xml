@@ -13,7 +13,7 @@
             android:id="@+id/ivThingBGG"
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
