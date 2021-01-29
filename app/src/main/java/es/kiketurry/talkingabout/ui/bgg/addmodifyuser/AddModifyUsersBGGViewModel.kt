@@ -4,9 +4,12 @@ import android.app.Application
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.data.repository.bbdd.users.UserBGGRoomEntity
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
-class AddModifyUsersBGGViewModel(application: Application, var appDatabase: AppDatabase) : BaseViewModel(application) {
+class AddModifyUsersBGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application, val appDatabase: AppDatabase) :
+    BaseViewModel(ioDispatcher, application) {
     override val TAG: String? get() = AddModifyUsersBGGViewModel::class.qualifiedName
 
     var modify: Boolean = false

@@ -2,6 +2,14 @@ package es.kiketurry.talkingabout.ui.calculator
 
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
 import org.junit.*
 
 
@@ -9,6 +17,8 @@ class CalculatorViewModelTest {
     //Para que puedan correr los test con viewmodels.
     @get:Rule
     val rule = InstantTaskExecutorRule()
+
+    private val testDispatcher = TestCoroutineDispatcher()
 
     lateinit var calculatorViewModel: CalculatorViewModel
 
@@ -28,8 +38,16 @@ class CalculatorViewModelTest {
 
     @Before //Método que se va a ejecutar antes de cada test. Normalmente para setear variables por eso se le suele llamar setup
     fun setup() {
-        calculatorViewModel = CalculatorViewModel(Application())
+        Dispatchers.setMain(testDispatcher)
+        calculatorViewModel = CalculatorViewModel(Dispatchers.IO, Application())
         System.out.println("l> Se ha ejecutado el método con la etiqueta @Before")
+    }
+
+    @After //Método que se va a ejecutar despues de cada test. Normalmente para liberar recursos, se le suele llamar tearDown
+    fun tearDown() {
+        testDispatcher.cleanupTestCoroutines()
+        Dispatchers.resetMain()
+        System.out.println("l> Se ha ejecutado el método con la etiqueta @After")
     }
 
     @Test
@@ -40,30 +58,50 @@ class CalculatorViewModelTest {
 
     @Test
     fun getTAG() {
-        Assert.assertEquals("El TAG esta mal seteado", calculatorViewModel.TAG, CalculatorViewModel::class.qualifiedName)
-        Assert.assertEquals(calculatorViewModel.TAG, CalculatorViewModel::class.qualifiedName)
+        Assert.assertEquals("El TAG esta mal seteado", CalculatorViewModel::class.qualifiedName, calculatorViewModel.TAG)
+        Assert.assertEquals(CalculatorViewModel::class.qualifiedName, calculatorViewModel.TAG)
         System.out.println("l> Se ha ejecutado el test calculadoraNullTest")
     }
 
     @Test
     fun add() {
         calculatorViewModel.add("10", "20")
-        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "30.0")
+        Assert.assertEquals("30.0", calculatorViewModel.resultMutableLiveData.value)
         System.out.println("l> Se ha ejecutado el test add Test")
+    }
+
+    @Test
+    fun `add observe`() {
+        val observerMock = mock<Observer<String>>()
+        testDispatcher.runBlockingTest {
+            calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
+            calculatorViewModel.add("4", "9")
+            verify(observerMock).onChanged("13.0")
+        }
     }
 
     @Test
     fun subtract() {
         calculatorViewModel.subtract("10", "20")
-        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "-10.0")
+        Assert.assertEquals("-10.0", calculatorViewModel.resultMutableLiveData.value)
         System.out.println("l> Se ha ejecutado el test subtract Test")
+    }
+
+    @Test
+    fun `subtract observe`() {
+        val observerMock = mock<Observer<String>>()
+        testDispatcher.runBlockingTest {
+            calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
+            calculatorViewModel.subtract("4", "9")
+            verify(observerMock).onChanged("-5.0")
+        }
     }
 
     @Test
     fun addWithDeviation() {
         Assert.assertEquals(
-            calculatorViewModel.addWithDeviation(10f, 20f),
             30f,
+            calculatorViewModel.addWithDeviation(10f, 20f),
             0.5f
         )// El delta es curioso deja un margen de desviación por encima o por debajo del esperado por si alguna operación matematica aceptara cierta desviación cómo válida.
         System.out.println("l> Se ha ejecutado el test add Test")
@@ -73,20 +111,35 @@ class CalculatorViewModelTest {
     @Test
     fun multiply() {
         calculatorViewModel.multiply("2.5", "3.2")
-        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "8.0")
+        Assert.assertEquals("8.0", calculatorViewModel.resultMutableLiveData.value)
         System.out.println("l> Se ha ejecutado el test multiply Test")
+    }
+
+    @Test
+    fun `multiply observe`() {
+        val observerMock = mock<Observer<String>>()
+        testDispatcher.runBlockingTest {
+            calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
+            calculatorViewModel.multiply("4", "9")
+            verify(observerMock).onChanged("36.0")
+        }
     }
 
     @Test
     fun divide() {
         calculatorViewModel.divide("10", "4")
-        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "2.5")
+        Assert.assertEquals("2.5", calculatorViewModel.resultMutableLiveData.value)
         System.out.println("l> Se ha ejecutado el test divide() Test")
     }
 
-    @After //Método que se va a ejecutar despues de cada test. Normalmente para liberar recursos, se le suele llamar tearDown
-    fun tearDown() {
-        System.out.println("l> Se ha ejecutado el método con la etiqueta @After")
+    @Test
+    fun `divide observe`() {
+        val observerMock = mock<Observer<String>>()
+        testDispatcher.runBlockingTest {
+            calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
+            calculatorViewModel.divide("10", "4")
+            verify(observerMock).onChanged("2.5")
+        }
     }
 
     @Test(expected = ArithmeticException::class) //Con expected decimos al metodo la excepción que se espera para que lo marque como bueno si se recibe esa excepción.
@@ -104,7 +157,7 @@ class CalculatorViewModelTest {
     @Test
     fun dividePerZeroWithoutControl() {
         calculatorViewModel.divide("10", "0")
-        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, "NaN")
+        Assert.assertEquals("NaN", calculatorViewModel.resultMutableLiveData.value)
         System.out.println("l> Se ha ejecutado el test divide() Test")
     }
 }

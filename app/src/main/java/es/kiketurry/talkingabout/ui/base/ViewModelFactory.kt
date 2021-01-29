@@ -15,11 +15,12 @@ import es.kiketurry.talkingabout.ui.calculator.CalculatorViewModel
 import es.kiketurry.talkingabout.ui.cats.CatsViewModel
 import es.kiketurry.talkingabout.ui.cats.detail.viewmodel.DetailCatViewModel
 import es.kiketurry.talkingabout.ui.cats.list.BreedListViewModel
+import es.kiketurry.talkingabout.ui.coroutines.CoroutinesViewModel
 
 class ViewModelFactory(
-    var application: Application,
-    var appDatabase: AppDatabase,
-    var dataProvider: DataProvider,
+    val application: Application,
+    val appDatabase: AppDatabase,
+    val dataProvider: DataProvider,
 ) :
     ViewModelProvider.Factory {
     companion object {
@@ -41,37 +42,40 @@ class ViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val viewModel: ViewModel = when (modelClass.name) {
             DistributiveViewModel::class.qualifiedName -> {
-                DistributiveViewModel(application)
+                DistributiveViewModel(application = application)
             }
             CatsViewModel::class.qualifiedName -> {
-                CatsViewModel(application, dataProvider)
+                CatsViewModel(application = application, dataProvider = dataProvider)
             }
             BreedListViewModel::class.qualifiedName -> {
-                BreedListViewModel(application, dataProvider)
+                BreedListViewModel(application = application, dataProvider = dataProvider)
             }
             DetailCatViewModel::class.qualifiedName -> {
-                DetailCatViewModel(application, dataProvider)
+                DetailCatViewModel(application = application, dataProvider = dataProvider)
             }
             CalculatorViewModel::class.qualifiedName -> {
-                CalculatorViewModel(application)
+                CalculatorViewModel(application = application)
             }
             BGGViewModel::class.qualifiedName -> {
-                BGGViewModel(application, appDatabase, dataProvider)
+                BGGViewModel(application = application, appDatabase = appDatabase, dataProvider = dataProvider)
             }
             ListUsersBGGViewModel::class.qualifiedName -> {
-                ListUsersBGGViewModel(application, appDatabase)
+                ListUsersBGGViewModel(application = application, appDatabase = appDatabase)
             }
             AddModifyUsersBGGViewModel::class.qualifiedName -> {
-                AddModifyUsersBGGViewModel(application, appDatabase)
+                AddModifyUsersBGGViewModel(application = application, appDatabase = appDatabase)
             }
             ListThingsBGGViewModel::class.qualifiedName -> {
-                ListThingsBGGViewModel(application, appDatabase, dataProvider)
+                ListThingsBGGViewModel(application = application, appDatabase = appDatabase, dataProvider = dataProvider)
             }
             DetailThingBGGViewModel::class.qualifiedName -> {
-                DetailThingBGGViewModel(application)
+                DetailThingBGGViewModel(application = application)
+            }
+            CoroutinesViewModel::class.qualifiedName -> {
+                CoroutinesViewModel(application = application)
             }
             else -> {
-                SimplyViewModel(application)
+                SimplyViewModel(application = application)
             }
         }
 

@@ -9,9 +9,11 @@ import es.kiketurry.talkingabout.data.repository.DataProvider
 import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks
 import es.kiketurry.talkingabout.data.repository.DataSourceCallbacks.GetBreedsCallback
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-class CatsViewModel(application: Application, private val dataProvider: DataProvider) :
-    BaseViewModel(application) {
+class CatsViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application, val dataProvider: DataProvider) :
+    BaseViewModel(ioDispatcher, application) {
     override val TAG: String? get() = CatsViewModel::class.qualifiedName
 
     var breedsModelListMutableLiveData: MutableLiveData<ArrayList<BreedModel>> = MutableLiveData()

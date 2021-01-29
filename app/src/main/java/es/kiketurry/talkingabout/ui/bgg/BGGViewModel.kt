@@ -15,11 +15,14 @@ import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingBGGMapperB
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingNameEsBGGMapperBBDD
 import es.kiketurry.talkingabout.data.repository.bbdd.things.ThingBGGRoomEntity
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import java.util.*
 import kotlin.collections.ArrayList
 
-class BGGViewModel(application: Application, var appDatabase: AppDatabase, val dataProvider: DataProvider) : BaseViewModel(application) {
+class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application, val appDatabase: AppDatabase, val dataProvider: DataProvider) :
+    BaseViewModel(ioDispatcher, application) {
     override val TAG: String? get() = BGGViewModel::class.qualifiedName
 
     companion object {

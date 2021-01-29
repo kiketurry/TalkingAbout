@@ -4,15 +4,16 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-class CalculatorViewModel(application: Application) : BaseViewModel(application) {
+class CalculatorViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application) : BaseViewModel(ioDispatcher, application) {
     override val TAG: String? get() = CalculatorViewModel::class.qualifiedName
 
     var resultMutableLiveData: MutableLiveData<String> = MutableLiveData()
 
     var operatorOneFloat: Float = 0f
     var operatorTwoFloat: Float = 0f
-    var result: Float = 0f
 
     private fun operatorsStringToFloat(operatorOne: String, operatorTwo: String) {
         try {
@@ -27,26 +28,22 @@ class CalculatorViewModel(application: Application) : BaseViewModel(application)
 
     fun add(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
-        result = operatorOneFloat + operatorTwoFloat
-        resultMutableLiveData.postValue(result.toString())
+        resultMutableLiveData.postValue((operatorOneFloat + operatorTwoFloat).toString())
     }
 
     fun subtract(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
-        result = operatorOneFloat - operatorTwoFloat
-        resultMutableLiveData.postValue(result.toString())
+        resultMutableLiveData.postValue((operatorOneFloat - operatorTwoFloat).toString())
     }
 
     fun multiply(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
-        result = operatorOneFloat * operatorTwoFloat
-        resultMutableLiveData.postValue(result.toString())
+        resultMutableLiveData.postValue((operatorOneFloat * operatorTwoFloat).toString())
     }
 
     fun divide(operatorOne: String, operatorTwo: String) {
         operatorsStringToFloat(operatorOne, operatorTwo)
-        result = operatorOneFloat / operatorTwoFloat
-        resultMutableLiveData.postValue(result.toString())
+        resultMutableLiveData.postValue((operatorOneFloat / operatorTwoFloat).toString())
     }
 
     @Throws(ArithmeticException::class)
@@ -55,8 +52,7 @@ class CalculatorViewModel(application: Application) : BaseViewModel(application)
         if (operatorTwoFloat == 0f) {
             throw ArithmeticException("No se puede dividir por cero.")
         }
-        result = operatorOneFloat / operatorTwoFloat
-        resultMutableLiveData.postValue(result.toString())
+        resultMutableLiveData.postValue((operatorOneFloat / operatorTwoFloat).toString())
     }
 
     fun addWithDeviation(operatorOne: Float, operatorTwo: Float): Float {

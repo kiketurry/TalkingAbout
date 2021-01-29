@@ -2,6 +2,7 @@ package es.kiketurry.talkingabout.ui.calculator
 
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import kotlinx.coroutines.Dispatchers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -34,14 +35,14 @@ class CalculatorParameterizedTest(var numberOne: String, var numberTwo: String, 
 
     @Before //Método que se va a ejecutar antes de cada test. Normalmente para setear variables por eso se le suele llamar setup
     fun setup() {
-        calculatorViewModel = CalculatorViewModel(Application())
+        calculatorViewModel = CalculatorViewModel(Dispatchers.IO, Application())
         System.out.println("l> Se ha ejecutado el método con la etiqueta @Before")
     }
 
     @Test
     fun dividirTest() {
         calculatorViewModel.divide(numberOne, numberTwo)
-        Assert.assertEquals(calculatorViewModel.resultMutableLiveData.value, result)
+        Assert.assertEquals(result, calculatorViewModel.resultMutableLiveData.value)
     }
 
 }

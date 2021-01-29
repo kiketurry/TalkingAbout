@@ -11,6 +11,7 @@ import es.kiketurry.talkingabout.ui.base.BaseActivity
 import es.kiketurry.talkingabout.ui.bgg.BGGActivity
 import es.kiketurry.talkingabout.ui.calculator.CalculatorActivity
 import es.kiketurry.talkingabout.ui.cats.splash.CatSplashActivity
+import es.kiketurry.talkingabout.ui.coroutines.CoroutinesActivityTwo
 
 class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
     override val TAG: String? get() = DistributiveActivity::class.qualifiedName
@@ -32,7 +33,8 @@ class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
         binding.btCats.setOnClickListener(this)
         binding.btCalculator.setOnClickListener(this)
         binding.btBGG.setOnClickListener(this)
-        binding.btBGG.performClick()
+        binding.btCoroutines.setOnClickListener(this)
+        binding.btCoroutines.performClick()
     }
 
     override fun configureToolbar() {
@@ -52,6 +54,10 @@ class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
             }
             R.id.btBGG -> {
                 startActivity(Intent(this, BGGActivity::class.java))
+            }
+            R.id.btCoroutines -> {
+//                startActivity(Intent(this, CoroutinesActivity::class.java))
+                startActivity(Intent(this, CoroutinesActivityTwo::class.java))
             }
         }
     }

@@ -10,9 +10,16 @@ import es.kiketurry.talkingabout.data.repository.DataProvider
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.ThingBGGMapperBBDD
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-class ListThingsBGGViewModel(application: Application, var appDatabase: AppDatabase, val dataProvider: DataProvider) :
-    BaseViewModel(application) {
+class ListThingsBGGViewModel(
+    ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    application: Application,
+    val appDatabase: AppDatabase,
+    val dataProvider: DataProvider
+) :
+    BaseViewModel(ioDispatcher, application) {
 
     override val TAG: String? get() = ListThingsBGGViewModel::class.qualifiedName
 

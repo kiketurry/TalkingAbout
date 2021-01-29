@@ -8,9 +8,12 @@ import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.UserBGGMapperBBDD
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
-class ListUsersBGGViewModel(application: Application, var appDatabase: AppDatabase) : BaseViewModel(application) {
+class ListUsersBGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application, val appDatabase: AppDatabase) :
+    BaseViewModel(ioDispatcher, application) {
 
     override val TAG: String? get() = ListUsersBGGViewModel::class.qualifiedName
 
