@@ -39,6 +39,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.calculator.detail.CalculatorDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.bgg.BGGActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />

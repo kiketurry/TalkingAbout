@@ -12,6 +12,7 @@ import es.kiketurry.talkingabout.ui.bgg.detailboardgame.DetailThingBGGViewModel
 import es.kiketurry.talkingabout.ui.bgg.listthings.ListThingsBGGViewModel
 import es.kiketurry.talkingabout.ui.bgg.listusers.ListUsersBGGViewModel
 import es.kiketurry.talkingabout.ui.calculator.CalculatorViewModel
+import es.kiketurry.talkingabout.ui.calculator.detail.CalculatorDetailViewModel
 import es.kiketurry.talkingabout.ui.cats.CatsViewModel
 import es.kiketurry.talkingabout.ui.cats.detail.viewmodel.DetailCatViewModel
 import es.kiketurry.talkingabout.ui.cats.list.BreedListViewModel
@@ -55,6 +56,9 @@ class ViewModelFactory(
             }
             CalculatorViewModel::class.qualifiedName -> {
                 CalculatorViewModel(application = application)
+            }
+            CalculatorDetailViewModel::class.qualifiedName -> {
+                CalculatorDetailViewModel(application = application)
             }
             BGGViewModel::class.qualifiedName -> {
                 BGGViewModel(application = application, appDatabase = appDatabase, dataProvider = dataProvider)

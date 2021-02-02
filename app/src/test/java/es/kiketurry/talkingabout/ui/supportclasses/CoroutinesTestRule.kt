@@ -1,4 +1,4 @@
-package es.kiketurry.talkingabout.ui.coroutines
+package es.kiketurry.talkingabout.ui.supportclasses
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -46,4 +46,5 @@
     <string name="toolbar_title_fragment_list_things_all">Juegos y Expansiones</string>
     <string name="toolbar_title_fragment_list_things_boardgames">Juegos</string>
     <string name="toolbar_title_fragment_list_things_expansions">Expansiones</string>
+    <string name="calculatorGoToDetail">Vista detalle</string>
 </resources>

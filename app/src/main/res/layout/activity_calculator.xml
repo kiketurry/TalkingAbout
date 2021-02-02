@@ -98,4 +98,14 @@
         app:layout_constraintTop_toBottomOf="@id/tvEqual"
         tools:text="20" />
 
+    <Button
+        android:id="@+id/btGoToDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/calculatorGoToDetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clToolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

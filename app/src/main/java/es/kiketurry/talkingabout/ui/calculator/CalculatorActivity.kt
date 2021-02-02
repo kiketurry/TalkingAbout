@@ -1,12 +1,15 @@
 package es.kiketurry.talkingabout.ui.calculator
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import es.kiketurry.talkingabout.R
+import es.kiketurry.talkingabout.data.constants.IntentKeys.Companion.INTENT_KEY_CALCULATOR_DETAIL
 import es.kiketurry.talkingabout.databinding.ActivityCalculatorBinding
 import es.kiketurry.talkingabout.injection.InjectionSingleton
 import es.kiketurry.talkingabout.ui.base.BaseActivity
+import es.kiketurry.talkingabout.ui.calculator.detail.CalculatorDetailActivity
 
 class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
     override val TAG: String? get() = CalculatorActivity::class.qualifiedName
@@ -37,6 +40,7 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
         binding.rbSubtract.setOnClickListener(this)
         binding.rbMultiply.setOnClickListener(this)
         binding.rbDivide.setOnClickListener(this)
+        binding.btGoToDetail.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -62,6 +66,11 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorBinding>() {
                 uncheckAllRadioButtons()
                 binding.rbDivide.isChecked = true
                 calculatorViewModel.divide(binding.etOperatorOne.text.toString(), binding.etOperatorTwo.text.toString())
+            }
+            binding.btGoToDetail.id -> {
+                intent = Intent(this, CalculatorDetailActivity::class.java)
+                intent.putExtra(INTENT_KEY_CALCULATOR_DETAIL, "Todo ha salido perfecto.")
+                startActivity(intent)
             }
         }
     }

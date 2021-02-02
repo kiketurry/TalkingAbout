@@ -22,9 +22,6 @@ class CalculatorActivityTest {
     @get:Rule
     var activityScenarioRule: ActivityScenarioRule<CalculatorActivity> = ActivityScenarioRule(CalculatorActivity::class.java)
 
-//    @get:Rule
-//    var activityScenarioRule: IntentsTestRule<CalculatorActivity> = IntentsTestRule(CalculatorActivity::class.java)
-
     @Test
     fun useAppContext() {
         // Context of the app under test.
@@ -107,10 +104,4 @@ class CalculatorActivityTest {
             .perform(click())
         onView(withId(R.id.tvResult)).check(matches(withText((8.0f / 3.0f).toString())))
     }
-
-//    @Test
-//    fun intentTest() {
-//        intended(hasComponent(MainActivity::class.qualifiedName))
-//    }
-
 }
