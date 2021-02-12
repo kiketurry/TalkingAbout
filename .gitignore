@@ -61,3 +61,6 @@ Thumbs.db
 
 # Java class files
 *.class
+
+#Temporal Word
+/~$rmacionTesting.docx
