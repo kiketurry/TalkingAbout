@@ -1,8 +1,11 @@
 package es.kiketurry.talkingabout.ui.bgg
 
 import android.app.Application
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.mlkit.nl.languageid.LanguageIdentification
 import es.kiketurry.talkingabout.data.domain.model.bgg.ListUserBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
@@ -17,7 +20,7 @@ import es.kiketurry.talkingabout.data.repository.bbdd.things.ThingBGGRoomEntity
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,8 +30,8 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
 
     companion object {
         const val ONE_MONTH_IN_MILLISECOND = 2629746000L
-        const val TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG = 1
-        const val TIME_IN_MILLISECOND_WAIT_UPDATE_DATA_BGG = 5000L
+        const val TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG = 2
+        const val TIME_IN_MILLIS_BEFORE_TOTAL_FAILURE_PERMIT_BEFORE_RETRY: Long = 3000
     }
 
     var userBGGSelectedMutableLiveData: MutableLiveData<String> = MutableLiveData()
@@ -56,7 +59,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
         loadingMutableLiveData.postValue(true)
         dataProvider.getBoardGamesByUser(object : DataSourceCallbacks.GetListBoardGamesByUserCallback {
             override fun onGetListBoardGamesByUserCallbackSuccess(listUserBGGModel: ListUserBGGModel) {
-                runBlocking {
+                viewModelScope.launch {
                     getListUserBGGModel = listUserBGGModel
                     getListUserBGGModel.userBGG = userBGG
                     val listThingsBGGRoomEntity = appDatabase.ListThingsBGGDao().findByUserBGG(userBGG)
@@ -79,7 +82,9 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
             override fun onGetListBoardGamesByUserCallbackFailure(errorModel: ErrorModel) {
                 if (countFailureGetListUserBGG < TOTAL_FAILURE_PERMIT_BEFORE_FAILURE_GET_LIST_USER_BGG) {
                     countFailureGetListUserBGG++
-                    getListBoardGamesByUser(userSelectedBGG)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        getListBoardGamesByUser(userSelectedBGG)
+                    }, TIME_IN_MILLIS_BEFORE_TOTAL_FAILURE_PERMIT_BEFORE_RETRY)
                 } else {
                     errorMutableLiveData.postValue(errorModel)
                     loadingMutableLiveData.postValue(false)
@@ -89,7 +94,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
     }
 
     private fun getAllThingUser() {
-        runBlocking {
+        viewModelScope.launch {
             val stringBuilderIds = StringBuilder("")
             val allThingsUserByUserBGG = appDatabase.ThingUserBGGDao().getAllThingsUserByUserBGG(getListUserBGGModel.userBGG)
             val timeStampMap = ThingBGGMapperBBDD().getTimeStampMap(appDatabase.ThingBGGDao().getAllThings())
@@ -117,7 +122,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
         dataProvider.getThingsBoardGameGeek(object : DataSourceCallbacks.GetThingsBoardGamesGeekCallback {
 
             override fun onGetThingsBoardGamesGeekCallbackSuccess(listThingBGGModels: ArrayList<ThingBGGModel>) {
-                runBlocking {
+                viewModelScope.launch {
                     val mapTranslate = ThingNameEsBGGMapperBBDD().getMapTranslate(appDatabase.ThingNameEsBGGDao().getAllThingsNameEs())
                     val listThingsBGGRoomEntity: ArrayList<ThingBGGRoomEntity> = ArrayList()
                     val thingBGGMapperBBDD = ThingBGGMapperBBDD()
@@ -147,7 +152,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
     }
 
     private fun completeInformationTypeThingListThingsBGGUser(userBGG: String) {
-        runBlocking {
+        viewModelScope.launch {
             var totalBoardGame = 0
             var totalExpansion = 0
             val listThingBGGModel = ThingBGGMapperBBDD().toModelListThingsEntity(appDatabase.JoinsBGGDao().getAllThingsUser(userBGG))
@@ -174,7 +179,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
     }
 
     private fun searchSpanishNames() {
-        runBlocking {
+        viewModelScope.launch {
             val languageIdentifier = LanguageIdentification.getClient()
             val thingBGGMapperBBDD = ThingBGGMapperBBDD()
             val listThingBGGModel: ArrayList<ThingBGGModel> =
@@ -214,7 +219,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
 
                             if (probablySpanish.isNotBlank() && confidenceMax >= 0.33F && confidenceMax > confidenceUpdate) {
                                 thingBGGModel.nameEs = probablySpanish
-                                runBlocking {
+                                viewModelScope.launch {
                                     appDatabase.ThingBGGDao().update(thingBGGMapperBBDD.toBBDD(thingBGGModel))
                                     Log.d(TAG, "l> actualizamos la base de datos con el nombre $name")
                                     confidenceUpdate = confidenceMax
@@ -229,7 +234,7 @@ class BGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, applicati
     }
 
     fun setThingBGGSelected(thingBGGModel: ThingBGGModel) {
-        runBlocking {
+        viewModelScope.launch {
             thingBGGSelectedMutableLiveData.postValue(
                 ThingBGGMapperBBDD().toModel(
                     appDatabase.ThingBGGDao().findByThingId(thingBGGModel.thingId)

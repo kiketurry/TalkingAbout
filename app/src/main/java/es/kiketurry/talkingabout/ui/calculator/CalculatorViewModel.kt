@@ -32,6 +32,7 @@ class CalculatorViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, ap
     }
 
     fun subtract(operatorOne: String, operatorTwo: String) {
+        Thread.sleep(1000)
         operatorsStringToFloat(operatorOne, operatorTwo)
         resultMutableLiveData.postValue((operatorOneFloat - operatorTwoFloat).toString())
     }

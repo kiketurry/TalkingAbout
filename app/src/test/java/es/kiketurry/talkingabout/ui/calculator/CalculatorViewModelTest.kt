@@ -71,7 +71,7 @@ class CalculatorViewModelTest {
     }
 
     @Test
-    fun `add observe`() {
+    fun `add observe test`() {
         val observerMock = mock<Observer<String>>()
         testDispatcher.runBlockingTest {
             calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
@@ -88,7 +88,7 @@ class CalculatorViewModelTest {
     }
 
     @Test
-    fun `subtract observe`() {
+    fun `subtract observe test`() {
         val observerMock = mock<Observer<String>>()
         testDispatcher.runBlockingTest {
             calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
@@ -116,7 +116,7 @@ class CalculatorViewModelTest {
     }
 
     @Test
-    fun `multiply observe`() {
+    fun `multiply observe test`() {
         val observerMock = mock<Observer<String>>()
         testDispatcher.runBlockingTest {
             calculatorViewModel.resultMutableLiveData.observeForever(observerMock)
@@ -133,7 +133,7 @@ class CalculatorViewModelTest {
     }
 
     @Test
-    fun `divide observe`() {
+    fun `divide observe test`() {
         val observerMock = mock<Observer<String>>()
         testDispatcher.runBlockingTest {
             calculatorViewModel.resultMutableLiveData.observeForever(observerMock)

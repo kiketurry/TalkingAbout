@@ -18,6 +18,9 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class CoroutinesViewModelTest {
+    //En esta clase testeamos coroutines con creando el testDispatcher y teniendo cuidado en el setup y el tearDown de establecerlo como dispatchers y finalmente resetearlo.
+    //En el futuro veremos como hacer esto de forma más simple creando una regla propia CoroutinesTestRule.
+
 
     //Obliga a todos los livedata en los test a ejecutarse en el hilo de test en vez de en el hilo principal de android que no existe en los test y entonces el test finalizaría antes de observar nada y daría una excepción.
     @get:Rule
@@ -42,7 +45,7 @@ class CoroutinesViewModelTest {
 
     //Con comillas invertidas se pueden usar nombres de metodos más humanos para luego verlos e identificarlos en el listado mejor, pero solo funciona en los test unitarios, no en los de integración.
     @Test
-    fun `success if observe true`() {
+    fun `success if observe return true`() {
         val observerMock = mock<Observer<Boolean>>()
         testDispatcher.runBlockingTest {
             coroutinesViewModel.resultMutableLiveData.observeForever(observerMock)

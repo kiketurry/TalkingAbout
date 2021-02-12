@@ -1,12 +1,13 @@
 package es.kiketurry.talkingabout.ui.bgg.addmodifyuser
 
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.data.repository.bbdd.users.UserBGGRoomEntity
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
 class AddModifyUsersBGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application, val appDatabase: AppDatabase) :
     BaseViewModel(ioDispatcher, application) {
@@ -23,13 +24,13 @@ class AddModifyUsersBGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers
     }
 
     private fun addUserBGG(userBGG: String, name: String, email: String, prefix: String, phone: String) {
-        runBlocking {
+        viewModelScope.launch {
             appDatabase.UserBGGDao().insert(UserBGGRoomEntity(userBGG, name, email, prefix, phone))
         }
     }
 
     private fun updateUserBGG(userBGG: String, name: String, email: String, prefix: String, phone: String) {
-        runBlocking {
+        viewModelScope.launch {
             appDatabase.UserBGGDao().update(UserBGGRoomEntity(userBGG, name, email, prefix, phone))
         }
     }

@@ -59,8 +59,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun insertUsers(db: SupportSQLiteDatabase) {
-            db.execSQL("INSERT INTO userBGGRoomEntity (userBGG, name, email, prefix, phone) VALUES('kiketurrydeveloper', 'Uno', 'kiketurry.developer@gmail.com', '34', '666555888')")
-            db.execSQL("INSERT INTO userBGGRoomEntity (userBGG, name, email, prefix, phone) VALUES('kiketurrydeveloper2', 'Dos', 'kiketurry.developer@gmail.com', '34', '666555888')")
+            db.execSQL("INSERT INTO userBGGRoomEntity (userBGG, name, email, prefix, phone) VALUES('kiketurrydeveloper', 'Franklin', 'franklin@gmail.com', '34', '612345678')")
             db.execSQL("INSERT INTO userBGGRoomEntity (userBGG, name, email, prefix, phone) VALUES('kiketurry', 'Enrique', 'kiketurry@gmail.com', '34', '666555888')")
         }
 

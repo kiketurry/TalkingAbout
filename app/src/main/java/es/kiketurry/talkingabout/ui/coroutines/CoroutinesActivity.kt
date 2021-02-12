@@ -26,11 +26,13 @@ class CoroutinesActivity : BaseActivity<ActivityCoroutinesBinding>() {
 
     override fun createAfterInflateBindingSetupObserverViewModel(savedInstanceState: Bundle?) {
         lifecycleScope.launch {
-            Log.i(TAG, "l> 1 Init launch modo secuencia en paralelo")
+            Log.i(TAG, "l> 1 Init launch modo secuencia")
             val operationOne = withContext(Dispatchers.IO) {
+                Log.i(TAG, "l> 1 lanzamos operacion one")
                 operationOne()
             }
             val operationTwo = withContext(Dispatchers.IO) {
+                Log.i(TAG, "l> 1 lanzamos operacion two")
                 operationTwo()
             }
 
@@ -41,9 +43,11 @@ class CoroutinesActivity : BaseActivity<ActivityCoroutinesBinding>() {
         lifecycleScope.launch {
             Log.i(TAG, "l> 2 Init launch con await modo paralelo")
             val operationOne = async(Dispatchers.IO) {
+                Log.i(TAG, "l> 2 lanzamos operacion one")
                 operationOne()
             }
             val operationTwo = async(Dispatchers.IO) {
+                Log.i(TAG, "l> 2 lanzamos operacion two")
                 operationTwo()
             }
 
@@ -58,7 +62,7 @@ class CoroutinesActivity : BaseActivity<ActivityCoroutinesBinding>() {
 
 
     private fun operationOne(): Boolean {
-        Thread.sleep(5000)
+        Thread.sleep(3000)
         return true
     }
 

@@ -46,6 +46,6 @@
         android:text="@string/goToCoroutines"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btCalculator" />
+        app:layout_constraintTop_toBottomOf="@id/btBGG" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

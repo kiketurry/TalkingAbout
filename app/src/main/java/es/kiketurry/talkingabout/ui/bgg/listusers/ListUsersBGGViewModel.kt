@@ -4,13 +4,14 @@ import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import es.kiketurry.talkingabout.data.domain.model.bgg.UserBGGModel
 import es.kiketurry.talkingabout.data.repository.bbdd.AppDatabase
 import es.kiketurry.talkingabout.data.repository.bbdd.mapper.bgg.UserBGGMapperBBDD
 import es.kiketurry.talkingabout.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
 class ListUsersBGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, application: Application, val appDatabase: AppDatabase) :
     BaseViewModel(ioDispatcher, application) {
@@ -28,14 +29,14 @@ class ListUsersBGGViewModel(ioDispatcher: CoroutineDispatcher = Dispatchers.IO, 
     }
 
     fun deleteUserBGG(userBGGModel: UserBGGModel) {
-        runBlocking {
+        viewModelScope.launch {
             appDatabase.UserBGGDao().delete(userBGGMapper.toBBDD(userBGGModel))
             appDatabase.ListThingsBGGDao().deleteByUserBGG(userBGGModel.userBGG)
         }
     }
 
     fun deleteAllThings() {
-        runBlocking {
+        viewModelScope.launch {
             appDatabase.ThingBGGDao().deleteAll()
         }
     }
