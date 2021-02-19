@@ -34,21 +34,6 @@ class ListThingsBGGFragmentIntentTest {
         intended(toPackage("com.whatsapp"))
     }
 
-//    @Test
-//    fun validateIntentSentWhatsappTwo() {
-//        onView(withId(R.id.rvListUsersBGG)).perform(actionOnItemAtPosition<UserBGGViewHolder>(0, click()))
-////        onView(withId(R.id.ivWhatsapp)).perform(click())
-//
-////        onData(withId(R.id.ivWhatsapp))
-////            .inAdapterView(withId(R.id.rvListThingsBGG))
-////            .atPosition(0)
-////            .perform(click())
-//
-//        onView(withId(R.id.rvListThingsBGG)).perform(actionOnItemAtPosition<ThingBGGViewHolder>(0, ClickViewIdItemRecyclerViewAction(R.id.ivWhatsapp)))
-//
-//        intended(toPackage("com.whatsapp"))
-//    }
-
     @Test
     fun validateIntentCalculatorDetail() {
         onView(withId(R.id.rvListUsersBGG)).perform(actionOnItemAtPosition<UserBGGViewHolder>(0, click()))

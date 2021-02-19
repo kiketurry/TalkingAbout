@@ -17,7 +17,7 @@ class WhatsappUtils {
             val messageWhatsapp = "He descubierto que tienes el juego: '$nameThingBGG', lo probamos???"
 
             if (whatsappInstalled) {
-                var intent = Intent(Intent.ACTION_VIEW)
+                val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$mobileNumber&text=$messageWhatsapp")
                 activity.startActivity(intent)
             } else {
@@ -26,15 +26,13 @@ class WhatsappUtils {
         }
 
         private fun appInstalled(activity: AppCompatActivity, packageString: String): Boolean {
-            var appInstalled: Boolean
-            appInstalled = try {
+            return try {
                 activity.packageManager.getPackageInfo(packageString, PackageManager.GET_ACTIVITIES)
                 true
             } catch (exception: Exception) {
                 Log.w(TAG, "l> Problemas revisando si la app esta instalada: $exception.message")
                 false
             }
-            return appInstalled
         }
     }
 }
