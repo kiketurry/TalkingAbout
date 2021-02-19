@@ -62,6 +62,8 @@ class CalculatorDetailActivityTest {
     @Test
     fun checkToast() {
         onView(withId(R.id.btLogin)).perform(click())
+        //Podemos buscar tanto por texto literal o escrito en el fichero strings.
         onView(withText("Testeando un toast")).inRoot(ToastMatcher()).check(matches(isDisplayed()))
+        onView(withText(R.string.toast)).inRoot(ToastMatcher()).check(matches(isDisplayed()))
     }
 }

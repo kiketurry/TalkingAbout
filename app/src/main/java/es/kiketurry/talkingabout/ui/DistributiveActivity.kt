@@ -34,7 +34,7 @@ class DistributiveActivity : BaseActivity<ActivityDistributiveBinding>() {
         binding.btCalculator.setOnClickListener(this)
         binding.btBGG.setOnClickListener(this)
         binding.btCoroutines.setOnClickListener(this)
-        binding.btBGG.performClick()
+//        binding.btBGG.performClick()
     }
 
     override fun configureToolbar() {

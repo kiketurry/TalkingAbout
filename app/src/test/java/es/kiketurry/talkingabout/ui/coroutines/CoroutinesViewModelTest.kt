@@ -11,10 +11,7 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 
 @ExperimentalCoroutinesApi
 class CoroutinesViewModelTest {
@@ -51,6 +48,17 @@ class CoroutinesViewModelTest {
             coroutinesViewModel.resultMutableLiveData.observeForever(observerMock)
             coroutinesViewModel.comeOn()
             verify(observerMock).onChanged(true)
+        }
+    }
+
+    @Test
+    fun `success if observe return true not mock observer`() {
+        val myObserver = Observer<Boolean> {
+            Assert.assertTrue("", it)
+        }
+        testDispatcher.runBlockingTest {
+            coroutinesViewModel.resultMutableLiveData.observeForever(myObserver)
+            coroutinesViewModel.comeOn()
         }
     }
 
