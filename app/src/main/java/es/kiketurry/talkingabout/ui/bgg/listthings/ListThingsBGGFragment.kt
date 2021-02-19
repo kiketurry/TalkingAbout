@@ -1,5 +1,6 @@
 package es.kiketurry.talkingabout.ui.bgg.listthings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import es.kiketurry.talkingabout.R
+import es.kiketurry.talkingabout.data.constants.IntentKeys
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel
 import es.kiketurry.talkingabout.data.domain.model.bgg.ThingBGGModel.TypeThingBGG.*
 import es.kiketurry.talkingabout.databinding.FragmentBggListThingsBinding
@@ -17,6 +19,7 @@ import es.kiketurry.talkingabout.ui.base.BaseFragment
 import es.kiketurry.talkingabout.ui.bgg.BGGActivity
 import es.kiketurry.talkingabout.ui.bgg.listthings.adapter.ListThingsBGGAdapter
 import es.kiketurry.talkingabout.ui.bgg.listthings.adapter.ListThingsBGGAdapter.ItemThingBGGClickListener
+import es.kiketurry.talkingabout.ui.calculator.detail.CalculatorDetailActivity
 import es.kiketurry.talkingabout.utils.WhatsappUtils
 import java.util.*
 
@@ -110,6 +113,7 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
         binding?.clConfigListThings?.ivCheckTotalBoardGames?.setOnClickListener(this)
         binding?.clConfigListThings?.ivCheckTotalBoardGamesBasic?.setOnClickListener(this)
         binding?.clConfigListThings?.ivCheckTotalExpansion?.setOnClickListener(this)
+        binding?.btLaunchIntent?.setOnClickListener(this)
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) = Unit
@@ -144,6 +148,11 @@ class ListThingsBGGFragment : BaseFragment<FragmentBggListThingsBinding>(), Item
                     binding?.mlListThings?.transitionToStart()
                     binding?.rvListThingsBGG?.smoothScrollToPosition(0)
                 }
+            }
+            R.id.btLaunchIntent -> {
+                val intent = Intent(baseActivity, CalculatorDetailActivity::class.java)
+                intent.putExtra(IntentKeys.INTENT_KEY_CALCULATOR_DETAIL, "Todo ha salido perfecto.")
+                startActivity(intent)
             }
         }
     }

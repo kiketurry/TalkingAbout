@@ -30,4 +30,13 @@
         android:id="@+id/clConfigListThings"
         layout="@layout/include_bgg_config_list_things" />
 
+    <Button
+        android:id="@+id/btLaunchIntent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/launchIntent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp" />
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

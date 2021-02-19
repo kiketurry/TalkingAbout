@@ -18,11 +18,9 @@ import es.kiketurry.talkingabout.ui.bgg.listusers.adapter.UserBGGViewHolder
 import es.kiketurry.talkingabout.ui.calculator.supportclasses.RecyclerViewItemCountAssertion
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.containsString
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.io.IOException
 
 class ListThingsBGGFragmentTest {
 
@@ -39,18 +37,11 @@ class ListThingsBGGFragmentTest {
         thingBGGDao = db.ThingBGGDao()
     }
 
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
-    }
-
     @Test
     fun showListThingKiketurryDeveloperTest() {
         onView(withId(R.id.rvListUsersBGG)).perform(actionOnItemAtPosition<UserBGGViewHolder>(0, click()))
         onView(withId(R.id.rvListThingsBGG)).check(RecyclerViewItemCountAssertion(18))
     }
-
 
     @Test
     fun showInfoDetailThingBGGTest() {

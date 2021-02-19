@@ -49,4 +49,5 @@
     <string name="calculatorGoToDetail">Vista detalle</string>
     <string name="toast">Testeando un toast</string>
     <string name="languageDependence">Dependencia idioma: </string>
+    <string name="launchIntent">Lanzar Intent</string>
 </resources>
